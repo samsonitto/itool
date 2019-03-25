@@ -86,7 +86,7 @@ namespace iTool
                 txbError.Text = "Enter your last name";
                 txtLastName.Focus();
             }
-            else if (txtMobile.Text.Length < 10)
+            else if (txtMobile.Text.Length < 10 || !int.TryParse(txtMobile.Text, out int num))
             {
                 txbError.Text = "Enter valid mobile number";
                 txtMobile.Focus();
@@ -96,7 +96,7 @@ namespace iTool
                 txbError.Text = "Enter your location";
                 txtAddLocation.Focus();
             }
-            else if (cbPayment == null)
+            else if (cbPayment.SelectedValue is null)
             {
                 txbError.Text = "Choose the payment method";
                 cbPayment.Focus();
@@ -114,7 +114,10 @@ namespace iTool
                 string password = pwdCreatePassword.Password;
                 string location = txtAddLocation.Text;
                 int mobile = int.Parse(txtMobile.Text);
+                
+                
                 string address = txtAddAddress.Text;
+                string payment = cbPayment.SelectedValue.ToString();
                 if (pwdCreatePassword.Password.Length == 0)
                 {
                     txbError.Text = "Enter password.";
@@ -136,7 +139,7 @@ namespace iTool
 
                     SqlConnection con = new SqlConnection("Data Source=mysql.labranet.jamk.fi;Initial Catalog=M3156_3;User ID=M3156;Password=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("Insert into user (userName,userSurname,userAddress,userEmail,userLocation,paymentMethod,userMobile,userPassword,userPicture) values('" + firstname + "','" + lastname + "','" + address + "','" + email + "','" + password + "')", con);
+                    SqlCommand cmd = new SqlCommand("Insert into user (userName,userSurname,userAddress,userEmail,userLocation,paymentMethod,userMobile,userPassword,userPicture) values('" + firstname + "','" + lastname + "','" + address + "','" + email + "','" + location + "','" + payment + "','" + mobile + "','" + password + "')", con);
                     cmd.CommandType = CommandType.Text;
                     cmd.ExecuteNonQuery();
                     con.Close();
