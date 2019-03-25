@@ -19,7 +19,7 @@
                     <Label Content="Password" HorizontalContentAlignment="Center" FontSize="18"/>
                     <PasswordBox x:Name="pwdCreatePassword" Margin="0 0 0 10" Height="30" Width="300"/>
                     <Label Content="Confirm password" HorizontalContentAlignment="Center" FontSize="18"/>
-                    <PasswordBox Margin="0 0 0 10" Height="30" Width="300"/>
+                    <PasswordBox x:Name="pwdConfirm" Margin="0 0 0 10" Height="30" Width="300"/>
                     <Label Content="First Name" HorizontalContentAlignment="Center" FontSize="18" Margin="0 0 0 0"/>
                     <TextBox x:Name="txtFirstName" Margin="0 0 0 10" Height="30" Width="300"/>
                     <Label Content="Last Name" HorizontalContentAlignment="Center" FontSize="18" Margin="0 0 0 0"/>
@@ -45,6 +45,7 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
+            <TextBlock x:Name="txbError"/>
         </StackPanel>
     </Grid>
 </Window>
