@@ -96,14 +96,12 @@ G:\iTool\iTool\iTool\obj\Debug\iTool.csprojAssemblyReference.cache
 G:\iTool\iTool\iTool\obj\Debug\MainPage.g.cs
 G:\iTool\iTool\iTool\obj\Debug\MainWindow.g.cs
 G:\iTool\iTool\iTool\obj\Debug\RegisterWindow.g.cs
-G:\iTool\iTool\iTool\obj\Debug\ShowUser.g.cs
 G:\iTool\iTool\iTool\obj\Debug\App.g.cs
 G:\iTool\iTool\iTool\obj\Debug\iTool_MarkupCompile.cache
 G:\iTool\iTool\iTool\obj\Debug\iTool_MarkupCompile.lref
 G:\iTool\iTool\iTool\obj\Debug\MainPage.baml
 G:\iTool\iTool\iTool\obj\Debug\MainWindow.baml
 G:\iTool\iTool\iTool\obj\Debug\RegisterWindow.baml
-G:\iTool\iTool\iTool\obj\Debug\ShowUser.baml
 G:\iTool\iTool\iTool\obj\Debug\iTool.g.resources
 G:\iTool\iTool\iTool\obj\Debug\iTool.Properties.Resources.resources
 G:\iTool\iTool\iTool\obj\Debug\iTool.csproj.GenerateResource.cache

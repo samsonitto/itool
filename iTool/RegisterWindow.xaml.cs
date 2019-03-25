@@ -25,8 +25,8 @@ namespace iTool
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        private List<string> payment = new List<string>() { "Paypal", "MasterCard", "VISA", "Lasku"};
-        private List<User> users;
+        private List<string> payment = new List<string>() { "Lasku", "MasterCard", "Paypal", "VISA" };
+        //private List<User> users;
 
         public RegisterWindow()
         {
@@ -149,10 +149,6 @@ namespace iTool
                     txbError.Text = "You have Registered successfully.";
                     Reset();
                 }
-                //users.Add(new User() { UserID = 1, Email = txtAddEmail.Text, Password = pwdCreatePassword.Password, FirstName = txtFirstName.Text, LastName = txtLastName.Text, Mobile = int.Parse(txtMobile.Text), Address = txtAddAddress.Text, Location = txtAddLocation.Text, PaymentMethod = cbPayment.SelectedValue.ToString(), PictureURL = txtPic.Text.Split('\\')[txtPic.Text.Split('\\').Length - 1] });
-                //ShowUser user = new ShowUser();
-                //user.Show();
-                //user.dgUsers.ItemsSource = users;
             }
         }
         public void Reset()
