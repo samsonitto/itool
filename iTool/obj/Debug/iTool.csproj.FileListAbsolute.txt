@@ -110,3 +110,7 @@ G:\iTool\iTool\iTool\obj\Debug\iTool.csproj.GenerateResource.cache
 G:\iTool\iTool\iTool\obj\Debug\iTool.csproj.CoreCompileInputs.cache
 G:\iTool\iTool\iTool\obj\Debug\iTool.exe
 G:\iTool\iTool\iTool\obj\Debug\iTool.pdb
+G:\iTool\iTool\iTool\bin\Debug\MySql.Data.dll
+G:\iTool\iTool\iTool\bin\Debug\Google.Protobuf.dll
+G:\iTool\iTool\iTool\bin\Debug\MySql.Data.xml
+G:\iTool\iTool\iTool\obj\Debug\iTool.csproj.CopyComplete

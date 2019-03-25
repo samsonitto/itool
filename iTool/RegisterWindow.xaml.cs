@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -137,20 +139,34 @@ namespace iTool
                 {
                     txbError.Text = "";
 
-                    SqlConnection con = new SqlConnection("Data Source=mysql.labranet.jamk.fi;Initial Catalog=M3156_3;User ID=M3156;Password=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
+                    //MySqlConnection con = new MySqlConnection("Data Source=mysql.labranet.jamk.fi;Initial Catalog=M3156_3;User ID=M3156;Password=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
+                    MySqlConnection con = new MySqlConnection("SERVER=mysql.labranet.jamk.fi;DATABASE=M3156_3;UID=M3156;PASSWORD=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("Insert into user (userName,userSurname,userAddress,userEmail,userLocation,paymentMethod,userMobile,userPassword,userPicture) values('" + firstname + "','" + lastname + "','" + address + "','" + email + "','" + location + "','" + payment + "','" + mobile + "','" + password + "')", con);
+                    MySqlCommand cmd = new MySqlCommand("Insert into user (userName,userSurname,userAddress,userEmail,userLocation,paymentMethod,userMobile,userPassword) values('" + firstname + "','" + lastname + "','" + address + "','" + email + "','" + location + "','" + payment + "','" + mobile + "','" + password + "')", con);
                     cmd.CommandType = CommandType.Text;
                     cmd.ExecuteNonQuery();
                     con.Close();
                     txbError.Text = "You have Registered successfully.";
-                    //Reset();
+                    Reset();
                 }
                 //users.Add(new User() { UserID = 1, Email = txtAddEmail.Text, Password = pwdCreatePassword.Password, FirstName = txtFirstName.Text, LastName = txtLastName.Text, Mobile = int.Parse(txtMobile.Text), Address = txtAddAddress.Text, Location = txtAddLocation.Text, PaymentMethod = cbPayment.SelectedValue.ToString(), PictureURL = txtPic.Text.Split('\\')[txtPic.Text.Split('\\').Length - 1] });
                 //ShowUser user = new ShowUser();
                 //user.Show();
                 //user.dgUsers.ItemsSource = users;
             }
+        }
+        public void Reset()
+        {
+            txtFirstName.Text = "";
+            txtLastName.Text = "";
+            txtAddEmail.Text = "";
+            pwdCreatePassword.Password = "";
+            pwdConfirm.Password = "";
+            txtMobile.Text = "";
+            txtAddAddress.Text = "";
+            txtAddLocation.Text = "";
+            txtPic.Text = "";
+            cbPayment.SelectedItem = null;
         }
     }
 }

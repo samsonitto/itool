@@ -6,15 +6,6 @@ using System.Threading.Tasks;
 
 namespace iTool
 {
-    public class BLiTool
-    {
-        public List<User> users = new List<User>();
-
-        public BLiTool()
-        {
-
-        }
-    }
 
     public class User
     {
