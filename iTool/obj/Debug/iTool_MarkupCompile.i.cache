@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-G:\iTool\iTool\iTool\obj\Debug\
+F:\iTool\iTool\iTool\obj\Debug\
 iTool
 none
 false
 DEBUG;TRACE
-G:\iTool\iTool\iTool\App.xaml
+F:\iTool\iTool\iTool\App.xaml
 3-1970956592
 
-131699928951
-14-1581797701
+13-1054889387
+15-2006365657
 MainPage.xaml;MainWindow.xaml;RegisterWindow.xaml;
 
-False
+True
 

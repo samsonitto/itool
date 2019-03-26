@@ -17,6 +17,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Drawing;
+using System.IO;
 
 namespace iTool
 {
@@ -25,7 +27,7 @@ namespace iTool
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        private List<string> payment = new List<string>() { "Lasku", "MasterCard", "Paypal", "VISA" };
+        private List<string> payment = new List<string>() { "Bill", "MasterCard", "Paypal", "VISA" };
         //private List<User> users;
 
         public RegisterWindow()
@@ -63,7 +65,17 @@ namespace iTool
             //bitmap.UriSource = new Uri(dlg.FileName, UriKind.RelativeOrAbsolute);
             //bitmap.EndInit();
             imgProfile.Stretch = Stretch.Fill;
+            Uri u = new Uri(dlg.FileName, UriKind.RelativeOrAbsolute);
             imgProfile.Source = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute));
+            string i = imgProfile.Source.ToString().Split('/')[imgProfile.Source.ToString().Split('/').Length - 1];
+            string path = $@"F:\iTool\iTool\iTool\images\{i}";
+            //string localPath = new Uri(path).LocalPath;
+            string dirPath = System.IO.Path.GetDirectoryName(dlg.FileName);
+            System.IO.File.Copy(dirPath, path, true);
+            File.SetAttributes(path, FileAttributes.Normal);
+            //BitmapImage b = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute));
+            //Bitmap b = new Bitmap(imgProfile.Source.ToString());
+            //b.Save("images");
         }
 
         private void BtnReg_Click(object sender, RoutedEventArgs e)
@@ -116,8 +128,11 @@ namespace iTool
                 string password = pwdCreatePassword.Password;
                 string location = txtAddLocation.Text;
                 int mobile = int.Parse(txtMobile.Text);
+                string imgSource = imgProfile.Source.ToString();
+                string imgFile = imgSource.Split('/')[imgSource.Split('/').Length - 1];
                 
-                
+
+
                 string address = txtAddAddress.Text;
                 string payment = cbPayment.SelectedValue.ToString();
                 if (pwdCreatePassword.Password.Length == 0)
@@ -142,12 +157,16 @@ namespace iTool
                     //MySqlConnection con = new MySqlConnection("Data Source=mysql.labranet.jamk.fi;Initial Catalog=M3156_3;User ID=M3156;Password=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
                     MySqlConnection con = new MySqlConnection("SERVER=mysql.labranet.jamk.fi;DATABASE=M3156_3;UID=M3156;PASSWORD=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand("Insert into user (userName,userSurname,userAddress,userEmail,userLocation,paymentMethod,userMobile,userPassword) values('" + firstname + "','" + lastname + "','" + address + "','" + email + "','" + location + "','" + payment + "','" + mobile + "','" + password + "')", con);
+                    MySqlCommand cmd = new MySqlCommand("Insert into user (userName,userSurname,userAddress,userEmail,userLocation,paymentMethod,userMobile,userPassword,userPicture) values('" + firstname + "','" + lastname + "','" + address + "','" + email + "','" + location + "','" + payment + "','" + mobile + "','" + password + "','" + imgFile + "')", con);
                     cmd.CommandType = CommandType.Text;
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    txbError.Text = "You have Registered successfully.";
-                    Reset();
+                    //txbError.Text = "You have Registered successfully.";
+                    MainWindow mw = new MainWindow();
+                    mw.txbError.Text = "You have Registered successfully.";
+                    mw.Show();
+                    this.Close();
+                    //Reset();
                 }
             }
         }

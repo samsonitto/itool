@@ -8,7 +8,7 @@
         Title="iTool" Height="800" Width="400" ResizeMode="NoResize">
     <Grid>
         <StackPanel>
-            <Label Content="iTool: Register" HorizontalContentAlignment="Center" FontSize="30" Margin="0 40 0 40"/>
+            <Label Content="iTool" HorizontalContentAlignment="Center" FontSize="30" Margin="0 40 0 40"/>
             <Label Content="E-mail" HorizontalContentAlignment="Center" FontSize="18" Margin="0 0 0 0"/>
             <TextBox x:Name="txtEmail" Margin="0 0 0 10" Height="50" Width="300" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="Password" HorizontalContentAlignment="Center" FontSize="18"/>
