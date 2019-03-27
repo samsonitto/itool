@@ -70,7 +70,7 @@ namespace iTool
             string i = imgProfile.Source.ToString().Split('/')[imgProfile.Source.ToString().Split('/').Length - 1];
             string path = $@"F:\iTool\iTool\iTool\images\{i}";
             //string localPath = new Uri(path).LocalPath;
-            string dirPath = System.IO.Path.GetDirectoryName(dlg.FileName);
+            string dirPath = $@"{System.IO.Path.GetDirectoryName(dlg.FileName)}\{System.IO.Path.GetFileName(dlg.FileName)}";
             System.IO.File.Copy(dirPath, path, true);
             File.SetAttributes(path, FileAttributes.Normal);
             //BitmapImage b = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute));
