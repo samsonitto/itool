@@ -25,6 +25,8 @@ namespace iTool
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static int activeUserID;
+        public static string activeUserImage;
         public MainWindow()
         {
             InitializeComponent();
@@ -43,13 +45,13 @@ namespace iTool
         {
             if (txtEmail.Text.Length == 0)
             {
-                txbError.Text = "Enter an email.";
+                txbMainError.Text = "Enter an email.";
                 txtEmail.Focus();
             }
             else if (!Regex.IsMatch(txtEmail.Text, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
             {
-                txbError.Text = "Enter a valid email.";
-                txbError.Focus();
+                txbMainError.Text = "Enter a valid email.";
+                txbMainError.Focus();
             }
             else
             {
@@ -66,13 +68,18 @@ namespace iTool
                 if (dataSet.Tables[0].Rows.Count > 0)
                 {
                     string username = dataSet.Tables[0].Rows[0]["userName"].ToString() + " " + dataSet.Tables[0].Rows[0]["userSurname"].ToString();
+                    activeUserID = int.Parse(dataSet.Tables[0].Rows[0]["userID"].ToString());
+                    string img = $"images/{dataSet.Tables[0].Rows[0]["userPicture"].ToString()}";
+                    Uri u = new Uri(img, UriKind.RelativeOrAbsolute);
                     main.txtUsername.Text = username;//Sending value from one form to another form.  
+                    //main.imgMainPageProfile.Stretch = Stretch.Fill;
+                    main.imgMainPageProfile.Source = new BitmapImage(u);
                     main.Show();
                     this.Close();
                 }
                 else
                 {
-                    txbError.Text = "Sorry! Please enter existing emailid/password.";
+                    txbMainError.Text = "Sorry! Please enter existing emailid/password.";
                 }
                 con.Close();
             }

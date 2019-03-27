@@ -17,7 +17,7 @@
                 <Button x:Name="btnLogin" Content="Login" Background="LightGray" Height="30" Width="140" HorizontalContentAlignment="Center" Margin="0 0 10 0" Click="btnLogin_Click"/>
                 <Button x:Name="btnRegister" Content="Register" Background="LightGray" Height="30" Width="140" HorizontalContentAlignment="Center" Margin="10 0 0 0" Click="btnRegister_Click"/>
             </StackPanel>
-            <TextBlock x:Name="txbError" Margin="40" HorizontalAlignment="Center" FontSize="14"/>
+            <TextBlock x:Name="txbMainError" Margin="40" HorizontalAlignment="Center" FontSize="14"/>
         </StackPanel>
     </Grid>
 </Window>

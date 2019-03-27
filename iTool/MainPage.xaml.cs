@@ -23,5 +23,13 @@ namespace iTool
         {
             InitializeComponent();
         }
+
+        private void dgUsers_Loaded(object sender, RoutedEventArgs e)
+        {
+            dgUsers.ItemsSource = iTool.DB.GetToolsFromMysql();
+            dgUsers.Columns[0].Visibility = Visibility.Collapsed;
+            dgUsers.Columns[5].Visibility = Visibility.Collapsed;
+            dgUsers.Columns[6].Visibility = Visibility.Collapsed;
+        }
     }
 }

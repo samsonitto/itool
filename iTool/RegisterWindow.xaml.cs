@@ -62,10 +62,7 @@ namespace iTool
             {
                 dlg.FileName = "images/no_picture.png";
             }
-            //BitmapImage bitmap = new BitmapImage();
-            //bitmap.BeginInit();
-            //bitmap.UriSource = new Uri(dlg.FileName, UriKind.RelativeOrAbsolute);
-            //bitmap.EndInit();
+            
             imgProfile.Stretch = Stretch.Fill;
             Uri u = new Uri(dlg.FileName, UriKind.RelativeOrAbsolute);
             imgProfile.Source = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute));
@@ -80,8 +77,8 @@ namespace iTool
                     imgFile = $"{x}{i}";
                     x++;
                 }
-                
             }
+            
             else
             {
                 imgFile = path.Split('/')[path.Split('/').Length - 1];
@@ -98,9 +95,18 @@ namespace iTool
 
         private void BtnReg_Click(object sender, RoutedEventArgs e)
         {
+            foreach (User user in DB.EmailChecker())
+            {
+                if (txtAddEmail.Text.ToString() == user.Email)
+                {
+                    txbError.Text = "Email is already in use";
+                    txtAddEmail.Focus();
+                }
+
+            }
             if (txtAddEmail.Text.Length == 0)
             {
-                txbError.Text = "Enter an email.";
+                txbError.Text = "Enter an email";
                 txtAddEmail.Focus();
             }
             else if (!Regex.IsMatch(txtAddEmail.Text, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
@@ -138,6 +144,13 @@ namespace iTool
                 txbError.Text = "Enter your address";
                 txtAddAddress.Focus();
             }
+            //else if (string.IsNullOrEmpty(path))
+            //{
+            //    imgFile = "no_picture.png";
+            //    //imgFile = null;
+            //}
+
+            
             else
             {
                 string firstname = txtFirstName.Text;
@@ -147,25 +160,22 @@ namespace iTool
                 string location = txtAddLocation.Text;
                 string mobile = txtMobile.Text;
                 string imgSource = imgProfile.Source.ToString();
-                //string imgFile = path.Split('/')[path.Split('/').Length - 1];
-                
-
 
                 string address = txtAddAddress.Text;
                 string payment = cbPayment.SelectedValue.ToString();
                 if (pwdCreatePassword.Password.Length == 0)
                 {
-                    txbError.Text = "Enter password.";
+                    txbError.Text = "Enter password";
                     pwdCreatePassword.Focus();
                 }
                 else if (pwdConfirm.Password.Length == 0)
                 {
-                    txbError.Text = "Enter Confirm password.";
+                    txbError.Text = "Enter Confirm password";
                     pwdConfirm.Focus();
                 }
                 else if (pwdCreatePassword.Password != pwdConfirm.Password)
                 {
-                    txbError.Text = "Confirm password must be same as password.";
+                    txbError.Text = "Confirm password must be same as password";
                     pwdConfirm.Focus();
                 }
                 else
@@ -179,14 +189,14 @@ namespace iTool
                     cmd.CommandType = CommandType.Text;
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    //txbError.Text = "You have Registered successfully.";
                     MainWindow mw = new MainWindow();
-                    mw.txbError.Text = "You have Registered successfully.";
+                    mw.txbMainError.Text = "You have Registered successfully\nYou can login now";
                     mw.Show();
                     this.Close();
                     //Reset();
                 }
             }
+        
         }
         public void Reset()
         {

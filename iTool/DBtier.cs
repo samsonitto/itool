@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace iTool
 {
-    public class MyDB
+    public class DB
     {
         public static List<User> GetUsersFromMysql()
         {
@@ -16,7 +16,7 @@ namespace iTool
             {
                 List<User> users = new List<User>();
                 string connStr = GetConnectionString();
-                string sql = "SELECT * FROM user";
+                string sql = $"SELECT userID, userName, userSurname, userAddress, userEmail, userLocation, paymentMethod, userMobile, userPicture FROM user WHERE userID != {MainWindow.activeUserID}";
                 using (MySqlConnection con = new MySqlConnection(connStr))
                 {
                     con.Open();
@@ -34,7 +34,17 @@ namespace iTool
                             u.Location = reader.GetString(5);
                             u.PaymentMethod = reader.GetString(6);
                             u.Mobile = int.Parse(reader.GetString(7));
-                            u.Password = reader.GetString(8);
+                            //u.Password = reader.GetString(8);
+                            if (reader.IsDBNull(8))
+                            {
+                                u.PictureURL = "no_picture.jpg";
+                            }
+                            else
+                            {
+                                u.PictureURL = reader.GetString(8);
+                            }
+                            
+                            users.Add(u);
                         }
                         return users;
                     }
@@ -46,7 +56,81 @@ namespace iTool
             }
         }
 
-        
+        public static List<User> EmailChecker()
+        {
+            try
+            {
+                List<User> emails = new List<User>();
+                string connStr = GetConnectionString();
+                string sql = $"SELECT userEmail FROM user";
+                using (MySqlConnection con = new MySqlConnection(connStr))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, con);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            User u = new User();
+                            u.Email = reader.GetString(0);
+                            emails.Add(u);
+                        }
+                        return emails;
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public static List<Tool> GetToolsFromMysql()
+        {
+            try
+            {
+                List<Tool> tools = new List<Tool>();
+                string connStr = GetConnectionString();
+                string sql = $"SELECT toolID, toolName, toolDescription, toolPrice, toolCondition, toolPicture, toolCategoryName FROM tool inner join toolCategory on tool.toolCategoryID = toolCategory.toolCategoryID WHERE userOwnerID != {MainWindow.activeUserID}";
+                using (MySqlConnection con = new MySqlConnection(connStr))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, con);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Tool t = new Tool();
+                            t.ToolID = int.Parse(reader.GetString(0));
+                            t.ToolName = reader.GetString(1);
+                            t.ToolDescription = reader.GetString(2);
+                            t.ToolPrice = float.Parse(reader.GetString(3));
+                            t.ToolCondition = reader.GetString(4);
+                            
+                            if (reader.IsDBNull(5))
+                            {
+                                t.ToolPictureURL = "no_picture_tool.png";
+                            }
+                            else
+                            {
+                                t.ToolPictureURL = reader.GetString(5);
+                            }
+
+                            t.ToolCategoryName = reader.GetString(6);
+
+                            tools.Add(t);
+                        }
+                        return tools;
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
 
         private static string GetConnectionString()
         {

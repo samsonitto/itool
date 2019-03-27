@@ -11,7 +11,7 @@ namespace iTool
     {
         public int UserID { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        //public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Location { get; set; }
@@ -21,10 +21,6 @@ namespace iTool
         public string PictureURL { get; set; }
         //public List<Tool> ToolCollection = new List<Tool>();
 
-        public User()
-        {
-
-        }
     }
 
     public class Tool
@@ -36,6 +32,9 @@ namespace iTool
         public float ToolPrice { get; set; }
         public int ToolCategoryID { get; set; }
         public int UserOwnerID { get; set; }
+        public string ToolPictureURL { get; set; }
+
+        public string ToolCategoryName { get; set; }
 
         public Tool()
         {
