@@ -29,6 +29,8 @@ namespace iTool
     {
         private List<string> payment = new List<string>() { "Bill", "MasterCard", "Paypal", "VISA" };
         //private List<User> users;
+        private string path;
+        private string imgFile;
 
         public RegisterWindow()
         {
@@ -68,7 +70,23 @@ namespace iTool
             Uri u = new Uri(dlg.FileName, UriKind.RelativeOrAbsolute);
             imgProfile.Source = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute));
             string i = imgProfile.Source.ToString().Split('/')[imgProfile.Source.ToString().Split('/').Length - 1];
-            string path = $@"F:\iTool\iTool\iTool\images\{i}";
+            path = $@"F:\iTool\iTool\iTool\images\{i}";
+            if (File.Exists(path))
+            {
+                int x = 0;
+                for (; File.Exists(path); )
+                {
+                    path = $@"F:\iTool\iTool\iTool\images\{x}{i}";
+                    imgFile = $"{x}{i}";
+                    x++;
+                }
+                
+            }
+            else
+            {
+                imgFile = path.Split('/')[path.Split('/').Length - 1];
+            }
+            //string imgFile = path.Split('/')[path.Split('/').Length - 1];
             //string localPath = new Uri(path).LocalPath;
             string dirPath = $@"{System.IO.Path.GetDirectoryName(dlg.FileName)}\{System.IO.Path.GetFileName(dlg.FileName)}";
             System.IO.File.Copy(dirPath, path, true);
@@ -127,9 +145,9 @@ namespace iTool
                 string email = txtAddEmail.Text;
                 string password = pwdCreatePassword.Password;
                 string location = txtAddLocation.Text;
-                int mobile = int.Parse(txtMobile.Text);
+                string mobile = txtMobile.Text;
                 string imgSource = imgProfile.Source.ToString();
-                string imgFile = imgSource.Split('/')[imgSource.Split('/').Length - 1];
+                //string imgFile = path.Split('/')[path.Split('/').Length - 1];
                 
 
 
