@@ -56,11 +56,11 @@ namespace iTool
             }
         }
 
-        public static List<User> EmailChecker()
+        public static List<string> EmailChecker()
         {
             try
             {
-                List<User> emails = new List<User>();
+                List<string> emails = new List<string>();
                 string connStr = GetConnectionString();
                 string sql = $"SELECT userEmail FROM user";
                 using (MySqlConnection con = new MySqlConnection(connStr))
@@ -73,7 +73,7 @@ namespace iTool
                         {
                             User u = new User();
                             u.Email = reader.GetString(0);
-                            emails.Add(u);
+                            emails.Add(u.Email.ToString());
                         }
                         return emails;
                     }

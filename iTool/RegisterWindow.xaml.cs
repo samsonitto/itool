@@ -22,16 +22,15 @@ using System.IO;
 
 namespace iTool
 {
-    /// <summary>
-    /// Interaction logic for RegisterWindow.xaml
-    /// </summary>
+
     public partial class RegisterWindow : Window
     {
+        //PROPERTIES
         private List<string> payment = new List<string>() { "Bill", "MasterCard", "Paypal", "VISA" };
-        //private List<User> users;
         private string path;
         private string imgFile;
 
+        //METHODS
         public RegisterWindow()
         {
             InitializeComponent();
@@ -81,29 +80,18 @@ namespace iTool
             
             else
             {
-                imgFile = path.Split('/')[path.Split('/').Length - 1];
+                imgFile = path.Split('\\')[path.Split('\\').Length - 1];
             }
             //string imgFile = path.Split('/')[path.Split('/').Length - 1];
             //string localPath = new Uri(path).LocalPath;
             string dirPath = $@"{System.IO.Path.GetDirectoryName(dlg.FileName)}\{System.IO.Path.GetFileName(dlg.FileName)}";
             System.IO.File.Copy(dirPath, path, true);
             File.SetAttributes(path, FileAttributes.Normal);
-            //BitmapImage b = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute));
-            //Bitmap b = new Bitmap(imgProfile.Source.ToString());
-            //b.Save("images");
+
         }
 
         private void BtnReg_Click(object sender, RoutedEventArgs e)
         {
-            foreach (User user in DB.EmailChecker())
-            {
-                if (txtAddEmail.Text.ToString() == user.Email)
-                {
-                    txbError.Text = "Email is already in use";
-                    txtAddEmail.Focus();
-                }
-
-            }
             if (txtAddEmail.Text.Length == 0)
             {
                 txbError.Text = "Enter an email";
@@ -112,6 +100,11 @@ namespace iTool
             else if (!Regex.IsMatch(txtAddEmail.Text, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
             {
                 txbError.Text = "Enter a valid email.";
+                txtAddEmail.Focus();
+            }
+            else if (DB.EmailChecker().Contains(txtAddEmail.Text))
+            {
+                txbError.Text = "Email is already in use";
                 txtAddEmail.Focus();
             }
             else if (txtFirstName.Text.Length == 0)
@@ -144,13 +137,6 @@ namespace iTool
                 txbError.Text = "Enter your address";
                 txtAddAddress.Focus();
             }
-            //else if (string.IsNullOrEmpty(path))
-            //{
-            //    imgFile = "no_picture.png";
-            //    //imgFile = null;
-            //}
-
-            
             else
             {
                 string firstname = txtFirstName.Text;
@@ -182,7 +168,6 @@ namespace iTool
                 {
                     txbError.Text = "";
 
-                    //MySqlConnection con = new MySqlConnection("Data Source=mysql.labranet.jamk.fi;Initial Catalog=M3156_3;User ID=M3156;Password=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
                     MySqlConnection con = new MySqlConnection("SERVER=mysql.labranet.jamk.fi;DATABASE=M3156_3;UID=M3156;PASSWORD=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
                     con.Open();
                     MySqlCommand cmd = new MySqlCommand("Insert into user (userName,userSurname,userAddress,userEmail,userLocation,paymentMethod,userMobile,userPassword,userPicture) values('" + firstname + "','" + lastname + "','" + address + "','" + email + "','" + location + "','" + payment + "','" + mobile + "','" + password + "','" + imgFile + "')", con);
@@ -193,7 +178,6 @@ namespace iTool
                     mw.txbMainError.Text = "You have Registered successfully\nYou can login now";
                     mw.Show();
                     this.Close();
-                    //Reset();
                 }
             }
         

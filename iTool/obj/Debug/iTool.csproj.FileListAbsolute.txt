@@ -134,3 +134,5 @@ F:\iTool\iTool\iTool\obj\Debug\iTool.csproj.CoreCompileInputs.cache
 F:\iTool\iTool\iTool\obj\Debug\iTool.csproj.CopyComplete
 F:\iTool\iTool\iTool\obj\Debug\iTool.exe
 F:\iTool\iTool\iTool\obj\Debug\iTool.pdb
+F:\iTool\iTool\iTool\obj\Debug\ProfileWindow.g.cs
+F:\iTool\iTool\iTool\obj\Debug\ProfileWindow.baml

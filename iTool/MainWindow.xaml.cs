@@ -70,9 +70,10 @@ namespace iTool
                     string username = dataSet.Tables[0].Rows[0]["userName"].ToString() + " " + dataSet.Tables[0].Rows[0]["userSurname"].ToString();
                     activeUserID = int.Parse(dataSet.Tables[0].Rows[0]["userID"].ToString());
                     string img = $"images/{dataSet.Tables[0].Rows[0]["userPicture"].ToString()}";
+
                     Uri u = new Uri(img, UriKind.RelativeOrAbsolute);
                     main.txtUsername.Text = username;//Sending value from one form to another form.  
-                    //main.imgMainPageProfile.Stretch = Stretch.Fill;
+                    main.imgMainPageProfile.Stretch = Stretch.Fill;
                     main.imgMainPageProfile.Source = new BitmapImage(u);
                     main.Show();
                     this.Close();
