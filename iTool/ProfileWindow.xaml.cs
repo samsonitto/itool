@@ -22,7 +22,15 @@ namespace iTool
         public ProfileWindow()
         {
             InitializeComponent();
-            imgUserProfile.Source = MainWindow.bi;
+            IniMyStuff();
+        }
+
+        private void IniMyStuff()
+        {
+            imgUserProfile.Source = new BitmapImage(new Uri(MainWindow.activeUserImage, UriKind.RelativeOrAbsolute));
+            txbFirstName.Text = MainWindow.fName;
+            txbLastName.Text = MainWindow.lName;
+            txbUserID.Text = $"User ID: {MainWindow.activeUserID.ToString()}";
         }
     }
 }

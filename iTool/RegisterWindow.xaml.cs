@@ -35,6 +35,11 @@ namespace iTool
         public RegisterWindow()
         {
             InitializeComponent();
+            IniMyStuff();
+        }
+
+        private void IniMyStuff()
+        {
             cbPayment.ItemsSource = payment;
             cbLocation.ItemsSource = locations;
         }

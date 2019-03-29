@@ -27,6 +27,9 @@ namespace iTool
     {
         public static int activeUserID;
         public static string activeUserImage;
+        public static string fName;
+        public static string lName;
+
         public static BitmapImage bi;
         public MainWindow()
         {
@@ -71,6 +74,9 @@ namespace iTool
                     string username = dataSet.Tables[0].Rows[0]["userName"].ToString() + " " + dataSet.Tables[0].Rows[0]["userSurname"].ToString();
                     activeUserID = int.Parse(dataSet.Tables[0].Rows[0]["userID"].ToString());
                     string img = $"images/{dataSet.Tables[0].Rows[0]["userPicture"].ToString()}";
+                    fName = dataSet.Tables[0].Rows[0]["userName"].ToString();
+                    lName = dataSet.Tables[0].Rows[0]["userSurname"].ToString();
+                    activeUserImage = img;
 
                     Uri u = new Uri(img, UriKind.RelativeOrAbsolute);
                     bi = new BitmapImage(u);

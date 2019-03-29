@@ -10,8 +10,26 @@
         <StackPanel>
             <Label Content="User Profile" FontSize="30" HorizontalContentAlignment="Center"/>
             <StackPanel Orientation="Horizontal">
-                <StackPanel Width="300" Height="700">
-                    <Image x:Name="imgUserProfile" Height="200" Width="200" Margin="50"/>
+                <StackPanel Width="300" Height="720" Background="LightGray" VerticalAlignment="Stretch">
+                    <Border Height="200" Width="200" Margin="50" BorderThickness="1" BorderBrush="Black">
+                        <Image x:Name="imgUserProfile"/>
+                    </Border>
+                    <TextBlock x:Name="txbUserID" HorizontalAlignment="Center" Height="20" Margin="5" FontSize="18" FontWeight="Bold"/>
+                    <TextBlock x:Name="txbFirstName" HorizontalAlignment="Center" Height="20" Margin="5" FontSize="18" FontWeight="Bold"/>
+                    <TextBlock x:Name="txbLastName" HorizontalAlignment="Center" Height="20" Margin="5" FontSize="18" FontWeight="Bold"/>
+                </StackPanel>
+                <StackPanel Width="600">
+                    <Grid Height="360">
+                        <DataGrid x:Name="dgMyTools"/>
+                    </Grid>
+                    <Grid Height="360">
+                        <DataGrid x:Name="dgRentedToolsByMe"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Width="300" Background="LightGoldenrodYellow">
+                    <Border BorderThickness="1" BorderBrush="Black" Width="200" Height="200" Margin="50">
+                        
+                    </Border>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
