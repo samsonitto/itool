@@ -8,8 +8,8 @@
           Title="iTool: " Height="800" Width="1200" ResizeMode="NoResize">
     <Grid >
         <Grid HorizontalAlignment="Left" Height="70"  Margin="0,0,-6.4,0" VerticalAlignment="Top" Width= "1200" Background="#aaaaaa">
-            <Image x:Name="imgMainPageProfile" HorizontalAlignment="Left" Height="60" Margin="40,5,0,0" VerticalAlignment="Top" Width="70" Source="images/no_picture.png" RenderTransformOrigin="0.33,0.7"/>
-            <TextBlock x:Name="txtUsername" Margin="110,22,0,22" TextWrapping="Wrap" Text="User Name" Width="auto" FontWeight="Bold" FontSize="18" Background="{x:Null}" Foreground="#FF262626"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="26"/>
+            <Image x:Name="imgMainPageProfile" HorizontalAlignment="Left" Height="60" Margin="40,5,0,0" VerticalAlignment="Top" Width="70" Source="images/no_picture.png" RenderTransformOrigin="0.33,0.7" MouseDown="ImgMainPageProfile_MouseDown"/>
+            <TextBlock x:Name="txtUsername" Margin="110,22,0,22" TextWrapping="Wrap" Text="User Name" Width="auto" FontWeight="Bold" FontSize="18" Background="{x:Null}" Foreground="#FF262626"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" MouseDown="TxtUsername_MouseDown"/>
             <TextBox x:Name="txbSearchBar" HorizontalAlignment="Left" Height="26"  Margin="495,22,0,22" TextWrapping="Wrap" 
                      Text="Search Tools" VerticalAlignment="Center" Width="275"  Foreground="#FF636262" FontSize="16"/>
             <TextBlock  Margin="380,22,0,22" TextWrapping="Wrap" Text="Search Tools" Width="auto" FontWeight="Bold" FontSize="18" Background="{x:Null}" Foreground="White"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="26"/>

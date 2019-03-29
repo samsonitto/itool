@@ -27,6 +27,7 @@ namespace iTool
     {
         //PROPERTIES
         private List<string> payment = new List<string>() { "Bill", "MasterCard", "Paypal", "VISA" };
+        private  List<string> locations = new List<string>() { "Ähtäri", "Espoo", "Helsinki", "Jyväskylä", "Kuopio", "Kuusamo", "Lahti", "Lappeenranta", "Oulu", "Rauma", "Rovanniemi", "Savonlinna", "Seinäjoki", "Tampere", "Turku", "Vaasa", "Vantaa" };
         private string path;
         private string imgFile;
 
@@ -35,6 +36,7 @@ namespace iTool
         {
             InitializeComponent();
             cbPayment.ItemsSource = payment;
+            cbLocation.ItemsSource = locations;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -66,13 +68,15 @@ namespace iTool
             Uri u = new Uri(dlg.FileName, UriKind.RelativeOrAbsolute);
             imgProfile.Source = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute));
             string i = imgProfile.Source.ToString().Split('/')[imgProfile.Source.ToString().Split('/').Length - 1];
-            path = $@"F:\iTool\iTool\iTool\images\{i}";
+            //path = $@"F:\iTool\iTool\iTool\images\{i}";
+            path = $@"images\{i}";
             if (File.Exists(path))
             {
                 int x = 0;
                 for (; File.Exists(path); )
                 {
-                    path = $@"F:\iTool\iTool\iTool\images\{x}{i}";
+                    path = $@"images\{x}{i}";
+                    //path = $@"F:\iTool\iTool\iTool\images\{x}{i}";
                     imgFile = $"{x}{i}";
                     x++;
                 }
@@ -82,11 +86,14 @@ namespace iTool
             {
                 imgFile = path.Split('\\')[path.Split('\\').Length - 1];
             }
-            //string imgFile = path.Split('/')[path.Split('/').Length - 1];
-            //string localPath = new Uri(path).LocalPath;
+
+            // relaatiivinen polku images kansioon
+            string relativePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\{path}";
+
+            // pulku valituun kuvatiedostoon
             string dirPath = $@"{System.IO.Path.GetDirectoryName(dlg.FileName)}\{System.IO.Path.GetFileName(dlg.FileName)}";
-            System.IO.File.Copy(dirPath, path, true);
-            File.SetAttributes(path, FileAttributes.Normal);
+            System.IO.File.Copy(dirPath, relativePath, true);
+            File.SetAttributes(relativePath, FileAttributes.Normal);
 
         }
 
@@ -122,10 +129,10 @@ namespace iTool
                 txbError.Text = "Enter valid mobile number";
                 txtMobile.Focus();
             }
-            else if (txtAddLocation.Text.Length == 0)
+            else if (cbLocation.Text.Length == 0)
             {
                 txbError.Text = "Enter your location";
-                txtAddLocation.Focus();
+                cbLocation.Focus();
             }
             else if (cbPayment.SelectedValue is null)
             {
@@ -137,13 +144,17 @@ namespace iTool
                 txbError.Text = "Enter your address";
                 txtAddAddress.Focus();
             }
+            //else if (string.IsNullOrEmpty(imgFile))
+            //{
+            //    imgFile = null;
+            //}
             else
             {
                 string firstname = txtFirstName.Text;
                 string lastname = txtLastName.Text;
                 string email = txtAddEmail.Text;
                 string password = pwdCreatePassword.Password;
-                string location = txtAddLocation.Text;
+                string location = cbLocation.SelectedValue.ToString();
                 string mobile = txtMobile.Text;
                 string imgSource = imgProfile.Source.ToString();
 
@@ -191,9 +202,73 @@ namespace iTool
             pwdConfirm.Password = "";
             txtMobile.Text = "";
             txtAddAddress.Text = "";
-            txtAddLocation.Text = "";
+            cbLocation.SelectedValue = null;
             txtPic.Text = "";
             cbPayment.SelectedItem = null;
+        }
+
+        public void Fill()
+        {
+            Random rand = new Random();
+            char[] abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+            char[] c123 = "1234567890".ToCharArray();
+            string fName = abc[rand.Next(abc.Length)].ToString().ToUpper();
+            string lName = abc[rand.Next(abc.Length)].ToString().ToUpper();
+            string eMail = abc[rand.Next(abc.Length)].ToString().ToLower();
+            string pw = abc[rand.Next(abc.Length)].ToString().ToLower();
+            string mobile = c123[rand.Next(c123.Length)].ToString();
+            string address = abc[rand.Next(abc.Length)].ToString().ToUpper();
+            string location = abc[rand.Next(abc.Length)].ToString().ToUpper();
+
+            for (int i = 0; i < 5; i++)
+            {
+                eMail = $"{eMail}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                pw = $"{pw}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                fName = $"{fName}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                lName = $"{lName}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+            }
+
+            for (int i = 0; i < 9; i++)
+            {
+                mobile = $"{mobile}{c123[rand.Next(c123.Length)].ToString()}";
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                address = $"{address}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                location = $"{location}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+            }
+
+            txtAddEmail.Text = $"{eMail}@gmail.com";
+            pwdCreatePassword.Password = pw;
+            pwdConfirm.Password = pw;
+            txtFirstName.Text = fName;
+            txtLastName.Text = lName;
+            txtMobile.Text = mobile;
+            txtAddAddress.Text = $"{address} {c123[rand.Next(c123.Length)].ToString()} {abc[rand.Next(abc.Length)].ToString().ToLower()} {c123[rand.Next(c123.Length)].ToString()}";
+            cbLocation.SelectedValue = cbLocation.Items[rand.Next(cbLocation.Items.Count)];
+            cbPayment.SelectedValue = cbPayment.Items[rand.Next(cbPayment.Items.Count)];
+        }
+
+        private void BtnFill_Click(object sender, RoutedEventArgs e)
+        {
+            Fill();
         }
     }
 }

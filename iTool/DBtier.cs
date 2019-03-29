@@ -35,10 +35,11 @@ namespace iTool
                             u.PaymentMethod = reader.GetString(6);
                             u.Mobile = int.Parse(reader.GetString(7));
                             //u.Password = reader.GetString(8);
-                            if (reader.IsDBNull(8))
+                            if (reader.IsDBNull(8) || string.IsNullOrEmpty(reader.GetString(8)))
                             {
                                 u.PictureURL = "no_picture.jpg";
                             }
+
                             else
                             {
                                 u.PictureURL = reader.GetString(8);

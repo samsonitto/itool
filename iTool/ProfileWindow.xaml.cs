@@ -22,6 +22,7 @@ namespace iTool
         public ProfileWindow()
         {
             InitializeComponent();
+            imgUserProfile.Source = MainWindow.bi;
         }
     }
 }

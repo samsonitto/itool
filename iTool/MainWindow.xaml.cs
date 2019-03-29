@@ -27,6 +27,7 @@ namespace iTool
     {
         public static int activeUserID;
         public static string activeUserImage;
+        public static BitmapImage bi;
         public MainWindow()
         {
             InitializeComponent();
@@ -72,6 +73,7 @@ namespace iTool
                     string img = $"images/{dataSet.Tables[0].Rows[0]["userPicture"].ToString()}";
 
                     Uri u = new Uri(img, UriKind.RelativeOrAbsolute);
+                    bi = new BitmapImage(u);
                     main.txtUsername.Text = username;//Sending value from one form to another form.  
                     main.imgMainPageProfile.Stretch = Stretch.Fill;
                     main.imgMainPageProfile.Source = new BitmapImage(u);

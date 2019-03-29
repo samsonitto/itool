@@ -22,6 +22,7 @@ namespace iTool
         public MainPage()
         {
             InitializeComponent();
+            imgMainPageProfile.Source = MainWindow.bi;
         }
 
         private void dgUsers_Loaded(object sender, RoutedEventArgs e)
@@ -30,6 +31,18 @@ namespace iTool
             dgUsers.Columns[0].Visibility = Visibility.Collapsed;
             dgUsers.Columns[5].Visibility = Visibility.Collapsed;
             dgUsers.Columns[6].Visibility = Visibility.Collapsed;
+        }
+
+        private void ImgMainPageProfile_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void TxtUsername_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ProfileWindow profile = new ProfileWindow();
+            profile.Show();
+            this.Close();
         }
     }
 }
