@@ -7,13 +7,14 @@
         mc:Ignorable="d"
           Title="iTool: " Height="800" Width="1200" ResizeMode="NoResize">
     <Grid >
-        <Grid HorizontalAlignment="Left" Height="70"  Margin="0,0,-6.4,0" VerticalAlignment="Top" Width= "1200" Background="#aaaaaa">
-            <Image x:Name="imgMainPageProfile" HorizontalAlignment="Left" Height="60" Margin="40,5,0,0" VerticalAlignment="Top" Width="70" Source="images/no_picture.png" RenderTransformOrigin="0.33,0.7" MouseDown="ImgMainPageProfile_MouseDown"/>
-            <TextBlock x:Name="txtUsername" Margin="110,22,0,22" TextWrapping="Wrap" Text="User Name" Width="auto" FontWeight="Bold" FontSize="18" Background="{x:Null}" Foreground="#FF262626"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="26" MouseDown="TxtUsername_MouseDown"/>
-            <TextBox x:Name="txbSearchBar" HorizontalAlignment="Left" Height="26"  Margin="495,22,0,22" TextWrapping="Wrap" 
-                     Text="Search Tools" VerticalAlignment="Center" Width="275"  Foreground="#FF636262" FontSize="16"/>
-            <TextBlock  Margin="380,22,0,22" TextWrapping="Wrap" Text="Search Tools" Width="auto" FontWeight="Bold" FontSize="18" Background="{x:Null}" Foreground="White"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="26"/>
-        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="70" Margin="0,0,-6.4,0" VerticalAlignment="Top" Width= "1200" Background="#aaaaaa">
+            <Border BorderThickness="1" BorderBrush="Black" Margin="20 5" Cursor="Hand" Height="60" Width="60">
+                <Image x:Name="imgMainPageProfile" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Top" MouseLeftButtonUp="ImgMainPageProfile_MouseLeftButtonUp" />
+            </Border>
+            <TextBlock x:Name="txtUsername" Margin="0" TextWrapping="Wrap" Text="User Name" Width="auto" FontWeight="Bold" FontSize="18" Background="{x:Null}" Foreground="#FF262626"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="26"/>
+            <TextBox x:Name="txbSearchBar" Height="30"  Margin="200 0 0 0" TextWrapping="Wrap" Text="Search Tools" Width="250" Foreground="#FF636262" FontSize="16"/>
+            <Button x:Name="btnSearchTools" Height="30" Content="Search" FontSize="16" Width="100" Margin="10 0 0 0"/>
+        </StackPanel>
 
 
         <Grid HorizontalAlignment="Left" Height="700" Margin="0,70,0,0" VerticalAlignment="Top" Width="240" Background="#FFDADADA">
@@ -32,8 +33,10 @@
                      Text="Tool name" VerticalAlignment="Center" Width="192"  Foreground="#FF636262" FontSize="16"/>
 
         </Grid>
-
-        <DataGrid x:Name="dgUsers" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="700" Margin="240,70,0,0" VerticalAlignment="Top" Width="687" Loaded="dgUsers_Loaded"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <DataGrid x:Name="dgTools" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="700" Margin="240,70,0,0" VerticalAlignment="Top" Width="687" Loaded="dgTools_Loaded"/>
+        </ScrollViewer>
+        
 
 
         <Grid HorizontalAlignment="Left" Height="700" Margin="927,70,-0.4,0" VerticalAlignment="Top" Width="270" Background="#FFDADADA">

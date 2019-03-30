@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using iTool;
 
 namespace iTool
 {
@@ -22,27 +23,39 @@ namespace iTool
         public MainPage()
         {
             InitializeComponent();
-            imgMainPageProfile.Source = MainWindow.bi;
+            IniMyStuff(); 
         }
 
-        private void dgUsers_Loaded(object sender, RoutedEventArgs e)
+        private void IniMyStuff()
         {
-            dgUsers.ItemsSource = iTool.DB.GetToolsFromMysql();
-            dgUsers.Columns[0].Visibility = Visibility.Collapsed;
-            dgUsers.Columns[5].Visibility = Visibility.Collapsed;
-            dgUsers.Columns[6].Visibility = Visibility.Collapsed;
-        }
+            //USER IMAGE
+            imgMainPageProfile.Source = Active.ImageSource;
 
-        private void ImgMainPageProfile_MouseDown(object sender, MouseButtonEventArgs e)
+            //USER NAME
+            txtUsername.Text = $"{Active.FirstName} {Active.LastName}";
+        }
+        private void dgTools_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            dgTools.ItemsSource = iTool.DB.GetToolsFromMysql();
+            dgTools.Columns[0].Visibility = Visibility.Collapsed;
+            dgTools.Columns[1].Visibility = Visibility.Collapsed;
+            dgTools.Columns[2].Visibility = Visibility.Collapsed;
+            dgTools.Columns[3].Visibility = Visibility.Collapsed;
         }
 
-        private void TxtUsername_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private void GoToProfile()
         {
             ProfileWindow profile = new ProfileWindow();
             profile.Show();
             this.Close();
         }
+
+        private void ImgMainPageProfile_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            GoToProfile();
+        }
     }
+
+
 }

@@ -17,6 +17,7 @@ using iTool;
 using MySql.Data.MySqlClient;
 using MySql.Data;
 using System.Data;
+using System.IO;
 
 namespace iTool
 {
@@ -25,24 +26,15 @@ namespace iTool
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static int activeUserID;
-        public static string activeUserImage;
-        public static string fName;
-        public static string lName;
-
-        public static BitmapImage bi;
         public MainWindow()
         {
             InitializeComponent();
-
         }
-        MainPage main = new MainPage();
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow register = new RegisterWindow();
             register.Show();
             this.Close();
-            
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -72,17 +64,21 @@ namespace iTool
                 if (dataSet.Tables[0].Rows.Count > 0)
                 {
                     string username = dataSet.Tables[0].Rows[0]["userName"].ToString() + " " + dataSet.Tables[0].Rows[0]["userSurname"].ToString();
-                    activeUserID = int.Parse(dataSet.Tables[0].Rows[0]["userID"].ToString());
-                    string img = $"images/{dataSet.Tables[0].Rows[0]["userPicture"].ToString()}";
-                    fName = dataSet.Tables[0].Rows[0]["userName"].ToString();
-                    lName = dataSet.Tables[0].Rows[0]["userSurname"].ToString();
-                    activeUserImage = img;
+                    Active.UserID = int.Parse(dataSet.Tables[0].Rows[0]["userID"].ToString());
+                    Active.ImagePath = $"{Active.ProjectPath}/images/{dataSet.Tables[0].Rows[0]["userPicture"].ToString()}";
+                    Active.FirstName = dataSet.Tables[0].Rows[0]["userName"].ToString();
+                    Active.LastName = dataSet.Tables[0].Rows[0]["userSurname"].ToString();
 
-                    Uri u = new Uri(img, UriKind.RelativeOrAbsolute);
-                    bi = new BitmapImage(u);
-                    main.txtUsername.Text = username;//Sending value from one form to another form.  
-                    main.imgMainPageProfile.Stretch = Stretch.Fill;
-                    main.imgMainPageProfile.Source = new BitmapImage(u);
+                    if (string.IsNullOrEmpty(Active.ImagePath))
+                    {
+                        Active.ImageSource = new BitmapImage(new Uri($"{Active.ProjectPath}/images/no_picture.png", UriKind.RelativeOrAbsolute));
+                    }
+                    else
+                    {
+                        Active.ImageSource = new BitmapImage(new Uri(Active.ImagePath, UriKind.RelativeOrAbsolute));
+                    }
+
+                    MainPage main = new MainPage();
                     main.Show();
                     this.Close();
                 }

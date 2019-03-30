@@ -27,10 +27,12 @@ namespace iTool
 
         private void IniMyStuff()
         {
-            imgUserProfile.Source = new BitmapImage(new Uri(MainWindow.activeUserImage, UriKind.RelativeOrAbsolute));
-            txbFirstName.Text = MainWindow.fName;
-            txbLastName.Text = MainWindow.lName;
-            txbUserID.Text = $"User ID: {MainWindow.activeUserID.ToString()}";
+            //imgUserProfile.Source = new BitmapImage(new Uri(MainWindow.activeUserImage, UriKind.RelativeOrAbsolute));
+            imgUserProfile.Source = Active.ImageSource;
+            //MainWindow.bi.CacheOption = BitmapCacheOption.OnLoad;
+            txbFirstName.Text = Active.FirstName;
+            txbLastName.Text = Active.LastName;
+            txbUserID.Text = $"User ID: {Active.UserID.ToString()}";
         }
     }
 }

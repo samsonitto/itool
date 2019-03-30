@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
+using iTool;
 
 namespace iTool
 {
@@ -26,15 +29,15 @@ namespace iTool
     public class Tool
     {
         public int ToolID { get; set; }
+        public int UserOwnerID { get; set; }
+        public int ToolCategoryID { get; set; }
+        public string ToolPictureURL { get; set; }
         public string ToolName { get; set; }
         public string ToolCondition { get; set; }
         public string ToolDescription { get; set; }
         public float ToolPrice { get; set; }
-        public int ToolCategoryID { get; set; }
-        public int UserOwnerID { get; set; }
-        public string ToolPictureURL { get; set; }
-
         public string ToolCategoryName { get; set; }
+        public string ToolLocation { get; set; }
 
         public Tool()
         {
@@ -52,6 +55,17 @@ namespace iTool
         {
 
         }
+    }
+
+    public static class Active
+    {
+        public static string ProjectPath { get { return Directory.GetParent(Environment.CurrentDirectory).Parent.FullName; } }
+        public static string FirstName { get; set; }
+        public static string LastName { get; set; }
+        public static string ImagePath { get; set; }
+        public static int UserID { get; set; }
+        public static BitmapImage ImageSource { get; set; }
+
     }
 
 }

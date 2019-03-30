@@ -16,7 +16,7 @@ namespace iTool
             {
                 List<User> users = new List<User>();
                 string connStr = GetConnectionString();
-                string sql = $"SELECT userID, userName, userSurname, userAddress, userEmail, userLocation, paymentMethod, userMobile, userPicture FROM user WHERE userID != {MainWindow.activeUserID}";
+                string sql = $"SELECT userID, userName, userSurname, userAddress, userEmail, userLocation, paymentMethod, userMobile, userPicture FROM user WHERE userID != {Active.UserID}";
                 using (MySqlConnection con = new MySqlConnection(connStr))
                 {
                     con.Open();
@@ -92,7 +92,7 @@ namespace iTool
             {
                 List<Tool> tools = new List<Tool>();
                 string connStr = GetConnectionString();
-                string sql = $"SELECT toolID, toolName, toolDescription, toolPrice, toolCondition, toolPicture, toolCategoryName FROM tool inner join toolCategory on tool.toolCategoryID = toolCategory.toolCategoryID WHERE userOwnerID != {MainWindow.activeUserID}";
+                string sql = $"SELECT toolID, userOwnerID, toolCategoryID, toolPicture, toolName, toolDescription, toolPrice, toolCondition, toolCategoryName, userLocation FROM all_tools WHERE userOwnerID != {Active.UserID}";
                 using (MySqlConnection con = new MySqlConnection(connStr))
                 {
                     con.Open();
@@ -103,21 +103,22 @@ namespace iTool
                         {
                             Tool t = new Tool();
                             t.ToolID = int.Parse(reader.GetString(0));
-                            t.ToolName = reader.GetString(1);
-                            t.ToolDescription = reader.GetString(2);
-                            t.ToolPrice = float.Parse(reader.GetString(3));
-                            t.ToolCondition = reader.GetString(4);
-                            
-                            if (reader.IsDBNull(5))
+                            t.UserOwnerID = int.Parse(reader.GetString(1));
+                            t.ToolCategoryID = int.Parse(reader.GetString(2));
+                            if (reader.IsDBNull(3) || string.IsNullOrEmpty(reader.GetString(3)))
                             {
                                 t.ToolPictureURL = "no_picture_tool.png";
                             }
                             else
                             {
-                                t.ToolPictureURL = reader.GetString(5);
+                                t.ToolPictureURL = reader.GetString(3);
                             }
-
-                            t.ToolCategoryName = reader.GetString(6);
+                            t.ToolName = reader.GetString(4);
+                            t.ToolDescription = reader.GetString(5);
+                            t.ToolPrice = float.Parse(reader.GetString(6));
+                            t.ToolCondition = reader.GetString(7);
+                            t.ToolCategoryName = reader.GetString(8);
+                            t.ToolLocation = reader.GetString(9);
 
                             tools.Add(t);
                         }
