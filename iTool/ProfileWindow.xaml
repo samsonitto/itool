@@ -8,28 +8,40 @@
         Title="iTool: User Profile" Height="800" Width="1200" ResizeMode="NoResize">
     <Grid>
         <StackPanel>
-            <Label Content="User Profile" FontSize="30" HorizontalContentAlignment="Center"/>
+            <Label Content="User Profile" FontSize="30" HorizontalContentAlignment="Center" FontWeight="Bold" Background="#aaaaaa"/>
             <StackPanel Orientation="Horizontal">
                 <StackPanel Width="300" Height="720" Background="LightGray" VerticalAlignment="Stretch">
-                    <Border Height="200" Width="200" Margin="50" BorderThickness="1" BorderBrush="Black">
+                    <Border Height="200" Width="200" Margin="50 50 50 0" BorderThickness="1" BorderBrush="Black">
                         <Image x:Name="imgUserProfile"/>
                     </Border>
-                    <TextBlock x:Name="txbUserID" HorizontalAlignment="Center" Height="20" Margin="5" FontSize="18" FontWeight="Bold"/>
-                    <TextBlock x:Name="txbFirstName" HorizontalAlignment="Center" Height="20" Margin="5" FontSize="18" FontWeight="Bold"/>
-                    <TextBlock x:Name="txbLastName" HorizontalAlignment="Center" Height="20" Margin="5" FontSize="18" FontWeight="Bold"/>
+                    <TextBlock x:Name="txbUserID" HorizontalAlignment="Left" Height="20" Margin="50 20 0 0" FontSize="18" FontWeight="Medium"/>
+                    <TextBlock x:Name="txbFirstName" HorizontalAlignment="Left" Height="20" Margin="50 20 0 0" FontSize="18" FontWeight="Medium"/>
+                    <TextBlock x:Name="txbLastName" HorizontalAlignment="Left" Height="20" Margin="50 20 0 0" FontSize="18" FontWeight="Medium"/>
                 </StackPanel>
                 <StackPanel Width="600">
-                    <Grid Height="360">
-                        <DataGrid x:Name="dgMyTools"/>
-                    </Grid>
-                    <Grid Height="360">
+                    <Label Content="My Tools" HorizontalContentAlignment="Center" FontSize="26" FontWeight="Bold" Margin="0 30 0 0"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <DataGrid x:Name="dgMyTools" SelectionChanged="DgMyTools_SelectionChanged"/>
+                    </ScrollViewer>
+                    <Label Content="My Rented Tools" HorizontalContentAlignment="Center" FontSize="26" FontWeight="Bold" Margin="0 30 0 0"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <DataGrid x:Name="dgRentedToolsByMe"/>
-                    </Grid>
+                    </ScrollViewer>
                 </StackPanel>
-                <StackPanel Width="300" Background="LightGoldenrodYellow">
-                    <Border BorderThickness="1" BorderBrush="Black" Width="200" Height="200" Margin="50">
-                        
+                <StackPanel Width="300" Background="LightGray">
+                    <Label  Margin="30 30 0 0"  Content="Tool" FontSize="26" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Width="200" Height="170" Margin="30 20 0 0" HorizontalAlignment="Left">
+                        <Image x:Name="imgToolProfile"/>
                     </Border>
+                    <Label Margin="30 20 0 0"  Content="Name: " FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="txbToolNameProfile" FontSize="22" Margin="30 0 0 0"/>
+                    <Label Margin="30 20 0 0"  Content="Conditioin: "  FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="txbToolConditionProfile" FontSize="22" Margin="30 0 0 0"/>
+                    <Label Margin="30 20 0 0" Content="Price €/day: " FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="txbPriceProfile" FontSize="22" Margin="30 0 0 0"/>
+                    <Label Margin="30 20 0 0" Content="Description: " FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="txbDescriptionProfile" FontSize="22" Margin="30 0 0 0" TextWrapping="Wrap"/>
+                    <Button x:Name="btnReturnDelete" Height="40" Width="150" HorizontalAlignment="Left" Margin="30 20 0 0" FontSize="20"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

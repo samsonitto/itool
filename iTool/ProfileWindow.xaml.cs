@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,39 @@ namespace iTool
             txbLastName.Text = Active.LastName;
             txbUserID.Text = $"User ID: {Active.UserID.ToString()}";
             dgMyTools.ItemsSource = DB.GetOwnedToolsFromMysql();
+        }
+
+        private void DgMyTools_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Object selected = dgMyTools.SelectedItem;
+            if (selected != null)
+            {
+                Tool tool = (Tool)selected;
+                ShowPicture(tool.ToolPictureURL);
+                txbToolNameProfile.Text = tool.ToolName;
+                txbToolConditionProfile.Text = tool.ToolCondition;
+                txbPriceProfile.Text = tool.ToolPrice.ToString();
+                txbDescriptionProfile.Text = tool.ToolDescription;
+                btnReturnDelete.Content = "Delete Tool";
+            }
+        }
+
+        private void ShowPicture(string imageFile)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(imageFile) || !File.Exists(imageFile))
+                {
+                    imageFile = "no_picture_tool.png";
+                }
+                BitmapImage toolImage = new BitmapImage(new Uri($"{Active.ProjectPath}/images/{imageFile}", UriKind.RelativeOrAbsolute));
+                imgToolProfile.Stretch = Stretch.Fill;
+                imgToolProfile.Source = toolImage;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
