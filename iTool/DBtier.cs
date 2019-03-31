@@ -132,7 +132,51 @@ namespace iTool
             }
         }
 
+        public static List<Tool> GetOwnedToolsFromMysql()
+        {
+            try
+            {
+                List<Tool> tools = new List<Tool>();
+                string connStr = GetConnectionString();
+                string sql = $"SELECT toolID, userOwnerID, toolCategoryID, toolPicture, toolName, toolDescription, toolPrice, toolCondition, toolCategoryName, userLocation FROM all_tools WHERE userOwnerID = {Active.UserID}";
+                using (MySqlConnection con = new MySqlConnection(connStr))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, con);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Tool t = new Tool();
+                            t.ToolID = int.Parse(reader.GetString(0));
+                            t.UserOwnerID = int.Parse(reader.GetString(1));
+                            t.ToolCategoryID = int.Parse(reader.GetString(2));
+                            if (reader.IsDBNull(3) || string.IsNullOrEmpty(reader.GetString(3)))
+                            {
+                                t.ToolPictureURL = "no_picture_tool.png";
+                            }
+                            else
+                            {
+                                t.ToolPictureURL = reader.GetString(3);
+                            }
+                            t.ToolName = reader.GetString(4);
+                            t.ToolDescription = reader.GetString(5);
+                            t.ToolPrice = float.Parse(reader.GetString(6));
+                            t.ToolCondition = reader.GetString(7);
+                            t.ToolCategoryName = reader.GetString(8);
+                            t.ToolLocation = reader.GetString(9);
 
+                            tools.Add(t);
+                        }
+                        return tools;
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
         private static string GetConnectionString()
         {

@@ -20,6 +20,7 @@ namespace iTool
     /// </summary>
     public partial class MainPage : Window
     {
+        private List<Tool> tools;
         public MainPage()
         {
             InitializeComponent();
@@ -28,6 +29,7 @@ namespace iTool
 
         private void IniMyStuff()
         {
+            tools = DB.GetToolsFromMysql();
             //USER IMAGE
             imgMainPageProfile.Source = Active.ImageSource;
 
@@ -36,7 +38,7 @@ namespace iTool
         }
         private void dgTools_Loaded(object sender, RoutedEventArgs e)
         {
-            dgTools.ItemsSource = iTool.DB.GetToolsFromMysql();
+            dgTools.ItemsSource = DB.GetToolsFromMysql();
             dgTools.Columns[0].Visibility = Visibility.Collapsed;
             dgTools.Columns[1].Visibility = Visibility.Collapsed;
             dgTools.Columns[2].Visibility = Visibility.Collapsed;
@@ -51,7 +53,7 @@ namespace iTool
             this.Close();
         }
 
-        private void ImgMainPageProfile_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             GoToProfile();
         }

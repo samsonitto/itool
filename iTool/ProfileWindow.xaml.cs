@@ -33,6 +33,7 @@ namespace iTool
             txbFirstName.Text = Active.FirstName;
             txbLastName.Text = Active.LastName;
             txbUserID.Text = $"User ID: {Active.UserID.ToString()}";
+            dgMyTools.ItemsSource = DB.GetOwnedToolsFromMysql();
         }
     }
 }
