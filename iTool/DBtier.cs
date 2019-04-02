@@ -182,7 +182,6 @@ namespace iTool
         {
             //yleensä connection string tallennetaan koodin ulkopuolelle
             //tässä demossa koodissa = HYI HYI Paha!
-            //string passu = "3HX4IWlUK13DNdDnkK3oQEzo4zKIXMCC";
             //haetaan salasana App.Config-tiedostosta
             return string.Format("SERVER=mysql.labranet.jamk.fi;DATABASE=M3156_3;UID=M3156;PASSWORD=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
         }

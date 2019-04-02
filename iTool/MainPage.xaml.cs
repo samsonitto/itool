@@ -22,6 +22,8 @@ namespace iTool
     public partial class MainPage : Window
     {
         private List<Tool> tools;
+        private List<string> locations = new List<string>();
+        private List<string> categories = new List<string>();
         public MainPage()
         {
             InitializeComponent();
@@ -34,10 +36,23 @@ namespace iTool
             dgTools.ItemsSource = tools;
 
             var location = tools.Select(t => t.ToolLocation).Distinct();
-            var category = tools.Select(c => c.ToolCategoryName).Distinct();
+            locations.Add("All cities");
+            foreach (var item in location)
+            {
+                locations.Add(item);
+            }
 
-            cbCityFilter.ItemsSource = location;
-            cbToolCategory.ItemsSource = category;
+            var category = tools.Select(c => c.ToolCategoryName).Distinct();
+            categories.Add("All categories");
+            foreach (var item in category)
+            {
+                categories.Add(item);
+            }
+
+            cbCityFilter.ItemsSource = locations;
+            cbCityFilter.SelectedIndex = 0;
+            cbToolCategory.ItemsSource = categories;
+            cbToolCategory.SelectedIndex = 0;
             //USER IMAGE
             imgMainPageProfile.Source = Active.ImageSource;
 
@@ -76,28 +91,41 @@ namespace iTool
         private void CbCityFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string location = cbCityFilter.SelectedValue.ToString();
-            if (cbToolCategory.SelectedValue == null)
+            string category = cbToolCategory.SelectedValue.ToString();
+            
+            else if (category == "All categories" && location == "All cities")
             {
-                dgTools.ItemsSource = tools.Where(t => t.ToolLocation.Contains(location));
+                dgTools.ItemsSource = tools;
             }
-            else
+            else if (category != "All categories" && location != "All cities")
             {
-                string category = cbToolCategory.SelectedValue.ToString();
-                dgTools.ItemsSource = tools.Where(t => t.ToolLocation.Contains(location) && t.ToolCategoryName.Contains(category));
+                dgTools.ItemsSource = tools.Where(t => t.ToolCategoryName.Contains(category) && t.ToolLocation.Contains(location));
             }
-        }
-
-        private void CbToolCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string category = cbCityFilter.SelectedValue.ToString();
-            if (cbCityFilter.SelectedValue == null)
+            else if (location == "All cities" && cbToolCategory.SelectedValue.ToString() != "All categories")
             {
                 dgTools.ItemsSource = tools.Where(t => t.ToolCategoryName.Contains(category));
             }
             else
             {
-                string location = cbCityFilter.SelectedValue.ToString();
-                dgTools.ItemsSource = tools.Where(t => t.ToolLocation.Contains(location) && t.ToolCategoryName.Contains(category));
+                dgTools.ItemsSource = tools.Where(t => t.ToolLocation.Contains(location));
+            }
+        }
+
+        private void CbToolCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string category = cbToolCategory.SelectedValue.ToString();
+            string location = cbCityFilter.SelectedValue.ToString();
+            if (category == "All categories" && location == "All cities")
+            {
+                dgTools.ItemsSource = tools;
+            }
+            else if (category == "All categories" && location != "All cities")
+            {
+                dgTools.ItemsSource = tools.Where(t => t.ToolLocation.Contains(location));
+            }
+            else
+            {
+                dgTools.ItemsSource = tools.Where(t => t.ToolCategoryName.Contains(category));
             }
         }
 

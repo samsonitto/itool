@@ -41,14 +41,14 @@
                     <Border HorizontalAlignment="Left" Margin="30 0 0 0" BorderThickness="1" BorderBrush="Black" Width="200" Height="160">
                         <Image x:Name="imgTool" HorizontalAlignment="Left" Margin="0"/>
                     </Border>
-                    <Label Margin="30 20 0 0"  Content="Name: " FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="txbToolName" FontSize="22" Margin="30 0 0 0"/>
-                    <Label Margin="30 20 0 0"  Content="Conditioin: "  FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="txbToolCondition" FontSize="22" Margin="30 0 0 0"/>
-                    <Label Margin="30 20 0 0" Content="Price €/day: " FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="txbPrice" FontSize="22" Margin="30 0 0 0"/>
-                    <Label Margin="30 20 0 0" Content="Description: " FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="txbDescription" FontSize="22" Margin="30 0 0 0"/>
+                    <Label Margin="30 20 0 0"  Content="Name: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <TextBlock x:Name="txbToolName" FontSize="16" Margin="30 0"/>
+                    <Label Margin="30 20 0 0"  Content="Conditioin: "  FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <TextBlock x:Name="txbToolCondition" FontSize="16" Margin="30 0"/>
+                    <Label Margin="30 20 0 0" Content="Price €/day: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <TextBlock x:Name="txbPrice" FontSize="16" Margin="30 0"/>
+                    <Label Margin="30 20 0 0" Content="Description: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <TextBlock x:Name="txbDescription" FontSize="16" Margin="30 0"/>
                 </StackPanel>
 
             </StackPanel>
