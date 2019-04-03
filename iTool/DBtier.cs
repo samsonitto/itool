@@ -33,7 +33,7 @@ namespace iTool
                             u.Email = reader.GetString(4);
                             u.Location = reader.GetString(5);
                             u.PaymentMethod = reader.GetString(6);
-                            u.Mobile = int.Parse(reader.GetString(7));
+                            u.Mobile = reader.GetString(7);
                             //u.Password = reader.GetString(8);
                             if (reader.IsDBNull(8) || string.IsNullOrEmpty(reader.GetString(8)))
                             {
@@ -48,6 +48,51 @@ namespace iTool
                             users.Add(u);
                         }
                         return users;
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public static User GetToolOwnerFromMysql(int toolOwnerID)
+        {
+            try
+            {
+                User user = new User();
+                string connStr = GetConnectionString();
+                string sql = $"SELECT userID, userName, userSurname, userAddress, userEmail, userLocation, paymentMethod, userMobile, userPicture FROM user WHERE userID = {toolOwnerID.ToString()}";
+                using (MySqlConnection con = new MySqlConnection(connStr))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, con);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        User u = new User();
+                        while (reader.Read())
+                        {
+                            
+                            u.UserID = int.Parse(reader.GetString(0));
+                            u.FirstName = reader.GetString(1);
+                            u.LastName = reader.GetString(2);
+                            u.Address = reader.GetString(3);
+                            u.Email = reader.GetString(4);
+                            u.Location = reader.GetString(5);
+                            u.PaymentMethod = reader.GetString(6);
+                            u.Mobile = reader.GetString(7);
+                            //u.Password = reader.GetString(8);
+                            if (reader.IsDBNull(8) || string.IsNullOrEmpty(reader.GetString(8)))
+                            {
+                                u.PictureURL = "no_picture.jpg";
+                            }
+
+                            else
+                            {
+                                u.PictureURL = reader.GetString(8);
+                            }
+                        }
+                        return u;
                     }
                 }
             }

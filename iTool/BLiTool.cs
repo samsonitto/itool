@@ -18,7 +18,7 @@ namespace iTool
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Location { get; set; }
-        public int Mobile { get; set; }
+        public string Mobile { get; set; }
         public string Address { get; set; }
         public string PaymentMethod { get; set; }
         public string PictureURL { get; set; }
@@ -65,7 +65,6 @@ namespace iTool
         public static string ImagePath { get; set; }
         public static int UserID { get; set; }
         public static BitmapImage ImageSource { get; set; }
-
     }
 
 }

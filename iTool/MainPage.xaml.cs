@@ -32,9 +32,14 @@ namespace iTool
 
         private void IniMyStuff()
         {
+            //LUODAAN DATAGRID KAIKISSA SAATAVILLA OLEVISTA TYÖKALUISTA
             tools = DB.GetToolsFromMysql();
-            dgTools.ItemsSource = tools;
+            dgTools.DataContext = tools;
+            //dgTools.Columns[0].Visibility = Visibility.Collapsed;
+            //dgTools.Columns[1].Visibility = Visibility.Collapsed;
+            //dgTools.Columns[2].Visibility = Visibility.Collapsed;
 
+            //LUODAAN SUODATIN COMBOBOXIT
             var location = tools.Select(t => t.ToolLocation).Distinct();
             locations.Add("All cities");
             foreach (var item in location)
@@ -50,13 +55,14 @@ namespace iTool
             }
 
             cbCityFilter.ItemsSource = locations;
-            cbCityFilter.SelectedIndex = 0;
+            //cbCityFilter.SelectedIndex = 0;
             cbToolCategory.ItemsSource = categories;
-            cbToolCategory.SelectedIndex = 0;
-            //USER IMAGE
+            //cbToolCategory.SelectedIndex = 0;
+
+            //ACTIVE USER IMAGE
             imgMainPageProfile.Source = Active.ImageSource;
 
-            //USER NAME
+            //ACTIVE USER NAME
             txtUsername.Text = $"{Active.FirstName} {Active.LastName}";
         }
 
@@ -72,8 +78,6 @@ namespace iTool
             GoToProfile();
         }
 
-        
-
         private void DgTools_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Object selected = dgTools.SelectedItem;
@@ -85,74 +89,48 @@ namespace iTool
                 txbToolCondition.Text = tool.ToolCondition;
                 txbPrice.Text = tool.ToolPrice.ToString();
                 txbDescription.Text = tool.ToolDescription;
+
+                User user = DB.GetToolOwnerFromMysql(tool.UserOwnerID);
+                txbOwner.Text = user.FirstName + " " + user.LastName;
+                txbNumber.Text = user.Mobile;
             }
         }
 
         private void CbCityFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string location = cbCityFilter.SelectedValue.ToString();
-            string category = cbToolCategory.SelectedValue.ToString();
-            
-            else if (category == "All categories" && location == "All cities")
-            {
-                dgTools.ItemsSource = tools;
-            }
-            else if (category != "All categories" && location != "All cities")
-            {
-                dgTools.ItemsSource = tools.Where(t => t.ToolCategoryName.Contains(category) && t.ToolLocation.Contains(location));
-            }
-            else if (location == "All cities" && cbToolCategory.SelectedValue.ToString() != "All categories")
-            {
-                dgTools.ItemsSource = tools.Where(t => t.ToolCategoryName.Contains(category));
-            }
-            else
-            {
-                dgTools.ItemsSource = tools.Where(t => t.ToolLocation.Contains(location));
-            }
+            Filters();
         }
 
         private void CbToolCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string category = cbToolCategory.SelectedValue.ToString();
-            string location = cbCityFilter.SelectedValue.ToString();
-            if (category == "All categories" && location == "All cities")
-            {
-                dgTools.ItemsSource = tools;
-            }
-            else if (category == "All categories" && location != "All cities")
-            {
-                dgTools.ItemsSource = tools.Where(t => t.ToolLocation.Contains(location));
-            }
-            else
-            {
-                dgTools.ItemsSource = tools.Where(t => t.ToolCategoryName.Contains(category));
-            }
+            Filters();
         }
 
-        //private void Filters()
-        //{
-        //    string location = cbCityFilter.SelectedValue.ToString();
-        //    string category = cbToolCategory.SelectedValue.ToString();
-        //    if (string.IsNullOrEmpty(location) && string.IsNullOrEmpty(category))
-        //    {
-        //        dgTools.ItemsSource = tools;
-        //    }
-        //    else
-        //    {
-        //        if (string.IsNullOrEmpty(location) && !string.IsNullOrEmpty(category))
-        //        {
-        //            dgTools.ItemsSource = tools.Where(t => t.ToolCategoryName.Contains(category));
-        //        }
-        //        else if (!string.IsNullOrEmpty(location) && string.IsNullOrEmpty(category))
-        //        {
-        //            dgTools.ItemsSource = tools.Where(t => t.ToolLocation.Contains(location));
-        //        }
-        //        else
-        //        {
-        //            dgTools.ItemsSource = tools.Where(t => t.ToolLocation.Contains(location) && t.ToolCategoryName.Contains(category));
-        //        }
-        //    }
-        //}
+        private void Filters()
+        {
+            if (cbCityFilter.SelectedValue != null && cbToolCategory.SelectedValue != null)
+            {
+                string location = cbCityFilter.SelectedValue.ToString();
+                string category = cbToolCategory.SelectedValue.ToString();
+
+                if (category == "All categories" && location == "All cities")
+                {
+                    dgTools.ItemsSource = tools;
+                }
+                else if (category != "All categories" && location != "All cities")
+                {
+                    dgTools.ItemsSource = tools.Where(t => t.ToolCategoryName.Contains(category) && t.ToolLocation.Contains(location));
+                }
+                else if (location == "All cities" && cbToolCategory.SelectedValue.ToString() != "All categories")
+                {
+                    dgTools.ItemsSource = tools.Where(t => t.ToolCategoryName.Contains(category));
+                }
+                else
+                {
+                    dgTools.ItemsSource = tools.Where(t => t.ToolLocation.Contains(location));
+                }
+            }
+        }
 
         private void ShowPicture(string imageFile)
         {

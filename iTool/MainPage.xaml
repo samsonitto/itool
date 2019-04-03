@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:iTool"
         mc:Ignorable="d"
-          Title="iTool: " Height="800" Width="1200" ResizeMode="NoResize">
+          Title="iTool: " Height="1000" Width="1200" ResizeMode="NoResize">
     <Grid >
         <StackPanel>
-            
-        
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="70" Margin="0,0,-6.4,0" VerticalAlignment="Top" Width= "1200" Background="#aaaaaa">
                 <Border BorderThickness="1" BorderBrush="Black" Margin="30 5 0 5" Cursor="Hand" Height="60" Width="60">
                     <Image x:Name="imgMainPageProfile" Cursor="Hand" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Top" MouseDown="ImgMainPageProfile_MouseDown" />
@@ -21,12 +20,12 @@
 
             <StackPanel Orientation="Horizontal">
                 
-                <StackPanel HorizontalAlignment="Left" Height="700" Margin="0" VerticalAlignment="Top" Width="300" Background="#FFDADADA">
+                <StackPanel HorizontalAlignment="Left" Height="900" Margin="0" VerticalAlignment="Top" Width="300" Background="#FFDADADA">
                     <Label  Margin="30 30 0 0"  Content="Filters" Width="192" FontSize="26" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Label  Margin="30 30 0 0"  Content="City" Width="auto" FontSize="22"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <ComboBox x:Name="cbCityFilter" HorizontalAlignment="Left" Height="30"  Margin="30 0 0 0" VerticalAlignment="Center" Width="200" FontSize="16" SelectionChanged="CbCityFilter_SelectionChanged"/>
-                    <Label Margin="30 30 0 0"  Content="Tool Category" Width="auto" FontSize="22" Background="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <ComboBox x:Name="cbToolCategory" HorizontalAlignment="Left" Height="30"  Margin="30 0 0 0" VerticalAlignment="Center" Width="200" FontSize="16" SelectionChanged="CbToolCategory_SelectionChanged"/>
+                    <ComboBox x:Name="cbCityFilter" HorizontalAlignment="Left" Height="30"  Margin="30 0 0 0" VerticalAlignment="Center" Width="200" FontSize="16" SelectedIndex="0" SelectionChanged="CbCityFilter_SelectionChanged"/>
+                    <Label Margin="30 30 0 0"  Content="Tool Category" Width="auto" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="cbToolCategory" HorizontalAlignment="Left" Height="30"  Margin="30 0 0 0" VerticalAlignment="Center" Width="200" FontSize="16" SelectedIndex="0" SelectionChanged="CbToolCategory_SelectionChanged"/>
                 </StackPanel>
 
                 <StackPanel Width="600" Background="#FFDADADA">
@@ -36,7 +35,7 @@
                     </ScrollViewer>
                 </StackPanel>
         
-                <StackPanel HorizontalAlignment="Left" Height="700" Margin="0" VerticalAlignment="Top" Width="300" Background="#FFDADADA">
+                <StackPanel HorizontalAlignment="Left" Height="900" Margin="0" VerticalAlignment="Top" Width="300" Background="#FFDADADA">
                     <Label  Margin="30 30 0 0"  Content="Tool" FontSize="26" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Border HorizontalAlignment="Left" Margin="30 0 0 0" BorderThickness="1" BorderBrush="Black" Width="200" Height="160">
                         <Image x:Name="imgTool" HorizontalAlignment="Left" Margin="0"/>
@@ -49,6 +48,20 @@
                     <TextBlock x:Name="txbPrice" FontSize="16" Margin="30 0"/>
                     <Label Margin="30 20 0 0" Content="Description: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
                     <TextBlock x:Name="txbDescription" FontSize="16" Margin="30 0"/>
+                    <Label Margin="30 20 0 0" Content="Owner: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <TextBlock x:Name="txbOwner" FontSize="16" Margin="30 0"/>
+                    <Label Margin="30 20 0 0" Content="Phone number: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <TextBlock x:Name="txbNumber" FontSize="16" Margin="30 0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="30 20 0 0" Content="Rent for:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                        <TextBox x:Name="txtDays" Height="20" Width="40" Margin="10 20 0 0"/>
+                        <Label Margin="5 20 0 0" Content="days" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Margin="30 20 0 0" Content="Total price:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock x:Name="txbTotalPrice" Margin="10 20 0 0" FontSize="16"/>
+                    </StackPanel>
+                    
                 </StackPanel>
 
             </StackPanel>
