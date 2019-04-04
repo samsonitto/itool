@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using iTool;
+using System.Threading;
 
 namespace iTool
 {
@@ -21,9 +23,15 @@ namespace iTool
     /// </summary>
     public partial class MainPage : Window
     {
+        string culture = CultureInfo.CurrentCulture.Name;
         private List<Tool> tools;
         private List<string> locations = new List<string>();
         private List<string> categories = new List<string>();
+        private float price;
+        private static DateTime dateTime = DateTime.Now;
+        private static DateTime addDays = dateTime.AddDays(2);
+        private string now = dateTime.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+        private string later = addDays.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
         public MainPage()
         {
             InitializeComponent();
@@ -88,11 +96,26 @@ namespace iTool
                 txbToolName.Text = tool.ToolName;
                 txbToolCondition.Text = tool.ToolCondition;
                 txbPrice.Text = tool.ToolPrice.ToString();
+                price = tool.ToolPrice;
                 txbDescription.Text = tool.ToolDescription;
 
                 User user = DB.GetToolOwnerFromMysql(tool.UserOwnerID);
                 txbOwner.Text = user.FirstName + " " + user.LastName;
                 txbNumber.Text = user.Mobile;
+
+                if (!string.IsNullOrEmpty(txtDays.Text))
+                {
+                    if (!int.TryParse(txtDays.Text, out int num))
+                    {
+                        txbMessages.Text = "Wrong input, numbers only.";
+                    }
+                    else
+                    {
+                        float totalPrice = price * int.Parse(txtDays.Text);
+                        txbTotalPrice.Text = $"{totalPrice.ToString()} €";
+                    }
+                }
+
             }
         }
 
@@ -153,6 +176,19 @@ namespace iTool
         private void ImgMainPageProfile_MouseDown(object sender, MouseButtonEventArgs e)
         {
             GoToProfile();
+        }
+
+        private void TxtDays_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(!int.TryParse(txtDays.Text, out int num))
+            {
+                txbMessages.Text = "Wrong input, numbers only.";
+            }
+            else
+            {
+                float totalPrice = price * int.Parse(txtDays.Text);
+                txbTotalPrice.Text = $"{totalPrice.ToString()} €";
+            }
         }
     }
 }

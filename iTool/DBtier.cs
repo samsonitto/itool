@@ -10,6 +10,7 @@ namespace iTool
 {
     public class DB
     {
+        
         public static List<User> GetUsersFromMysql()
         {
             try
@@ -223,12 +224,37 @@ namespace iTool
             }
         }
 
-        private static string GetConnectionString()
+        public static bool AddTransactionToMysql(string transactionStartDate, string transactionPlannedEndDate, int userOwnerID, int userLesseeID, int toolID)
         {
+            try
+            {
+                string connStr = GetConnectionString();
+                string sql = $"INSERT INTO transaction (transactionStartDate, transactionPlannedEndDate, userOwnerID, userLesseeID, toolID ) VALUES ('{transactionStartDate}','{transactionPlannedEndDate}',{userOwnerID},{userLesseeID},{toolID});";
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    return true;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public static string GetConnectionString()
+        {
+            string mysqlServer = Properties.Settings.Default.server;
+            string mysqlDatabase = Properties.Settings.Default.database;
+            string mysqlUID = Properties.Settings.Default.userID;
+            string mysqlPassword = Properties.Settings.Default.password;
             //yleensä connection string tallennetaan koodin ulkopuolelle
             //tässä demossa koodissa = HYI HYI Paha!
             //haetaan salasana App.Config-tiedostosta
-            return string.Format("SERVER=mysql.labranet.jamk.fi;DATABASE=M3156_3;UID=M3156;PASSWORD=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
+            return string.Format($"SERVER={mysqlServer};DATABASE={mysqlDatabase};UID={mysqlUID};PASSWORD={mysqlPassword}");
         }
 
     }

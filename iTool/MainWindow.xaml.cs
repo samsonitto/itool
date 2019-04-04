@@ -21,9 +21,7 @@ using System.IO;
 
 namespace iTool
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -53,7 +51,8 @@ namespace iTool
             {
                 string email = txtEmail.Text;
                 string password = pwdPassword.Password;
-                MySqlConnection con = new MySqlConnection("SERVER=mysql.labranet.jamk.fi;DATABASE=M3156_3;UID=M3156;PASSWORD=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
+                string connStr = DB.GetConnectionString();
+                MySqlConnection con = new MySqlConnection(connStr);
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("Select * from user where userEmail='" + email + "'  and userPassword='" + password + "'", con);
                 cmd.CommandType = CommandType.Text;
@@ -63,7 +62,7 @@ namespace iTool
                 adapter.Fill(dataSet);
                 if (dataSet.Tables[0].Rows.Count > 0)
                 {
-                    string username = dataSet.Tables[0].Rows[0]["userName"].ToString() + " " + dataSet.Tables[0].Rows[0]["userSurname"].ToString();
+                    //string username = dataSet.Tables[0].Rows[0]["userName"].ToString() + " " + dataSet.Tables[0].Rows[0]["userSurname"].ToString();
                     Active.UserID = int.Parse(dataSet.Tables[0].Rows[0]["userID"].ToString());
                     Active.ImagePath = $"{Active.ProjectPath}/images/{dataSet.Tables[0].Rows[0]["userPicture"].ToString()}";
                     Active.FirstName = dataSet.Tables[0].Rows[0]["userName"].ToString();

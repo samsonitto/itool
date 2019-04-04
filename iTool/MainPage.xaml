@@ -7,7 +7,7 @@
         mc:Ignorable="d"
           Title="iTool: " Height="1000" Width="1200" ResizeMode="NoResize">
     <Grid >
-        <StackPanel>
+        <StackPanel Height="970" Background="#FFDADADA" VerticalAlignment="Top">
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="70" Margin="0,0,-6.4,0" VerticalAlignment="Top" Width= "1200" Background="#aaaaaa">
                 <Border BorderThickness="1" BorderBrush="Black" Margin="30 5 0 5" Cursor="Hand" Height="60" Width="60">
@@ -18,9 +18,9 @@
                 <Button x:Name="btnSearchTools" Height="30" Content="Search" FontSize="16" Width="100" Margin="10 0 0 0"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Height="870" VerticalAlignment="Top">
                 
-                <StackPanel HorizontalAlignment="Left" Height="900" Margin="0" VerticalAlignment="Top" Width="300" Background="#FFDADADA">
+                <StackPanel HorizontalAlignment="Left" Height="870" Margin="0" VerticalAlignment="Top" Width="300">
                     <Label  Margin="30 30 0 0"  Content="Filters" Width="192" FontSize="26" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Label  Margin="30 30 0 0"  Content="City" Width="auto" FontSize="22"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <ComboBox x:Name="cbCityFilter" HorizontalAlignment="Left" Height="30"  Margin="30 0 0 0" VerticalAlignment="Center" Width="200" FontSize="16" SelectedIndex="0" SelectionChanged="CbCityFilter_SelectionChanged"/>
@@ -28,14 +28,14 @@
                     <ComboBox x:Name="cbToolCategory" HorizontalAlignment="Left" Height="30"  Margin="30 0 0 0" VerticalAlignment="Center" Width="200" FontSize="16" SelectedIndex="0" SelectionChanged="CbToolCategory_SelectionChanged"/>
                 </StackPanel>
 
-                <StackPanel Width="600" Background="#FFDADADA">
+                <StackPanel Width="600">
                     <Label  Content="Tools For Rent" Margin="0 30 0 0" HorizontalContentAlignment="Center" FontSize="26" FontWeight="Bold"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <DataGrid x:Name="dgTools" ItemsSource="{Binding}" Margin="0" VerticalAlignment="Top" Width="600" SelectionChanged="DgTools_SelectionChanged"/>
                     </ScrollViewer>
                 </StackPanel>
         
-                <StackPanel HorizontalAlignment="Left" Height="900" Margin="0" VerticalAlignment="Top" Width="300" Background="#FFDADADA">
+                <StackPanel HorizontalAlignment="Left" Height="870" Margin="0" VerticalAlignment="Top" Width="300">
                     <Label  Margin="30 30 0 0"  Content="Tool" FontSize="26" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Border HorizontalAlignment="Left" Margin="30 0 0 0" BorderThickness="1" BorderBrush="Black" Width="200" Height="160">
                         <Image x:Name="imgTool" HorizontalAlignment="Left" Margin="0"/>
@@ -54,17 +54,20 @@
                     <TextBlock x:Name="txbNumber" FontSize="16" Margin="30 0"/>
                     <StackPanel Orientation="Horizontal">
                         <Label Margin="30 20 0 0" Content="Rent for:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                        <TextBox x:Name="txtDays" Height="20" Width="40" Margin="10 20 0 0"/>
+                        <TextBox x:Name="txtDays" Height="20" Width="40" Margin="10 20 0 0" TextChanged="TxtDays_TextChanged"/>
                         <Label Margin="5 20 0 0" Content="days" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
                     </StackPanel>
-                    <StackPanel>
+                    <StackPanel Orientation="Horizontal">
                         <Label Margin="30 20 0 0" Content="Total price:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
                         <TextBlock x:Name="txbTotalPrice" Margin="10 20 0 0" FontSize="16"/>
                     </StackPanel>
-                    
+                    <Button Height="30" Margin="30 20 20 0" Width="100" HorizontalAlignment="Left" Content="Rent" FontSize="16"/>
+
                 </StackPanel>
 
             </StackPanel>
+            <TextBox x:Name="txbMessages" Text="Messages..." FontSize="16" Height="30" VerticalContentAlignment="Center" Padding="10 0 10 0"/>
         </StackPanel>
+        
     </Grid>
 </Window>
