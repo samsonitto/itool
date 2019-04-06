@@ -62,7 +62,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 | FT02 | [ Lisää/poistaa työkalu ](../liitteet/f2_tools.md) | Pakollinen | |
 | FT03 | [ Tunnusten poistaminen](../liitteet/f3_delete_account.md) | Pakollinen | |
 | FT04 | [ Mahdollisuus arvioida käyttäjiä ](../liitteet/f4_rating.md) | Nice to Have | |
-| FT05 | [ Työkalujen kommentointi ](../liitteet/f5_comment.md) | Nice to Have | |
+| FT05 | [ Työkalujen kommentoiminen ](../liitteet/f5_comment.md) | Nice to Have | |
 | FT06 | [ Työkalujen vuokraaminen ](../liitteet/f6_rentatool.md) | Pakollinen | |
 
 # Käyttötapaukset
