@@ -165,14 +165,14 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 
 ```plantuml
 @startuml
-    MainWindow --> DB
-    RegisterWindow --> DB
-    User --> MainPage
-    User --> ProfileWindow
-    Tool --> MainPage
-    Tool --> ProfileWindow
-    DB --> User
-    DB --> Tool
+    MainWindow
+    RegisterWindow
+    CommentWindow --|> MainPage
+    RegisterWindow --|> MainWindow
+    User
+    Tool
+    ProfileWindow
+    DB
 @enduml
 ```
     
