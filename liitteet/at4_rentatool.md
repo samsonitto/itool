@@ -20,6 +20,7 @@
 **Linkit vaatimuksiin tai muihin lähteisin**
 
 * Ominaisuus: [Vuokraaminen](f6_rentatool.md)
+* Use Case 2: [Työkalujen selailu, vuokraus ja palautus](../README.md#työkalujen-selailu-vuokraus-ja-palautus)
 
 **Testin alkutilanne (Pre-state)** 
 
