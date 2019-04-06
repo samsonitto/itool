@@ -29,7 +29,7 @@
 
 **Testiaskeleet (Test Steps)**
 
-1. Klikataan "Registen" painikettä
+1. Klikataan "Register" painikettä
 2. Täytetään kaikki pakolliset kentät
 3. Klikataan "Complete" painikettä
 4. Register-ikkuna sulkeutuu ja MainWindow aukee
