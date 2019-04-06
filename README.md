@@ -259,3 +259,19 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
     
 @enduml
 ```
+
+# Työnjako
+
+Samson Azizyan
+Suunnittelu, XAML toteutus, code in behind, testit, Mysql database (Tietokannat kurssi)
+
+# Työaika suunnitelma
+
+* Viikko 11: MainWindow ja RegisterWindow sekä XAML että code in behind. User, Tool luokat, Mysql tietokanta (15h)
+* Viikko 12: DB, MainPage XAML ja code in behind, DB, Mysql (10h)
+* Viikko 13: ProfileWindow, DB (5h)
+* Viikko 14: Kaikkien ikkunoiden toimintojen parantamista, DB, Harjoitustyön suunnitelmä xD (10h)
+* Viikko 15: Kaikkien ikkunoiden toimintojen parantamista, DB, CommentWindow XAML, Mysql näkymät
+* Viikko 16: Testaaminen, debuggaaminen
+
+Pakko myöntää etää aloin koodaamaan jo viikolla 11 ja tein tämän suunnitelman vasta viikolla 14.
