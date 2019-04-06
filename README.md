@@ -169,6 +169,10 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
     RegisterWindow --|> MainWindow
     MainWindow --> MainPage
     MainPage --> ProfileWindow
+    User --> MainPage
+    User --> ProfileWindow
+    Tool --|> User
+    User --> DB
     
     
 @enduml
