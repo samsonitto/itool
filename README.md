@@ -59,11 +59,11 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 | Tunnus | Ominaisuus | Prioriteetti | Muuta |
 | :-: | :-: | :-: | :-: |
 | FT01 | [ Tunnusten luominen ja kirjautuminen](../liitteet/f1_login.md) | Pakollinen | |
-| FT02 | [ Lisää/poistaa työkalu ](liitteet/f2_tools) | Pakollinen | |
-| FT03 | [ Tunnusten poistaminen](liitteet/f3_delete_account.md) | Pakollinen | |
-| FT04 | [ Mahdollisuus arvioida käyttäjiä ](liitteet/f4_rating.md) | Nice to Have | |
-| FT05 | [ Työkalujen kommentointi ](liitteet/f5_comment.md) | Nice to Have | |
-| FT06 | [ Työkalujen vuokraaminen ](liitteet/f6_rentatool.md) | Pakollinen | |
+| FT02 | [ Lisää/poistaa työkalu ](../liitteet/f2_tools) | Pakollinen | |
+| FT03 | [ Tunnusten poistaminen](../liitteet/f3_delete_account.md) | Pakollinen | |
+| FT04 | [ Mahdollisuus arvioida käyttäjiä ](../liitteet/f4_rating.md) | Nice to Have | |
+| FT05 | [ Työkalujen kommentointi ](../liitteet/f5_comment.md) | Nice to Have | |
+| FT06 | [ Työkalujen vuokraaminen ](../liitteet/f6_rentatool.md) | Pakollinen | |
 
 # Käyttötapaukset
 
@@ -154,10 +154,10 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 
 | TestiID | Kuvaus |								
 |:-:|:-:|
-| AT01 | [Tunnusten luominen](liitteet/at1_tunnusten_luominen.md) |
-| AT02 | [Palveluun kirjautuminen](liitteet/at2_kirjautuminen.md) |
-| AT03 | [Työkalun lisäys/poisto](liitteet/at3_addtool.md) |
-| AT04 | [Työkalun vuokraaminen](liitteet/at4_rentatool.md) |
-| AT05 | [Tunnusten poistaminen](liitteet/at5_delete.md) |
-| AT06 | [Kommentointi](liitteet/at6_comments.md) |
-| AT07 | [Työkalun palautus](liitteet/at7_returnatool.md) |
+| AT01 | [Tunnusten luominen](../liitteet/at1_tunnusten_luominen.md) |
+| AT02 | [Palveluun kirjautuminen](../liitteet/at2_kirjautuminen.md) |
+| AT03 | [Työkalun lisäys/poisto](../liitteet/at3_addtool.md) |
+| AT04 | [Työkalun vuokraaminen](../liitteet/at4_rentatool.md) |
+| AT05 | [Tunnusten poistaminen](../liitteet/at5_delete.md) |
+| AT06 | [Kommentointi](../liitteet/at6_comments.md) |
+| AT07 | [Työkalun palautus](../liitteet/at7_returnatool.md) |
