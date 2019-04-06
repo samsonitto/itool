@@ -10,11 +10,11 @@
 ## Sisällysluettelo 
 
 
-* [Sovelluksen yleiskuvaus](#johdatus)
-* [Kohdeyleisö](#palvelukuvaus)
-* [Käyttöympäristö ja käytetyt teknologiat](#valitut-asiakastarinat)
-* [Käyttäjäroolit](#yleinen-sidosryhmäkuva-stakeholder-map)
-* [Ominaisuudet](#palvelupolku-asiakas)
+* [Sovelluksen yleiskuvaus](#sovelluksen-yleiskuvaus)
+* [Kohdeyleisö](#kohdeyleisö)
+* [Käyttöympäristö ja käytetyt teknologiat](#käyttöympäristö-ja-käytetyt-teknologiat)
+* [Käyttäjäroolit](#käyttäjäroolit)
+* [Ominaisuudet](#ominaisuudet)
 * [Käyttötapaukset](#toiminnallisia-vaatimuksia)
 * [Käsitemalli](#tärkeimmät-käyttötapaukset-general-use-cases)
 * [Luokkakaavio](#palvelu-mockup-prototyyppi)
