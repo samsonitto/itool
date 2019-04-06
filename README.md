@@ -105,3 +105,20 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
     Käyttäjä --> (Työkalun palautus) : Palauttaa
 @enduml
 ```
+
+**Käyttötapauksen kuvaus**
+
+1. Käyttäjä selaa voukrattavissa olevia työkaluja
+2. Käyttäjä ottaa yhteyttä työkalun omistajaan ja sopii tapaaminen
+3. Käyttäjä vuokraa työkalun
+4. Käyttäjä palauttaa työkalun
+
+	
+**Lopputulos**	
+
+* Asiakas on vuokrannut ja palautanut työkalub onnistuneesti
+
+**Käyttötiheys** 
+
+* Vuokraus: rajaton
+* Palautus: kerran per transaction
