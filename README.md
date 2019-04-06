@@ -58,7 +58,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 
 | Tunnus | Ominaisuus | Prioriteetti | Muuta |
 | :-: | :-: | :-: | :-: |
-| FT01 | [ Tunnusten luominen ja kirjautuminen](liitteet/f1_login.md) | Pakollinen | |
+| FT01 | [ Tunnusten luominen ja kirjautuminen](../liitteet/f1_login.md) | Pakollinen | |
 | FT02 | [ Lisää/poistaa työkalu ](liitteet/f2_tools) | Pakollinen | |
 | FT03 | [ Tunnusten poistaminen](liitteet/f3_delete_account.md) | Pakollinen | |
 | FT04 | [ Mahdollisuus arvioida käyttäjiä ](liitteet/f4_rating.md) | Nice to Have | |
