@@ -165,8 +165,6 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 
 ```plantuml
 @startuml
-    MainWindow
-    RegisterWindow
     CommentWindow --|> MainPage
     RegisterWindow --|> MainWindow
     User
