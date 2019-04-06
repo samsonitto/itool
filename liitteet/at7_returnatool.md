@@ -3,11 +3,11 @@
 
 | | |
 |:-:|:-:|
-| Testitapauksen kuvaus | Kelpuutetaan asiakkaalla jos asiakas pystyy lisäämään ja poistamaan käyttäjiä kaverilistalle sekä kommunikoimaan heidän kanssa  |
+| Testitapauksen kuvaus | Kelpuutetaan käyttäjällä jos käyttäjä pystyy palauttamaan lainatun työkalun |
 | Testitapaus ID | AT06 |
-| Testitapauksen suunnittelija | Amanda Waltari | 
-| Testitapauksen hyväksyjä: | Samson Gold |
-| Luontipvm | 11.3.2019 |
+| Testitapauksen suunnittelija | Samson Azizyan | 
+| Testitapauksen hyväksyjä: | Samson Azizyan |
+| Luontipvm | 6.4.2019 |
 | Luokitus | Hyväksyntätesti / Acceptance Test |
 
 **Päivityshistoria**
@@ -16,44 +16,30 @@
 
 **Testin kuvaus / tavoite**
 
-* Yritetään hakea, lisätä ja poistaa käyttäjiä kaverilistalle.
-* Yritetään kommunikoida kvaerilistalla olevien käyttäjien kanssa.
+* Yritetään palauttaa lainatun työkalun takaisin omistajalle.
 
-**Linkit vaatimuksiin tai muihin lähteisin**
-
-* Vaatimus: FUNC-REQ-0009
-* Ominaisuus: FT06 - Kaverilista
 
 **Testin alkutilanne (Pre-state)** 
 
-* Alkutilanne, "Hae käyttäjä"
+* Profiili-ikkuna auki ja lista vuokratuista työkaluista on auki.
 
 **Testiaskeleet (Test Steps)**
 
-1. Haetaan käyttäjä
-2. Lisätään käyttäjä kaverilistalle
-3. Käyttäjä hyväksyy kaverilistalle lisäämisen pyynnön
-4. Aloitetaan keskustelu kaverilistalla olevan käyttäjän kanssa
-5. Kommunikoidaan kaverilistalla olevan käyttäjän kanssa
-6. Poistetaan käyttäjä kaverilistalta
+1. Valitaan työkalu jonka halutaan palauttaa
+2. Klikataan Return painiketta
+3. Varmistus ikkuna avautuu
+4. Klikataan "Yes"
+5. Työkalu on poistunut vuokrattujen työkalujen listasta
 
 **Testin lopputilanne (End-State)**
 
 
 * Testin ajon aikana käydään kaikki testiaskelet läpi ja lopputilanne on se,
-* että ollaan haettu, lisätty ja poistettu käyttäjä kaverilistalta
-* sekä ollaan kommunikoitu kaverilistalla olevan käyttäjän kanssa.
-
-
-
-<!--**Huomioitava testin aikana**
-
-* Huomio 1
-* Huomio 1 Kaikkien henkilötietojen pitää olla poistettuna tietokannasta-->
+* että ollaan palautettu vuokratun työkalun omistajalleen.
 
 
 **Testin "tuomio"/tulos (Pass/Fail Criteria)**
 
 
-* PASS Käyttäjää on haettu, lisätty kaverilistalle ja poistettu kaverilistalta onnistuneesti. Kaverilistalla olevan käyttäjän kanssa on kommunikoitu onnistuneesti.
-* FAIL Joko haku, lisäys, poisto tai kommunikointi on epäonnistunut.
+* PASS Käyttäjää on palauttanut vuokratun työkalun onnistuneesti ja transaktio kirjautuu tr_completion tauluun mysql tietokannassa.
+* FAIL Käyttäjä ei onnistunut palauttamaan työkalua.
