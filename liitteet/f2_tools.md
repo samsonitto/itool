@@ -11,7 +11,7 @@
 ### Kuvaus
 
 iTool sovelluksen periaate on vuokra / jätä vuokrattavaksi työkalu, sitä varten pitää pystyä lisäämään työkaluja oman profiili-ikkunan kautta.
-Työkaluja voi myö luonnollisesti poistamaan tai muokkaamaan.
+Työkaluja voi myös luonnollisesti poistamaan tai muokkaamaan.
 
 
 ### Ominaisuuteen liittyvät rajaukset, vaatimukset käyttötapaukset
