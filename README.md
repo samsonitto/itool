@@ -122,3 +122,15 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 
 * Vuokraus: rajaton
 * Palautus: kerran per transaction
+
+## Työkalujen kommentointi
+
+```plantuml
+@startuml
+    :Käyttäjä 1: as k1
+    :Käyttäjä 2: as k2
+    k1 --> (Työkalun kommentti) : Jättää kommentin työkalusta
+    k2 --> (Työkalun kommentin vastaus) : Vastaa kommenttiin
+    (Työkalun kommentin vastaus) --> (Työkalun kommentti)
+@enduml
+```
