@@ -98,8 +98,9 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 
 ```plantuml
 @startuml
+    :Työkalun omistaja: as Omistaja
     Käyttäjä --> (Työkalujen selailu) : Selaa
-    Käyttäjä --> Työkalun omistaja : Soittaa ja sopii tapaaminen
+    Käyttäjä --> Omistaja : Soittaa ja sopii tapaaminen
     Käyttäjä --> (Työkalun vuokraus) : Vuokraa
     Käyttäjä --> (Työkalun palautus) : Palauttaa
 @enduml
