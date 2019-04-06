@@ -3,11 +3,11 @@
 
 | | |
 |:-:|:-:|
-| Testitapauksen kuvaus | Kelpuutetaan asiakkaalla jos asiakas pystyy lisäämään ja poistamaan käyttäjiä kaverilistalle sekä kommunikoimaan heidän kanssa  |
-| Testitapaus ID | AT06 |
-| Testitapauksen suunnittelija | Amanda Waltari | 
-| Testitapauksen hyväksyjä: | Samson Gold |
-| Luontipvm | 11.3.2019 |
+| Testitapauksen kuvaus | Kelpuutetaan käyttäjällä, jos käyttäjä pystyy kommentoimaan sekä työkaluja että muita kommeteja  |
+| Testitapaus ID | AT05 |
+| Testitapauksen suunnittelija | Samson Azizyan | 
+| Testitapauksen hyväksyjä: | Samson Azizyan |
+| Luontipvm | 6.4.2019 |
 | Luokitus | Hyväksyntätesti / Acceptance Test |
 
 **Päivityshistoria**
@@ -16,44 +16,34 @@
 
 **Testin kuvaus / tavoite**
 
-* Yritetään hakea, lisätä ja poistaa käyttäjiä kaverilistalle.
-* Yritetään kommunikoida kvaerilistalla olevien käyttäjien kanssa.
+* Yritetään kommentoida työkalua ja kommettia.
 
 **Linkit vaatimuksiin tai muihin lähteisin**
 
-* Vaatimus: FUNC-REQ-0009
-* Ominaisuus: FT06 - Kaverilista
+* Ominaisuus: [Kommentoiminen](f5_comment.md)
 
 **Testin alkutilanne (Pre-state)** 
 
-* Alkutilanne, "Hae käyttäjä"
+* MainPage ikkuna auki, saatavilla olevien työkalujen lista auki
 
 **Testiaskeleet (Test Steps)**
 
-1. Haetaan käyttäjä
-2. Lisätään käyttäjä kaverilistalle
-3. Käyttäjä hyväksyy kaverilistalle lisäämisen pyynnön
-4. Aloitetaan keskustelu kaverilistalla olevan käyttäjän kanssa
-5. Kommunikoidaan kaverilistalla olevan käyttäjän kanssa
-6. Poistetaan käyttäjä kaverilistalta
+1. Valitaan työkalu listasta
+2. Klikataan Comment painiketta
+3. Kirjoitetaan kommentti
+4. Klikataan kommentin alla olevaa Reply painiketta
+5. Kirjoitetaan vastaus kommenttiin
+6. Suljetaan ikkuna
 
 **Testin lopputilanne (End-State)**
 
 
 * Testin ajon aikana käydään kaikki testiaskelet läpi ja lopputilanne on se,
-* että ollaan haettu, lisätty ja poistettu käyttäjä kaverilistalta
-* sekä ollaan kommunikoitu kaverilistalla olevan käyttäjän kanssa.
-
-
-
-<!--**Huomioitava testin aikana**
-
-* Huomio 1
-* Huomio 1 Kaikkien henkilötietojen pitää olla poistettuna tietokannasta-->
+* että ollaan kommentoitu sekä työkalua että omaa kommenttiä
 
 
 **Testin "tuomio"/tulos (Pass/Fail Criteria)**
 
 
-* PASS Käyttäjää on haettu, lisätty kaverilistalle ja poistettu kaverilistalta onnistuneesti. Kaverilistalla olevan käyttäjän kanssa on kommunikoitu onnistuneesti.
-* FAIL Joko haku, lisäys, poisto tai kommunikointi on epäonnistunut.
+* PASS Käyttäjä on jättänyt kommentin ja vastauksen kommenttiin onnistuneesti.
+* FAIL Käyttäjä epäonnistui jättämään joko kommentin tai vastauksen kommenttiin.
