@@ -167,10 +167,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 @startuml
     CommentWindow --|> MainPage
     RegisterWindow --|> MainWindow
-    User
-    Tool
-    ProfileWindow
-    DB
+    
 @enduml
 ```
     
