@@ -1,4 +1,4 @@
-# "Kaverilista" ominaisuuden hyväksyntätesti
+# "Kommentoiminen" ominaisuuden hyväksyntätesti
 
 
 | | |
