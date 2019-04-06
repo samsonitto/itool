@@ -89,6 +89,10 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 
 * Asiakas on luonut tunnukset ja on päässyt kirjautumaan iTool sovellukseen
 
+**Käyttötiheys** 
+
+* Tunnusten luominen: Kerran per sähköposti
+* Kirjautuminen: rajaton
 
 ## Työkalujen selailu, vuokraus ja palautus
 
