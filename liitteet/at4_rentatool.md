@@ -19,7 +19,7 @@
 
 **Linkit vaatimuksiin tai muihin lähteisin**
 
-* Ominaisuus: [Ominaisuus: Vuokraaminen](f6_rentatool.md)
+* Ominaisuus: [Vuokraaminen](f6_rentatool.md)
 
 **Testin alkutilanne (Pre-state)** 
 
