@@ -149,3 +149,15 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 
 * Kommenttointi: rajaton
 * Vastaaminen kommentteihin: rajaton
+
+## Hyväksyntätestit
+
+| TestiID | Kuvaus |								
+|:-:|:-:|
+| AT01 | [Tunnusten luominen](liitteet/at1_tunnusten_luominen.md) |
+| AT02 | [Palveluun kirjautuminen](liitteet/at2_kirjautuminen.md) |
+| AT03 | [Työkalun lisäys/poisto](liitteet/at3_addtool.md) |
+| AT04 | [Työkalun vuokraaminen](liitteet/at4_rentatool.md) |
+| AT05 | [Tunnusten poistaminen](liitteet/at5_delete.md) |
+| AT06 | [Kommentointi](liitteet/at6_comments.md) |
+| AT07 | [Työkalun palautus](liitteet/at7_returnatool.md) |
