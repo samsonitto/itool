@@ -150,7 +150,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 * Kommenttointi: rajaton
 * Vastaaminen kommentteihin: rajaton
 
-## Hyväksyntätestit
+# Hyväksyntätestit
 
 | TestiID | Kuvaus |								
 |:-:|:-:|
@@ -160,3 +160,18 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 | AT04 | [Tunnusten poistaminen](../liitteet/at5_delete.md) |
 | AT05 | [Kommentointi](../liitteet/at6_comments.md) |
 | AT06 | [Työkalun palautus](../liitteet/at7_returnatool.md) |
+
+# Käsitemalli
+
+```plantuml
+@startuml
+    MainWindow --> DB
+    RegisterWindow --> DB
+    User --> MainPage
+    User --> ProfileWindow
+    Tool --> MainPage
+    Tool --> ProfileWindow
+    DB --> User
+    DB --> Tool
+@enduml
+    
