@@ -173,8 +173,89 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
     User --> ProfileWindow
     Tool --|> User
     User --> DB
+@enduml
+```
+# Luokkamalli
+
+```plantuml
+@startuml
+    class User {
+        +userID
+        +userEmail
+        #userPassword
+        +userFirstName
+        +userLastName
+        +userMobile
+        +userPicture
+        +userLocation
+        +userPaymentMethod
+        +addTool()
+        +deleteTool()
+        +rentTool()
+        +returnTool()
+        +comment()
+        #editEmail()
+        #editPassword()
+        +login()
+        +logout()
+    }
     
+    class Tool {
+        +toolID
+        +toolName
+        +toolCategory
+        +toolDescription
+        +toolImage
+    }
+    
+    class MainWindow {
+        Opne()
+        Close()
+        Show()
+    }
+    
+    class RegisterWindow {
+        Opne()
+        Close()
+        Show()
+    }
+    
+    class MainPage {
+        Opne()
+        Close()
+        Show()
+    }
+    
+    class ProfileWindow {
+        Opne()
+        Close()
+        Show()
+    }
+    
+    class CommentWindow {
+        Opne()
+        Close()
+        Show()
+    }
+    
+    class DB {
+        GetConnectionString()
+        GetUsersFromMysql()
+        GetToolOwnerFromMysql()
+        EmailChecker()
+        GetToolsFromMysql()
+        GetOwnedToolsFromMysql()
+        AddTransactionToMysql()
+    }
+    
+    CommentWindow --|> MainPage
+    RegisterWindow --|> MainWindow
+    MainWindow --> MainPage
+    MainPage --> ProfileWindow
+    User --> MainPage
+    User --> ProfileWindow
+    Tool --|> User
+    User --> DB
     
 @enduml
 ```
-    
