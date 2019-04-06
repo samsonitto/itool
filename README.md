@@ -75,18 +75,27 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
     Käyttäjä --> (Kirjautuminen)
 @enduml
 ```
+**Käyttötapauksen kuvaus**
+
 1. Käyttäjä luo tunnukset
 2. Käyttäjä kirjautuu palveluun
 
-1.1 Käyttäjä ei täyttänyt kaikki kentät oikein, saa virheilmoituksen
-2.1 Käyttäjä ei muista salasanaa, ottaa yhteyttä ylläpitoon
+**Poikkeukset**
+ 
+* P1 Käyttäjä ei täyttänyt kaikki kentät oikein, saa virheilmoituksen
+* P2 Käyttäjä ei muista salasanaa, ottaa yhteyttä ylläpitoon
+	
+**Lopputulos**	
 
-## Työkalujen selailu ja vuokraus
+* Asiakas on luonut tunnukset ja on päässyt kirjautumaan iTool sovellukseen
+
+
+## Työkalujen selailu, vuokraus ja palautus
 
 ```plantuml
 @startuml
     Käyttäjä --> (Työkalujen selailu)
-    Käyttäjä --> (Työkalujen vuokraus)
-    Työkalun omistaja --> (Työkalujen vuokraus)
+    Käyttäjä --> (Työkalujen vuokraus) <-- Työkalunomistaja
+    Käyttäjä --> (Työkalujen vuokraus) <-- Työkalunomistaja
 @enduml
 ```
