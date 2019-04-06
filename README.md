@@ -16,11 +16,11 @@
 * [Käyttäjäroolit](#käyttäjäroolit)
 * [Ominaisuudet](#ominaisuudet)
 * [Käyttötapaukset](#toiminnallisia-vaatimuksia)
+* [Hyväksyntätestit](#hyväksyntätestit)
 * [Käsitemalli](#tärkeimmät-käyttötapaukset-general-use-cases)
 * [Luokkakaavio](#palvelu-mockup-prototyyppi)
 * [Työnjako](#tärkeimmät-tunnistetut-ominaisuudetpiirteet-features)
 * [Työaikasuunnitelma](#käyttäjätarinat)
-* [Hyväksyntätestit](#hyväksyntätestit)
 
 # Sovelluksen yleiskuvaus
 
@@ -64,3 +64,29 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 | FT04 | [ Mahdollisuus arvioida käyttäjiä ](liitteet/f4_rating.md) | Nice to Have | |
 | FT05 | [ Työkalujen kommentointi ](liitteet/f5_comment.md) | Nice to Have | |
 | FT06 | [ Työkalujen vuokraaminen ](liitteet/f6_rentatool.md) | Pakollinen | |
+
+# Käyttötapaukset
+
+## Tunnusten luominen ja kirjautuminen
+
+```plantuml
+@startuml
+    Käyttäjä --> (Tunnusten luominen)
+    Käyttäjä --> (Kirjautuminen)
+@enduml
+```
+1. Käyttäjä luo tunnukset
+2. Käyttäjä kirjautuu palveluun
+
+1.1 Käyttäjä ei täyttänyt kaikki kentät oikein, saa virheilmoituksen
+2.1 Käyttäjä ei muista salasanaa, ottaa yhteyttä ylläpitoon
+
+## Työkalujen selailu ja vuokraus
+
+```plantuml
+@startuml
+    Käyttäjä --> (Työkalujen selailu)
+    Käyttäjä --> (Työkalujen vuokraus)
+    Työkalun omistaja --> (Työkalujen vuokraus)
+@enduml
+```
