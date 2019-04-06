@@ -134,3 +134,18 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
     (Työkalun kommentin vastaus) --> (Työkalun kommentti)
 @enduml
 ```
+
+**Käyttötapauksen kuvaus**
+
+1. Käyttäjä 1 jättää kommentin työkalusta
+2. Käyttäjä 2 kommentoi Käyttäjä 1:n jättämä kommenttia
+
+	
+**Lopputulos**	
+
+* Kommentointi sujuu onnistuneesti
+
+**Käyttötiheys** 
+
+* Kommenttointi: rajaton
+* Vastaaminen kommentteihin: rajaton
