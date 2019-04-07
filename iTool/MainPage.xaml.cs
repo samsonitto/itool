@@ -28,10 +28,8 @@ namespace iTool
         private List<string> locations = new List<string>();
         private List<string> categories = new List<string>();
         private float price;
-        private static DateTime dateTime = DateTime.Now;
-        private static DateTime addDays = dateTime.AddDays(2);
-        private string now = dateTime.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
-        private string later = addDays.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+        private string toolName;
+        
         public MainPage()
         {
             InitializeComponent();
@@ -42,7 +40,7 @@ namespace iTool
         {
             //LUODAAN DATAGRID KAIKISSA SAATAVILLA OLEVISTA TYÖKALUISTA
             tools = DB.GetToolsFromMysql();
-            dgTools.DataContext = tools;
+            dgTools.ItemsSource = tools;
             //dgTools.Columns[0].Visibility = Visibility.Collapsed;
             //dgTools.Columns[1].Visibility = Visibility.Collapsed;
             //dgTools.Columns[2].Visibility = Visibility.Collapsed;
@@ -81,10 +79,10 @@ namespace iTool
             this.Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            GoToProfile();
-        }
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    GoToProfile();
+        //}
 
         private void DgTools_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -94,10 +92,14 @@ namespace iTool
                 Tool tool = (Tool)selected;
                 ShowPicture(tool.ToolPictureURL);
                 txbToolName.Text = tool.ToolName;
+                toolName = tool.ToolName;
                 txbToolCondition.Text = tool.ToolCondition;
                 txbPrice.Text = tool.ToolPrice.ToString();
                 price = tool.ToolPrice;
                 txbDescription.Text = tool.ToolDescription;
+                imgTool.Source = new BitmapImage(new Uri($"{Active.ProjectPath}/images/{tool.ToolPictureURL}", UriKind.RelativeOrAbsolute));
+                Active.ToolID = tool.ToolID;
+                Active.OwnerID = tool.UserOwnerID;
 
                 User user = DB.GetToolOwnerFromMysql(tool.UserOwnerID);
                 txbOwner.Text = user.FirstName + " " + user.LastName;
@@ -180,14 +182,42 @@ namespace iTool
 
         private void TxtDays_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(!int.TryParse(txtDays.Text, out int num))
+            try
             {
-                txbMessages.Text = "Wrong input, numbers only.";
+                if (!int.TryParse(txtDays.Text, out int num))
+                {
+                    txbMessages.Text = "Wrong input, numbers only.";
+                }
+                else
+                {
+                    float totalPrice = price * int.Parse(txtDays.Text);
+                    txbTotalPrice.Text = $"{totalPrice.ToString()} €";
+                    txbMessages.Text = $"Total price of the transaction is {totalPrice.ToString()} €";
+                }
             }
-            else
+            catch
             {
-                float totalPrice = price * int.Parse(txtDays.Text);
-                txbTotalPrice.Text = $"{totalPrice.ToString()} €";
+
+                throw;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DateTime dateTime = DateTime.Now;
+                DateTime addDays = dateTime.AddDays(int.Parse(txtDays.Text));
+                string startDate = dateTime.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+                string plannedEndDate = addDays.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+                DB.AddTransactionToMysql(startDate, plannedEndDate, Active.OwnerID, Active.UserID, Active.ToolID);
+                tools = DB.GetToolsFromMysql();
+                dgTools.ItemsSource = tools;
+                txbMessages.Text = $"You have rented {toolName}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

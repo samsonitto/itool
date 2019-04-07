@@ -25,7 +25,7 @@
                     </ScrollViewer>
                     <Label Content="My Rented Tools" HorizontalContentAlignment="Center" FontSize="26" FontWeight="Bold" Margin="0 30 0 0"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                        <DataGrid x:Name="dgRentedToolsByMe"/>
+                        <DataGrid x:Name="dgRentedToolsByMe" SelectionChanged="DgRentedToolsByMe_SelectionChanged"/>
                     </ScrollViewer>
                 </StackPanel>
                 <StackPanel Width="300" Background="LightGray">

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -138,7 +139,7 @@ namespace iTool
             {
                 List<Tool> tools = new List<Tool>();
                 string connStr = GetConnectionString();
-                string sql = $"SELECT toolID, userOwnerID, toolCategoryID, toolPicture, toolName, toolDescription, toolPrice, toolCondition, toolCategoryName, userLocation FROM all_tools WHERE userOwnerID != {Active.UserID}";
+                string sql = $"SELECT toolID, userOwnerID, toolCategoryID, toolPicture, toolName, toolDescription, toolPrice, toolCondition, toolCategoryName, userLocation FROM all_tools WHERE userOwnerID != {Active.UserID} AND toolID NOT IN (select toolID from rented_tools);";
                 using (MySqlConnection con = new MySqlConnection(connStr))
                 {
                     con.Open();
@@ -184,7 +185,7 @@ namespace iTool
             {
                 List<Tool> tools = new List<Tool>();
                 string connStr = GetConnectionString();
-                string sql = $"SELECT toolID, userOwnerID, toolCategoryID, toolPicture, toolName, toolDescription, toolPrice, toolCondition, toolCategoryName, userLocation FROM all_tools WHERE userOwnerID = {Active.UserID}";
+                string sql = $"SELECT toolID, userOwnerID, toolCategoryID, toolPicture, toolName, toolDescription, toolPrice, toolCondition, toolCategoryName, userLocation FROM all_tools WHERE userOwnerID = {Active.UserID} GROUP BY toolID";
                 using (MySqlConnection con = new MySqlConnection(connStr))
                 {
                     con.Open();
@@ -257,5 +258,51 @@ namespace iTool
             return string.Format($"SERVER={mysqlServer};DATABASE={mysqlDatabase};UID={mysqlUID};PASSWORD={mysqlPassword}");
         }
 
+        public static List<Tool> GetMyRentedToolsFromMysql()
+        {
+            try
+            {
+                List<Tool> tools = new List<Tool>();
+                string connStr = GetConnectionString();
+                string sql = $"SELECT toolID, userOwnerID, toolCategoryID, toolPicture, toolName, toolDescription, toolPrice, toolCondition, toolCategoryName, userLocation, transactionPlannedEndDate FROM rented_tools WHERE userLesseeID = {Active.UserID}";
+                using (MySqlConnection con = new MySqlConnection(connStr))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, con);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Tool t = new Tool();
+                            t.ToolID = int.Parse(reader.GetString(0));
+                            t.UserOwnerID = int.Parse(reader.GetString(1));
+                            t.ToolCategoryID = int.Parse(reader.GetString(2));
+                            if (reader.IsDBNull(3) || string.IsNullOrEmpty(reader.GetString(3)))
+                            {
+                                t.ToolPictureURL = "no_picture_tool.png";
+                            }
+                            else
+                            {
+                                t.ToolPictureURL = reader.GetString(3);
+                            }
+                            t.ToolName = reader.GetString(4);
+                            t.ToolDescription = reader.GetString(5);
+                            t.ToolPrice = float.Parse(reader.GetString(6));
+                            t.ToolCondition = reader.GetString(7);
+                            t.ToolCategoryName = reader.GetString(8);
+                            t.ToolLocation = reader.GetString(9);
+                            t.TransactionPlannedEndDate = DateTime.Parse(reader.GetString(10));
+
+                            tools.Add(t);
+                        }
+                        return tools;
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

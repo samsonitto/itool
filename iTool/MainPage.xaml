@@ -61,7 +61,7 @@
                         <Label Margin="30 20 0 0" Content="Total price:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
                         <TextBlock x:Name="txbTotalPrice" Margin="10 20 0 0" FontSize="16"/>
                     </StackPanel>
-                    <Button Height="30" Margin="30 20 20 0" Width="100" HorizontalAlignment="Left" Content="Rent" FontSize="16"/>
+                    <Button Height="30" Margin="30 20 20 0" Width="100" HorizontalAlignment="Left" Content="Rent" FontSize="16" Click="Button_Click"/>
 
                 </StackPanel>
 

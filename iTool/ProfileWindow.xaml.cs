@@ -35,6 +35,7 @@ namespace iTool
             txbLastName.Text = Active.LastName;
             txbUserID.Text = $"User ID: {Active.UserID.ToString()}";
             dgMyTools.ItemsSource = DB.GetOwnedToolsFromMysql();
+            dgRentedToolsByMe.ItemsSource = DB.GetMyRentedToolsFromMysql();
         }
 
         private void DgMyTools_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -48,6 +49,7 @@ namespace iTool
                 txbToolConditionProfile.Text = tool.ToolCondition;
                 txbPriceProfile.Text = tool.ToolPrice.ToString();
                 txbDescriptionProfile.Text = tool.ToolDescription;
+                imgToolProfile.Source = new BitmapImage(new Uri($"{Active.ProjectPath}/images/{tool.ToolPictureURL}"));
                 btnReturnDelete.Content = "Delete Tool";
             }
         }
@@ -56,7 +58,7 @@ namespace iTool
         {
             try
             {
-                if (string.IsNullOrEmpty(imageFile) || !File.Exists(imageFile))
+                if (string.IsNullOrEmpty(imageFile) || !File.Exists($"{Active.ProjectPath}/images/{imageFile}"))
                 {
                     imageFile = "no_picture_tool.png";
                 }
@@ -67,6 +69,22 @@ namespace iTool
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DgRentedToolsByMe_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Object selected = dgRentedToolsByMe.SelectedItem;
+            if (selected != null)
+            {
+                Tool tool = (Tool)selected;
+                ShowPicture(tool.ToolPictureURL.ToString());
+                txbToolNameProfile.Text = tool.ToolName;
+                txbToolConditionProfile.Text = tool.ToolCondition;
+                txbPriceProfile.Text = tool.ToolPrice.ToString();
+                txbDescriptionProfile.Text = tool.ToolDescription;
+                //imgToolProfile.Source = new BitmapImage(new Uri($"{Active.ProjectPath}/images/{tool.ToolPictureURL}"));
+                btnReturnDelete.Content = "Return Tool";
             }
         }
     }

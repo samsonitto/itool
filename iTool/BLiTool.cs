@@ -38,6 +38,7 @@ namespace iTool
         public float ToolPrice { get; set; }
         public string ToolCategoryName { get; set; }
         public string ToolLocation { get; set; }
+        public DateTime TransactionPlannedEndDate { get; set; }
 
         public Tool()
         {
@@ -65,6 +66,8 @@ namespace iTool
         public static string ImagePath { get; set; }
         public static int UserID { get; set; }
         public static BitmapImage ImageSource { get; set; }
+        public static int OwnerID { get; set; }
+        public static int ToolID { get; set; }
     }
 
 }
