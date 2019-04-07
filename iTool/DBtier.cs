@@ -304,5 +304,26 @@ namespace iTool
                 throw;
             }
         }
+
+        public static bool ReturnRentedToolMysql(int userRating, string actualEndDate, string returnCondition, int transactionID, int raterID, int ratedID)
+        {
+            try
+            {
+                string connStr = GetConnectionString();
+                string sql = $"INSERT INTO tr_completion (userRating, ActualEndDate, returnCondition, transactionID, raterID, ratedID ) VALUES ('{userRating}','{actualEndDate}','{returnCondition}',{transactionID},{raterID},{ratedID});";
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    return true;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

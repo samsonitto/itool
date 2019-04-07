@@ -41,7 +41,7 @@
                     <TextBlock x:Name="txbPriceProfile" FontSize="16" Margin="30 0"/>
                     <Label Margin="30 20 0 0" Content="Description: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
                     <TextBlock x:Name="txbDescriptionProfile" FontSize="16" Margin="30 0 0 0" TextWrapping="Wrap"/>
-                    <Button x:Name="btnReturnDelete" Height="30" Width="120" HorizontalAlignment="Left" Margin="30 20 0 0" FontSize="16"/>
+                    <Button x:Name="btnReturnDelete" Height="30" Width="120" HorizontalAlignment="Left" Margin="30 20 0 0" FontSize="16" Click="BtnReturnDelete_Click"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

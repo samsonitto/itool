@@ -87,5 +87,22 @@ namespace iTool
                 btnReturnDelete.Content = "Return Tool";
             }
         }
+
+        private void BtnReturnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnReturnDelete.Content == "Return Tool")
+            {
+                DateTime dateTime = DateTime.Now;
+                string actualEndDate = dateTime.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+            }
+            else if(btnReturnDelete.Content == "Delete Tool")
+            {
+
+            }
+            else
+            {
+
+            }
+        }
     }
 }
