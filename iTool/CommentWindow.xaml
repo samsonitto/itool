@@ -10,12 +10,16 @@
         <StackPanel>
             <Label x:Name="lblCommentsHeader" Content="iTool: Comments" HorizontalContentAlignment="Center" FontSize="40" FontWeight="Black" Foreground="Blue" Margin="30 20 30 0"/>
             <Border BorderThickness="1" BorderBrush="Black" Margin="30 30 30 0">
-                <ListBox x:Name="lbxComments" Height="470" Background="#e6f2ff" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox x:Name="lbxComments" Height="470" Background="#e6f2ff" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="lbxComments_SelectionChanged">
                 </ListBox>
             </Border>
             <StackPanel Orientation="Horizontal" Margin="30 30 30 10" Height="100">
                 <TextBox x:Name="txtComment" Height="100" Width="600" HorizontalAlignment="Left" KeyUp="TxtComment_KeyUp" TextWrapping="Wrap" Padding="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"/>
-                <Button x:Name="btnCommentReply" Width="110" Margin="23 0 0 0"/>
+                <StackPanel>
+                    <Button x:Name="btnComment" Content="New Comment" Width="110" Height="45" Margin="20 0 0 0" Click="btnComment_Click"/>
+                    <Button x:Name="btnReply" Content="Reply" Width="110" Height="45" Margin="20 10 0 0"/>
+                </StackPanel>
+                
             </StackPanel>
             <TextBlock x:Name="CommentMessages" Margin="30 0"/>
         </StackPanel>

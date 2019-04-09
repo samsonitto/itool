@@ -60,8 +60,8 @@ namespace iTool
             cbToolCategory.ItemsSource = categories;
 
             //ACTIVE USER IMAGE
-            //imgMainPageProfile.Source = Active.ImageSource;
-            imgMainPageProfile.Source = new BitmapImage(new Uri(@"https://student.labranet.jamk.fi/~M3156/iTool/images/" + Active.ImageFileName, UriKind.RelativeOrAbsolute));
+            imgMainPageProfile.Source = Active.ImageSource;
+            //imgMainPageProfile.Source = new BitmapImage(new Uri(@"https://student.labranet.jamk.fi/~M3156/iTool/images/" + Active.ImageFileName, UriKind.RelativeOrAbsolute));
 
             //ACTIVE USER NAME
             txtUsername.Text = $"{Active.FirstName} {Active.LastName}";

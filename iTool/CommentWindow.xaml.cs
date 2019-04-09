@@ -29,7 +29,7 @@ namespace iTool
             if (e.Key == Key.Enter)
             {
                 Label user = new Label();
-                user.Content = $"{Active.FirstName} {Active.LastName}";
+                user.Content = $"{Active.FirstName} {Active.LastName}, User ID: #{Active.UserID}";
                 user.FontSize = 16;
                 user.FontWeight = FontWeights.Bold;
 
@@ -50,6 +50,17 @@ namespace iTool
 
                 lbxComments.Items.Add(spComment);
             }
+        }
+
+        private void lbxComments_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Object selected = lbxComments.SelectedItem;
+            
+        }
+
+        private void btnComment_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

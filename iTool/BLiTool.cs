@@ -58,6 +58,13 @@ namespace iTool
         }
     }
 
+    public class Comment
+    {
+        public int CommentID { get; set; }
+        public DateTime DateTime { get; set; }
+        public string Text { get; set; }
+    }
+
     public static class Active
     {
         public static string ProjectPath { get { return Directory.GetParent(Environment.CurrentDirectory).Parent.FullName; } }
