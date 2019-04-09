@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data;
@@ -325,5 +327,22 @@ namespace iTool
                 throw;
             }
         }
+
+        //public static bool GetImages()
+        //{
+        //    try
+        //    {
+        //        string url = @"https://student.labranet.jamk.fi/~M3156/iTool/images/";
+
+        //        using (WebClient wc = new WebClient())
+        //        {
+        //            foreach(File file in wc.)
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //}
     }
 }

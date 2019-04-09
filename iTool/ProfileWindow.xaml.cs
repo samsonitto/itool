@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Globalization;
+using System.Threading;
 
 namespace iTool
 {
@@ -34,6 +36,7 @@ namespace iTool
             txbFirstName.Text = Active.FirstName;
             txbLastName.Text = Active.LastName;
             txbUserID.Text = $"User ID: {Active.UserID.ToString()}";
+
             dgMyTools.ItemsSource = DB.GetOwnedToolsFromMysql();
             dgRentedToolsByMe.ItemsSource = DB.GetMyRentedToolsFromMysql();
         }

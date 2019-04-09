@@ -64,6 +64,7 @@ namespace iTool
         public static string FirstName { get; set; }
         public static string LastName { get; set; }
         public static string ImagePath { get; set; }
+        public static string ImageFileName { get; set; }
         public static int UserID { get; set; }
         public static BitmapImage ImageSource { get; set; }
         public static int OwnerID { get; set; }

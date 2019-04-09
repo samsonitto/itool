@@ -67,6 +67,7 @@ namespace iTool
                     Active.ImagePath = $"{Active.ProjectPath}/images/{dataSet.Tables[0].Rows[0]["userPicture"].ToString()}";
                     Active.FirstName = dataSet.Tables[0].Rows[0]["userName"].ToString();
                     Active.LastName = dataSet.Tables[0].Rows[0]["userSurname"].ToString();
+                    Active.ImageFileName = dataSet.Tables[0].Rows[0]["userPicture"].ToString();
 
                     if (string.IsNullOrEmpty(Active.ImagePath))
                     {

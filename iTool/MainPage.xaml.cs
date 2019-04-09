@@ -40,9 +40,6 @@ namespace iTool
             //LUODAAN DATAGRID KAIKISSA SAATAVILLA OLEVISTA TYÖKALUISTA
             tools = DB.GetToolsFromMysql();
             dgTools.ItemsSource = tools;
-            //dgTools.Columns[0].Visibility = Visibility.Collapsed;
-            //dgTools.Columns[1].Visibility = Visibility.Collapsed;
-            //dgTools.Columns[2].Visibility = Visibility.Collapsed;
 
             //LUODAAN SUODATIN COMBOBOXIT
             var location = tools.Select(t => t.ToolLocation).Distinct();
@@ -63,7 +60,8 @@ namespace iTool
             cbToolCategory.ItemsSource = categories;
 
             //ACTIVE USER IMAGE
-            imgMainPageProfile.Source = Active.ImageSource;
+            //imgMainPageProfile.Source = Active.ImageSource;
+            imgMainPageProfile.Source = new BitmapImage(new Uri(@"https://student.labranet.jamk.fi/~M3156/iTool/images/" + Active.ImageFileName, UriKind.RelativeOrAbsolute));
 
             //ACTIVE USER NAME
             txtUsername.Text = $"{Active.FirstName} {Active.LastName}";
@@ -75,11 +73,6 @@ namespace iTool
             profile.Show();
             this.Close();
         }
-
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    GoToProfile();
-        //}
 
         private void DgTools_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -101,6 +94,8 @@ namespace iTool
                 User user = DB.GetToolOwnerFromMysql(tool.UserOwnerID);
                 txbOwner.Text = user.FirstName + " " + user.LastName;
                 txbNumber.Text = user.Mobile;
+
+                txbMessages.Text = $"You are viewing a tool: {toolName}, click Rent to rent a tool.";
 
                 if (!string.IsNullOrEmpty(txtDays.Text))
                 {
@@ -185,9 +180,14 @@ namespace iTool
         {
             try
             {
-                if (!int.TryParse(txtDays.Text, out int num))
+                if (!int.TryParse(txtDays.Text, out int num) && !string.IsNullOrEmpty(txtDays.Text))
                 {
                     txbMessages.Text = "Wrong input, numbers only.";
+                }
+                else if (string.IsNullOrEmpty(txtDays.Text))
+                {
+                    txbTotalPrice.Text = "";
+                    txbMessages.Text = "Enter amount of days to see the total price of the transaction.";
                 }
                 else
                 {
@@ -207,14 +207,27 @@ namespace iTool
         {
             try
             {
-                DateTime dateTime = DateTime.Now;
-                DateTime addDays = dateTime.AddDays(int.Parse(txtDays.Text));
-                string startDate = dateTime.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
-                string plannedEndDate = addDays.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
-                DB.AddTransactionToMysql(startDate, plannedEndDate, Active.OwnerID, Active.UserID, Active.ToolID);
-                tools = DB.GetToolsFromMysql();
-                dgTools.ItemsSource = tools;
-                txbMessages.Text = $"You have rented {toolName}";
+                if (!string.IsNullOrEmpty(txtDays.Text) && int.TryParse(txtDays.Text, out int num))
+                {
+                    DateTime dateTime = DateTime.Now;
+                    DateTime addDays = dateTime.AddDays(int.Parse(txtDays.Text));
+                    string startDate = dateTime.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+                    string plannedEndDate = addDays.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+                    DB.AddTransactionToMysql(startDate, plannedEndDate, Active.OwnerID, Active.UserID, Active.ToolID);
+                    tools = DB.GetToolsFromMysql();
+                    dgTools.ItemsSource = tools;
+                    txbMessages.Text = $"You have rented {toolName}";
+                }
+                else if (float.TryParse(txtDays.Text, out float fnum))
+                {
+                    txtDays.Focus();
+                    txbMessages.Text = $"\"Days\" field can't be a decimal number";
+                }
+                else
+                {
+                    txtDays.Focus();
+                    txbMessages.Text = $"\"Days\" field can't be empty or not a number";
+                }
             }
             catch (Exception ex)
             {
@@ -267,6 +280,12 @@ namespace iTool
                 dgTools.ItemsSource = tools;
                 txbMessages.Text = "Here you can see all tools that are available for rent. Use filters or the search bar to find a tool for you.";
             }
+        }
+
+        private void BtnComment_Click(object sender, RoutedEventArgs e)
+        {
+            CommentWindow comment = new CommentWindow();
+            comment.ShowDialog();
         }
     }
 }
