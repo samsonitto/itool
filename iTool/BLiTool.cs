@@ -63,6 +63,9 @@ namespace iTool
         public int CommentID { get; set; }
         public DateTime DateTime { get; set; }
         public string Text { get; set; }
+        public int ToolID { get; set; }
+        public int userID { get; set; }
+        public int CommentParentID { get; set; }
     }
 
     public static class Active

@@ -344,5 +344,39 @@ namespace iTool
         //        throw;
         //    }
         //}
+
+        public static List<Comment> GetCommentsFromMysql(int toolID)
+        {
+            List<Comment> comments = new List<Comment>();
+            string connStr = GetConnectionString();
+            string sql = $"SELECT commentID, commentDate, commentText, userID, toolID, commentParentID FROM comment WHERE toolID = {toolID}";
+
+            using (MySqlConnection conn = new MySqlConnection(connStr))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                using(MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    
+                    while (reader.Read())
+                    {
+                        Comment c = new Comment();
+                        c.CommentID = int.Parse(reader.GetString(0));
+                        c.DateTime = DateTime.Parse(reader.GetString(1));
+                        c.Text = reader.GetString(2);
+                        c.userID = int.Parse(reader.GetString(3));
+                        c.ToolID = int.Parse(reader.GetString(4));
+                        if (!reader.IsDBNull(5))
+                        {
+                            c.CommentParentID = int.Parse(reader.GetString(5));
+                        }
+                        
+                        comments.Add(c);
+                    }
+                    return comments;
+                }
+            }
+        }
     }
 }
