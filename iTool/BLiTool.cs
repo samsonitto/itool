@@ -52,10 +52,6 @@ namespace iTool
         public string ToolCategoryName { get; set; }
         public string ToolCategoryDescription { get; set; }
 
-        public ToolCategory()
-        {
-
-        }
     }
 
     public class Comment
@@ -66,6 +62,16 @@ namespace iTool
         public int ToolID { get; set; }
         public int userID { get; set; }
         public int CommentParentID { get; set; }
+    }
+
+    public class Transaction
+    {
+        public int TransactionID { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime PlannedEndDate { get; set; }
+        public int UserOwnerID { get; set; }
+        public int UserLesseeID { get; set; }
+        public int ToolID { get; set; }
     }
 
     public static class Active

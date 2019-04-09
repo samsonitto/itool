@@ -17,6 +17,11 @@
                     <TextBlock x:Name="txbUserID" HorizontalAlignment="Left" Height="20" Margin="50 20 0 0" FontSize="18" FontWeight="Medium"/>
                     <TextBlock x:Name="txbFirstName" HorizontalAlignment="Left" Height="20" Margin="50 0 0 0" FontSize="18" FontWeight="Medium"/>
                     <TextBlock x:Name="txbLastName" HorizontalAlignment="Left" Height="20" Margin="50 0 0 0" FontSize="18" FontWeight="Medium"/>
+                    <Button x:Name="btnAddTool" Width="150" Height="30" Content="Add a tool" Margin="10"/>
+                    <Button x:Name="btnEditProfile" Width="150" Height="30" Content="Edit profile" Margin="10"/>
+                    <Button x:Name="btnDeleteProfile" Width="150" Height="30" Content="Delete profile" Margin="10"/>
+                    <Button x:Name="btnBackToMainPage" Width="150" Height="30" Content="Back to main page" Margin="10" Click="BtnBackToMainPage_Click"/>
+                    <Button x:Name="btnLogout" Width="150" Height="30" Content="Log out" Margin="10" Click="BtnLogout_Click"/>
                 </StackPanel>
                 <StackPanel Width="600">
                     <Label Content="My Tools" HorizontalContentAlignment="Center" FontSize="26" FontWeight="Bold" Margin="0 30 0 0"/>
@@ -28,7 +33,7 @@
                         <DataGrid x:Name="dgRentedToolsByMe" SelectionChanged="DgRentedToolsByMe_SelectionChanged"/>
                     </ScrollViewer>
                 </StackPanel>
-                <StackPanel Width="300" Background="LightGray">
+                <StackPanel Width="300" Background="#e6f2ff">
                     <Label  Margin="30 30 0 0"  Content="Tool" FontSize="26" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Border BorderThickness="1" BorderBrush="Black" Width="200" Height="170" Margin="30 20 0 0" HorizontalAlignment="Left">
                         <Image x:Name="imgToolProfile"/>

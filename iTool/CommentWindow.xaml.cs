@@ -83,7 +83,7 @@ namespace iTool
                         lb.FontWeight = FontWeights.Bold;
 
                         TextBlock reply1 = new TextBlock();
-                        reply1.Text = item.Text;
+                        reply1.Text = reply.Text;
                         reply1.VerticalAlignment = VerticalAlignment.Top;
                         reply1.HorizontalAlignment = HorizontalAlignment.Left;
                         reply1.FontSize = 12;

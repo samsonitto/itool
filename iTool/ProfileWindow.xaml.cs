@@ -107,5 +107,20 @@ namespace iTool
 
             }
         }
+
+        private void BtnBackToMainPage_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage main = new MainPage();
+            main.Show();
+            this.Close();
+        }
+
+        private void BtnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            mw.txbMainError.Text = "You have succesfully logged out of iTool";
+            mw.Show();
+            this.Close();
+        }
     }
 }

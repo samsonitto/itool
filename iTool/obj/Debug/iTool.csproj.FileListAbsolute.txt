@@ -138,3 +138,4 @@ F:\iTool\iTool\iTool\obj\Debug\ProfileWindow.g.cs
 F:\iTool\iTool\iTool\obj\Debug\ProfileWindow.baml
 F:\iTool\iTool\iTool\obj\Debug\CommentWindow.g.cs
 F:\iTool\iTool\iTool\obj\Debug\CommentWindow.baml
+F:\iTool\iTool\iTool\bin\Debug\MySql.Data.dll
