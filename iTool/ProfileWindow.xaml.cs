@@ -122,5 +122,11 @@ namespace iTool
             mw.Show();
             this.Close();
         }
+
+        private void btnAddTool_Click(object sender, RoutedEventArgs e)
+        {
+            AddAToolWindow a = new AddAToolWindow();
+            a.ShowDialog();
+        }
     }
 }

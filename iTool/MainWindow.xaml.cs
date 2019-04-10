@@ -18,6 +18,7 @@ using MySql.Data.MySqlClient;
 using MySql.Data;
 using System.Data;
 using System.IO;
+using System.Net;
 
 namespace iTool
 {

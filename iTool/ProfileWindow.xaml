@@ -17,7 +17,7 @@
                     <TextBlock x:Name="txbUserID" HorizontalAlignment="Left" Height="20" Margin="50 20 0 0" FontSize="18" FontWeight="Medium"/>
                     <TextBlock x:Name="txbFirstName" HorizontalAlignment="Left" Height="20" Margin="50 0 0 0" FontSize="18" FontWeight="Medium"/>
                     <TextBlock x:Name="txbLastName" HorizontalAlignment="Left" Height="20" Margin="50 0 0 0" FontSize="18" FontWeight="Medium"/>
-                    <Button x:Name="btnAddTool" Width="150" Height="30" Content="Add a tool" Margin="10"/>
+                    <Button x:Name="btnAddTool" Width="150" Height="30" Content="Add a tool" Margin="10" Click="btnAddTool_Click"/>
                     <Button x:Name="btnEditProfile" Width="150" Height="30" Content="Edit profile" Margin="10"/>
                     <Button x:Name="btnDeleteProfile" Width="150" Height="30" Content="Delete profile" Margin="10"/>
                     <Button x:Name="btnBackToMainPage" Width="150" Height="30" Content="Back to main page" Margin="10" Click="BtnBackToMainPage_Click"/>

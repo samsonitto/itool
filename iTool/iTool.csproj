@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddAToolWindow.xaml.cs">
+      <DependentUpon>AddAToolWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BLiTool.cs" />
     <Compile Include="CommentWindow.xaml.cs">
       <DependentUpon>CommentWindow.xaml</DependentUpon>
@@ -70,6 +73,10 @@
     <Compile Include="RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddAToolWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CommentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

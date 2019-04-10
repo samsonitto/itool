@@ -42,7 +42,7 @@
                 <StackPanel Width="400">
                     <Label  Margin="30 30 0 0"  Content="Tool" FontSize="26" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Border x:Name="bdrToolImage" HorizontalAlignment="Left" Margin="30 0 60 0" BorderThickness="1" BorderBrush="Black" >
-                        <Image x:Name="imgTool" HorizontalAlignment="Left" Margin="0" Width="{Binding ElementName=bdrToolImage, Path=ActualWidth}"/>
+                        <Image x:Name="imgTool" HorizontalAlignment="Left" Margin="0" Width="{Binding ElementName=bdrToolImage, Path=ActualWidth}" Source="images/no_picture_tool.png"/>
                     </Border>
                     
                 </StackPanel>

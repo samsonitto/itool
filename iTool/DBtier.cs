@@ -328,23 +328,6 @@ namespace iTool
             }
         }
 
-        //public static bool GetImages()
-        //{
-        //    try
-        //    {
-        //        string url = @"https://student.labranet.jamk.fi/~M3156/iTool/images/";
-
-        //        using (WebClient wc = new WebClient())
-        //        {
-        //            foreach(File file in wc.)
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        throw;
-        //    }
-        //}
-
         public static List<Comment> GetCommentsFromMysql(int toolID)
         {
             List<Comment> comments = new List<Comment>();
@@ -376,6 +359,27 @@ namespace iTool
                     }
                     return comments;
                 }
+            }
+        }
+
+        public static bool AddAToolToMysql(string toolName, int toolCategoryID, string toolDescription, int toolOwnerID, string toolCondition, float toolPrice, string toolImage)
+        {
+            try
+            {
+                string connStr = GetConnectionString();
+                string sql = $"INSERT INTO tool (toolName, toolDescription, toolPrice, toolCondition, toolCategoryID, userOwnerID, toolPicture) VALUES ('{toolName}','{toolDescription}',{toolPrice},'{toolCondition}',{toolCategoryID}, {toolOwnerID}, '{toolImage}');";
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    return true;
+                }
+            }
+            catch
+            {
+                throw;
             }
         }
     }
