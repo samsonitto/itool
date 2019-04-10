@@ -10,9 +10,9 @@
         <StackPanel>
             <Label Content="iTool" HorizontalContentAlignment="Center" FontSize="50" Margin="0 40 0 40" Foreground="Blue" FontWeight="Black"/>
             <Label Content="E-mail" HorizontalContentAlignment="Center" FontSize="18" Margin="0 0 0 0"/>
-            <TextBox x:Name="txtEmail" Margin="0 0 0 10" Height="50" Width="300" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="txtEmail" Text="samson@samson.fi"  Margin="0 0 0 10" Height="50" Width="300" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="Password" HorizontalContentAlignment="Center" FontSize="18"/>
-            <PasswordBox x:Name="pwdPassword" Margin="0 0 0 10" Height="50" Width="300" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <PasswordBox x:Name="pwdPassword" Password="samson" Margin="0 0 0 10" Height="50" Width="300" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <StackPanel Orientation="Horizontal" Width="300">
                 <Button x:Name="btnLogin" Content="Login" Background="LightGray" Height="30" Width="140" HorizontalContentAlignment="Center" Margin="0 0 10 0" Click="btnLogin_Click"/>
                 <Button x:Name="btnRegister" Content="Register" Background="LightGray" Height="30" Width="140" HorizontalContentAlignment="Center" Margin="10 0 0 0" Click="btnRegister_Click"/>

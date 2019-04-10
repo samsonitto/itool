@@ -140,3 +140,7 @@ F:\iTool\iTool\iTool\obj\Debug\CommentWindow.g.cs
 F:\iTool\iTool\iTool\obj\Debug\CommentWindow.baml
 F:\iTool\iTool\iTool\obj\Debug\AddAToolWindow.g.cs
 F:\iTool\iTool\iTool\obj\Debug\AddAToolWindow.baml
+F:\iTool\iTool\iTool\bin\Debug\iTool.exe.manifest
+F:\iTool\iTool\iTool\bin\Debug\iTool.application
+F:\iTool\iTool\iTool\obj\Debug\iTool.exe.manifest
+F:\iTool\iTool\iTool\obj\Debug\iTool.application

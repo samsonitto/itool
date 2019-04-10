@@ -22,12 +22,22 @@ namespace iTool
     public partial class AddAToolWindow : Window
     {
         private List<string> conditions = new List<string>() { "Poor", "Ok", "Good", "Pristine" };
-        private List<string> categories = new List<string>() { "Ähtäri", "Espoo", "Helsinki", "Jyväskylä", "Kuopio", "Kuusamo", "Lahti", "Lappeenranta", "Oulu", "Rauma", "Rovanniemi", "Savonlinna", "Seinäjoki", "Tampere", "Turku", "Vaasa", "Vantaa" };
+        private List<string> categories = new List<string>() { "Hionta", "Hitsauskoneet", "Juottaminen", "Käsityökalut", "Leikkaustyökalut", "Leikkuuterät", "Mittavälineet", "Paineilma", "Poranterät", "Työkalujen säilyttäminen", "Työpajan varustus", "Työstökoneet", "Sähkötyökalut" };
         private string path;
         private string imgFile;
+        private string dirPath;
+        private string relativePath;
         public AddAToolWindow()
         {
             InitializeComponent();
+            IniMyStuff();
+        }
+
+        private void IniMyStuff()
+        {
+            imgAddTool.Source = new BitmapImage(new Uri(@"F:\iTool\iTool\iTool\images\no_picture_tool.png", UriKind.RelativeOrAbsolute));
+            cbToolCategories.ItemsSource = categories;
+            cbToolCondition.ItemsSource = conditions;
         }
 
         private void btnBrowseToolImage_Click(object sender, RoutedEventArgs e)
@@ -71,12 +81,64 @@ namespace iTool
             }
 
             // relaatiivinen polku images kansioon
-            string relativePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\{path}";
+            relativePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\{path}";
 
             // polku valituun kuvatiedostoon
-            string dirPath = $@"{System.IO.Path.GetDirectoryName(dlg.FileName)}\{System.IO.Path.GetFileName(dlg.FileName)}";
-            System.IO.File.Copy(dirPath, relativePath, true);
-            File.SetAttributes(relativePath, FileAttributes.Normal);
+            dirPath = $@"{System.IO.Path.GetDirectoryName(dlg.FileName)}\{System.IO.Path.GetFileName(dlg.FileName)}";
+            
+        }
+
+        private void btnAddaToolToMysql_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtToolName.Text.Length == 0)
+            {
+                lblToolError.Content = "Enter a tool name";
+                txtToolName.Focus();
+            }
+            else if (cbToolCategories.SelectedValue is null)
+            {
+                lblToolError.Content = "Select a category";
+                cbToolCategories.Focus();
+            }
+            else if (cbToolCondition.SelectedValue is null)
+            {
+                lblToolError.Content = "Select a condition";
+                cbToolCondition.Focus();
+            }
+            else if (string.IsNullOrEmpty(txtPrice.Text) || !float.TryParse(txtPrice.Text, out float f))
+            {
+                lblToolError.Content = "Enter a price, has to be a number";
+                txtPrice.Focus();
+            }
+            else if (string.IsNullOrEmpty(txtDescription.Text))
+            {
+                lblToolError.Content = "Enter a description";
+                txtDescription.Focus();
+            }
+            else
+            {
+                int cID = DB.GetToolCategoryID(cbToolCategories.SelectedValue.ToString());
+                DB.AddAToolToMysql(txtToolName.Text, cID, txtDescription.Text, Active.UserID, cbToolCondition.SelectedValue.ToString(), float.Parse(txtPrice.Text), imgFile);
+                lblToolError.Content = "You have successfully added a tool for rent!";
+
+                if (!string.IsNullOrEmpty(txtBrowseToolImage.Text))
+                {
+                    System.IO.File.Copy(dirPath, relativePath, true);
+                    File.SetAttributes(relativePath, FileAttributes.Normal);
+                }
+                Reset();
+            }
+        }
+
+        private void Reset()
+        {
+            txtToolName.Text = "";
+            cbToolCategories.SelectedValue = null;
+            cbToolCondition.SelectedValue = null;
+            txtPrice.Text = "";
+            txtDescription.Text = "";
+            txtBrowseToolImage.Text = "";
+            imgAddTool.Source = new BitmapImage(new Uri(@"F:\iTool\iTool\iTool\images\no_picture_tool.png", UriKind.RelativeOrAbsolute));
         }
     }
 }

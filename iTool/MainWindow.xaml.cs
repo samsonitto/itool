@@ -55,7 +55,7 @@ namespace iTool
                 string connStr = DB.GetConnectionString();
                 MySqlConnection con = new MySqlConnection(connStr);
                 con.Open();
-                MySqlCommand cmd = new MySqlCommand("Select * from user where userEmail='" + email + "'  and userPassword='" + password + "'", con);
+                MySqlCommand cmd = new MySqlCommand($"Select * from user where userEmail='{email}' and userPassword=MD5('{password}')", con);
                 cmd.CommandType = CommandType.Text;
                 MySqlDataAdapter adapter = new MySqlDataAdapter();
                 adapter.SelectCommand = cmd;

@@ -382,5 +382,34 @@ namespace iTool
                 throw;
             }
         }
+        public static int GetToolCategoryID(string toolCategoryName)
+        {
+            try
+            {
+                
+                string connStr = GetConnectionString();
+                string sql = $"SELECT toolCategoryID FROM toolCategory WHERE toolCategoryName = '{toolCategoryName}'";
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        int toolCategoryID = 0;
+                        while (reader.Read())
+                        {
+                            toolCategoryID = int.Parse(reader.GetString(0));
+                            
+                        }
+                        return toolCategoryID;
+                    }
+                    
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

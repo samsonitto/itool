@@ -65,6 +65,9 @@ namespace iTool
 
             //ACTIVE USER NAME
             txtUsername.Text = $"{Active.FirstName} {Active.LastName}";
+
+            //TOOL IMAGE
+            imgTool.Source = new BitmapImage(new Uri(@"F:\iTool\iTool\iTool\images\no_picture_tool.png", UriKind.RelativeOrAbsolute));
         }
 
         private void GoToProfile()
