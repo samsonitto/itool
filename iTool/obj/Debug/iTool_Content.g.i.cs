@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("escrewdriver_31h_icon.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/no_picture_tool.png")]
 
 

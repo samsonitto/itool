@@ -1,0 +1,18 @@
+﻿<Window x:Class="iTool.AddRandomTools"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:iTool"
+        mc:Ignorable="d"
+        Title="AddRandomTools" Height="500" Width="450">
+    <Grid Background="#3a3939">
+        <StackPanel>
+            <Label Content="iTool: Generate Tools" FontSize="25" FontWeight="Black" Foreground="#c1fff9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Label Content="Enter amount of tools" FontSize="20" Foreground="#c1fff9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0 50 0 0" FontWeight="Black"/>
+            <TextBox x:Name="txtToolAmount" Width="200" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" Margin="0 50 0 0" Background="#c1fff9" Foreground="Red"/>
+            <Button x:Name="btnGenerate" Width="200" Height="100" Content="GENERATE" FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="Red" Foreground="White" FontWeight="Black" Margin="0 50 0 30" Click="BtnGenerate_Click"/>
+            <Label x:Name="lblInfo" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#c1fff9"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -367,7 +367,7 @@ namespace iTool
             try
             {
                 string connStr = GetConnectionString();
-                string sql = $"INSERT INTO tool (toolName, toolDescription, toolPrice, toolCondition, toolCategoryID, userOwnerID, toolPicture) VALUES ('{toolName}','{toolDescription}',{toolPrice},'{toolCondition}',{toolCategoryID}, {toolOwnerID}, '{toolImage}');";
+                string sql = $"INSERT INTO tool (toolName, toolDescription, toolPrice, toolCondition, toolCategoryID, userOwnerID, toolPicture) VALUES ('{toolName}','{toolDescription}',{toolPrice.ToString(CultureInfo.InvariantCulture)},'{toolCondition}',{toolCategoryID}, {toolOwnerID}, '{toolImage}');";
                 using (MySqlConnection conn = new MySqlConnection(connStr))
                 {
                     conn.Open();
@@ -404,6 +404,146 @@ namespace iTool
                         return toolCategoryID;
                     }
                     
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public static List<int> GetToolCategoryIDs()
+        {
+            try
+            {
+                List<int> ids = new List<int>();
+                string connStr = GetConnectionString();
+                string sql = $"SELECT toolCategoryID FROM toolCategory;";
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        int toolCategoryID = 0;
+                        while (reader.Read())
+                        {
+                            toolCategoryID = int.Parse(reader.GetString(0));
+                            ids.Add(toolCategoryID);
+
+                        }
+                        return ids;
+                    }
+
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public static List<int> GetUserIDsFromMysql()
+        {
+            try
+            {
+                List<int> ids = new List<int>();
+                string connStr = GetConnectionString();
+                string sql = $"SELECT userID FROM user;";
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        int userID = 0;
+                        while (reader.Read())
+                        {
+                            userID = int.Parse(reader.GetString(0));
+                            ids.Add(userID);
+
+                        }
+                        return ids;
+                    }
+
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public static List<Transaction> GetTransactionsFromMysql()
+        {
+            try
+            {
+                List<Transaction> transactions = new List<Transaction>();
+                string connStr = GetConnectionString();
+                string sql = $"SELECT transactionID, transactionStartDate, transactionPlannedEndDate, userOwnerID, userLesseeID, toolID, actualEndDate  FROM transaction WHERE userOwnerID = {Active.UserID} || userLesseeID = {Active.UserID};";
+                using (MySqlConnection con = new MySqlConnection(connStr))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, con);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Transaction t = new Transaction();
+                            t.TransactionID = int.Parse(reader.GetString(0));
+                            t.StartDate = DateTime.Parse(reader.GetString(1));
+                            t.PlannedEndDate = DateTime.Parse(reader.GetString(2));
+                            t.UserOwnerID = int.Parse(reader.GetString(3));
+                            t.UserLesseeID = int.Parse(reader.GetString(4));
+                            t.ToolID = int.Parse(reader.GetString(5));
+                            if (!reader.IsDBNull(6))
+                            {
+                                t.ActualEndDate = DateTime.Parse(reader.GetString(6));
+                            }
+                            else
+                            {
+                                t.ActualEndDate = null;
+                            }
+                            
+
+                            transactions.Add(t);
+                        }
+                        return transactions;
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public static Tool GetToolFromMysql(int toolID)
+        {
+            try
+            {
+                Tool tool = new Tool();
+                string connStr = GetConnectionString();
+                string sql = $"SELECT toolID, toolName, toolDescription, toolPrice, toolCondition, toolCategoryID, userOwnerID, toolPicture FROM tool WHERE toolID = {toolID}";
+                using (MySqlConnection con = new MySqlConnection(connStr))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, con);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            tool.ToolID = int.Parse(reader.GetString(0));
+                            tool.ToolName = reader.GetString(1);
+                            tool.ToolDescription = reader.GetString(2);
+                            tool.ToolPrice = float.Parse(reader.GetString(3));
+                            tool.ToolCondition = reader.GetString(4);
+                            tool.ToolCategoryID = int.Parse(reader.GetString(5));
+                            tool.UserOwnerID = int.Parse(reader.GetString(6));
+                            tool.ToolPictureURL = reader.GetString(7);
+                            //u.Password = reader.GetString(8);
+                            
+                        }
+                        return tool;
+                    }
                 }
             }
             catch

@@ -144,3 +144,7 @@ F:\iTool\iTool\iTool\bin\Debug\iTool.exe.manifest
 F:\iTool\iTool\iTool\bin\Debug\iTool.application
 F:\iTool\iTool\iTool\obj\Debug\iTool.exe.manifest
 F:\iTool\iTool\iTool\obj\Debug\iTool.application
+F:\iTool\iTool\iTool\obj\Debug\AddRandomTools.g.cs
+F:\iTool\iTool\iTool\obj\Debug\AddRandomTools.baml
+F:\iTool\iTool\iTool\obj\Debug\EditProfile.g.cs
+F:\iTool\iTool\iTool\obj\Debug\EditProfile.baml

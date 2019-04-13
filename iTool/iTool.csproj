@@ -90,14 +90,21 @@
     <Compile Include="AddAToolWindow.xaml.cs">
       <DependentUpon>AddAToolWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddRandomTools.xaml.cs">
+      <DependentUpon>AddRandomTools.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BLiTool.cs" />
     <Compile Include="CommentWindow.xaml.cs">
       <DependentUpon>CommentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DBtier.cs" />
+    <Compile Include="EditProfile.xaml.cs">
+      <DependentUpon>EditProfile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM.cs" />
     <Compile Include="ProfileWindow.xaml.cs">
       <DependentUpon>ProfileWindow.xaml</DependentUpon>
     </Compile>
@@ -108,7 +115,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddRandomTools.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CommentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -181,6 +196,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\no_picture_tool.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

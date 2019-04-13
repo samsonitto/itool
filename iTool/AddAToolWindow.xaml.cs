@@ -27,6 +27,7 @@ namespace iTool
         private string imgFile;
         private string dirPath;
         private string relativePath;
+        
         public AddAToolWindow()
         {
             InitializeComponent();
@@ -39,6 +40,8 @@ namespace iTool
             cbToolCategories.ItemsSource = categories;
             cbToolCondition.ItemsSource = conditions;
         }
+
+        
 
         private void btnBrowseToolImage_Click(object sender, RoutedEventArgs e)
         {
@@ -139,6 +142,15 @@ namespace iTool
             txtDescription.Text = "";
             txtBrowseToolImage.Text = "";
             imgAddTool.Source = new BitmapImage(new Uri(@"F:\iTool\iTool\iTool\images\no_picture_tool.png", UriKind.RelativeOrAbsolute));
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.T)
+            {
+                AddRandomTools addRandomTools = new AddRandomTools();
+                addRandomTools.ShowDialog();
+            }
         }
     }
 }

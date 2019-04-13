@@ -35,6 +35,7 @@ namespace iTool
             IniMyStuff(); 
         }
 
+        #region METHODS
         private void IniMyStuff()
         {
             //LUODAAN DATAGRID KAIKISSA SAATAVILLA OLEVISTA TYÖKALUISTA
@@ -67,7 +68,8 @@ namespace iTool
             txtUsername.Text = $"{Active.FirstName} {Active.LastName}";
 
             //TOOL IMAGE
-            imgTool.Source = new BitmapImage(new Uri(@"F:\iTool\iTool\iTool\images\no_picture_tool.png", UriKind.RelativeOrAbsolute));
+            //imgTool.Source = new BitmapImage(new Uri(@"F:\iTool\iTool\iTool\images\no_picture_tool.png", UriKind.RelativeOrAbsolute));
+            imgTool.Source = new BitmapImage(new Uri(@"images\no_picture_tool.png", UriKind.RelativeOrAbsolute));
         }
 
         private void GoToProfile()
@@ -76,56 +78,6 @@ namespace iTool
             profile.Show();
             this.Close();
         }
-
-        private void DgTools_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Object selected = dgTools.SelectedItem;
-            if(selected != null)
-            {
-                Tool tool = (Tool)selected;
-                ShowPicture(tool.ToolPictureURL);
-                txbToolName.Text = tool.ToolName;
-                toolName = tool.ToolName;
-                txbToolCondition.Text = tool.ToolCondition;
-                txbPrice.Text = tool.ToolPrice.ToString();
-                price = tool.ToolPrice;
-                txbDescription.Text = tool.ToolDescription;
-                imgTool.Source = new BitmapImage(new Uri($"{Active.ProjectPath}/images/{tool.ToolPictureURL}", UriKind.RelativeOrAbsolute));
-                Active.ToolID = tool.ToolID;
-                Active.OwnerID = tool.UserOwnerID;
-
-                User user = DB.GetToolOwnerFromMysql(tool.UserOwnerID);
-                txbOwner.Text = user.FirstName + " " + user.LastName;
-                txbNumber.Text = user.Mobile;
-
-                txbMessages.Text = $"You are viewing a tool: {toolName}, click Rent to rent a tool.";
-
-                if (!string.IsNullOrEmpty(txtDays.Text))
-                {
-                    if (!int.TryParse(txtDays.Text, out int num))
-                    {
-                        txbMessages.Text = "Wrong input, numbers only.";
-                    }
-                    else
-                    {
-                        float totalPrice = price * int.Parse(txtDays.Text);
-                        txbTotalPrice.Text = $"{totalPrice.ToString()} €";
-                    }
-                }
-
-            }
-        }
-
-        private void CbCityFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Filters();
-        }
-
-        private void CbToolCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Filters();
-        }
-
         private void Filters()
         {
             if (cbCityFilter.SelectedValue != null && cbToolCategory.SelectedValue != null)
@@ -172,6 +124,64 @@ namespace iTool
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        #endregion
+
+        #region EVENTHANDLERS
+        private void DgTools_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Object selected = dgTools.SelectedItem;
+            if(selected != null)
+            {
+                try
+                {
+                    Tool tool = (Tool)selected;
+                    ShowPicture(tool.ToolPictureURL);
+                    txbToolName.Text = tool.ToolName;
+                    toolName = tool.ToolName;
+                    txbToolCondition.Text = tool.ToolCondition;
+                    txbPrice.Text = tool.ToolPrice.ToString();
+                    price = tool.ToolPrice;
+                    txbDescription.Text = tool.ToolDescription;
+                    imgTool.Source = new BitmapImage(new Uri($"{Active.ProjectPath}/images/{tool.ToolPictureURL}", UriKind.RelativeOrAbsolute));
+                    Active.ToolID = tool.ToolID;
+                    Active.OwnerID = tool.UserOwnerID;
+
+                    User user = DB.GetToolOwnerFromMysql(tool.UserOwnerID);
+                    txbOwner.Text = user.FirstName + " " + user.LastName;
+                    txbNumber.Text = user.Mobile;
+
+                    txbMessages.Text = $"You are viewing a tool: {toolName}, click Rent to rent a tool.";
+
+                    if (!string.IsNullOrEmpty(txtDays.Text))
+                    {
+                        if (!int.TryParse(txtDays.Text, out int num))
+                        {
+                            txbMessages.Text = "Wrong input, numbers only.";
+                        }
+                        else
+                        {
+                            float totalPrice = price * int.Parse(txtDays.Text);
+                            txbTotalPrice.Text = $"{totalPrice.ToString()} €";
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void CbCityFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filters();
+        }
+
+        private void CbToolCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filters();
         }
 
         private void ImgMainPageProfile_MouseDown(object sender, MouseButtonEventArgs e)
@@ -290,5 +300,6 @@ namespace iTool
             CommentWindow comment = new CommentWindow();
             comment.ShowDialog();
         }
+        #endregion
     }
 }

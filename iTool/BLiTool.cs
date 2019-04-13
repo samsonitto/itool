@@ -67,24 +67,14 @@ namespace iTool
     public class Transaction
     {
         public int TransactionID { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime PlannedEndDate { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? PlannedEndDate { get; set; }
+        public DateTime? ActualEndDate { get; set; }
         public int UserOwnerID { get; set; }
         public int UserLesseeID { get; set; }
         public int ToolID { get; set; }
     }
 
-    public static class Active
-    {
-        public static string ProjectPath { get { return Directory.GetParent(Environment.CurrentDirectory).Parent.FullName; } }
-        public static string FirstName { get; set; }
-        public static string LastName { get; set; }
-        public static string ImagePath { get; set; }
-        public static string ImageFileName { get; set; }
-        public static int UserID { get; set; }
-        public static BitmapImage ImageSource { get; set; }
-        public static int OwnerID { get; set; }
-        public static int ToolID { get; set; }
-    }
+    
 
 }
