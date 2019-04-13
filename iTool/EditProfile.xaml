@@ -5,8 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:iTool"
         mc:Ignorable="d"
-        Title="EditProfile" Height="450" Width="800">
+        Title="iTool: Edit Profile" Height="800" Width="1200" ResizeMode="NoResize">
     <Grid>
-        
+        <StackPanel>
+            <Label Content="iTool: Edit Profile" HorizontalContentAlignment="Center" FontSize="30" Margin="0 40 0 40"/>
+            <StackPanel Orientation="Horizontal" Margin="90 50 90 0">
+                <StackPanel Width="300" Margin="0 0 0 0">
+                    <Image x:Name="imgProfile" Source="images/no_picture.png"/>
+                </StackPanel>
+                <StackPanel Width="300" Margin="50 0 25 0">
+                    <Label Content="New E-mail" HorizontalContentAlignment="Center" FontSize="18" Margin="0 0 0 0"/>
+                    <TextBox x:Name="txtNewEmail" Margin="0 0 0 10" Height="30" Width="300"/>
+                    <Label Content="Confirm new E-mail" HorizontalContentAlignment="Center" FontSize="18" Margin="0 0 0 0"/>
+                    <TextBox x:Name="txtConfirmNewEmail" Margin="0 0 0 10" Height="30" Width="300"/>
+                    <Label Content="New password" HorizontalContentAlignment="Center" FontSize="18"/>
+                    <PasswordBox x:Name="pwdNewPassword" Margin="0 0 0 10" Height="30" Width="300"/>
+                    <Label Content="Confirm new password" HorizontalContentAlignment="Center" FontSize="18"/>
+                    <PasswordBox x:Name="pwdConfirmNewPassword" Margin="0 0 0 10" Height="30" Width="300"/>
+                    <Label Content="Mobile number" HorizontalContentAlignment="Center" FontSize="18" Margin="0 0 0 0"/>
+                    <TextBox x:Name="txtNewMobile" Margin="0 0 0 10" Height="30" Width="300"/>
+                </StackPanel>
+                <StackPanel Width="300" Margin="25 0 50 0">
+                    
+                    <Label Content="New address" HorizontalContentAlignment="Center" FontSize="18"/>
+                    <TextBox x:Name="txtNewAddress" Margin="0 0 0 10" Height="30" Width="300"/>
+                    <Label Content="Location" HorizontalContentAlignment="Center" FontSize="18"/>
+                    <ComboBox x:Name="cbNewLocation" Width="300" Height="30" Margin="0 0 0 10"/>
+                    <Label Content="Payment method" HorizontalContentAlignment="Center" FontSize="18"/>
+                    <ComboBox x:Name="cbNewPayment" Width="300" Height="30" Margin="0 0 0 10"/>
+                    <Label Content="Change picture" HorizontalContentAlignment="Center" FontSize="18"/>
+                    <StackPanel Orientation="Horizontal" Width="300" Height="30" Margin="0 0 0 10">
+                        <TextBox x:Name="txtNewPic" Margin="0 0 0 0" Height="30" Width="200"/>
+                        <Button x:Name="btnNewPicBrowse" Width="90" Margin="10 0 0 0" Height="30" Content="Browse"/>
+                    </StackPanel>
+                    <Label Content="Current password" HorizontalContentAlignment="Center" FontSize="18"/>
+                    <PasswordBox x:Name="pwdCurrentPassword" Margin="0 0 0 10" Height="30" Width="300"/>
+                    <Button x:Name="btnConfirm" Content="Confirm changes" Height="30" Margin="0 20 0 0" FontSize="18" Click="BtnConfirm_Click"/>
+                </StackPanel>
+            </StackPanel>
+            <TextBlock x:Name="txbNewError" Margin="40" HorizontalAlignment="Center" FontSize="18"/>
+        </StackPanel>
     </Grid>
 </Window>

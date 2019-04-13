@@ -228,6 +228,14 @@ namespace iTool
             }
         }
 
+        private void BtnEditProfile_Click(object sender, RoutedEventArgs e)
+        {
+            EditProfile editProfile = new EditProfile();
+            editProfile.ShowDialog();
+        }
+
         #endregion
+
+
     }
 }

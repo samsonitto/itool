@@ -105,7 +105,6 @@ namespace iTool
                 throw;
             }
         }
-
         public static List<string> EmailChecker()
         {
             try
@@ -134,7 +133,6 @@ namespace iTool
                 throw;
             }
         }
-
         public static List<Tool> GetToolsFromMysql()
         {
             try
@@ -180,7 +178,6 @@ namespace iTool
                 throw;
             }
         }
-
         public static List<Tool> GetOwnedToolsFromMysql()
         {
             try
@@ -226,7 +223,6 @@ namespace iTool
                 throw;
             }
         }
-
         public static bool AddTransactionToMysql(string transactionStartDate, string transactionPlannedEndDate, int userOwnerID, int userLesseeID, int toolID)
         {
             try
@@ -247,7 +243,6 @@ namespace iTool
                 throw;
             }
         }
-
         public static string GetConnectionString()
         {
             string mysqlServer = Properties.Settings.Default.server;
@@ -259,7 +254,6 @@ namespace iTool
             //haetaan salasana App.Config-tiedostosta
             return string.Format($"SERVER={mysqlServer};DATABASE={mysqlDatabase};UID={mysqlUID};PASSWORD={mysqlPassword}");
         }
-
         public static List<Tool> GetMyRentedToolsFromMysql()
         {
             try
@@ -306,7 +300,6 @@ namespace iTool
                 throw;
             }
         }
-
         public static bool ReturnRentedToolMysql(int userRating, string actualEndDate, string returnCondition, int transactionID, int raterID, int ratedID)
         {
             try
@@ -327,7 +320,6 @@ namespace iTool
                 throw;
             }
         }
-
         public static List<Comment> GetCommentsFromMysql(int toolID)
         {
             List<Comment> comments = new List<Comment>();
@@ -361,7 +353,6 @@ namespace iTool
                 }
             }
         }
-
         public static bool AddAToolToMysql(string toolName, int toolCategoryID, string toolDescription, int toolOwnerID, string toolCondition, float toolPrice, string toolImage)
         {
             try
@@ -471,7 +462,6 @@ namespace iTool
                 throw;
             }
         }
-
         public static List<Transaction> GetTransactionsFromMysql()
         {
             try
@@ -543,6 +533,50 @@ namespace iTool
                             
                         }
                         return tool;
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public static User GetUserFromMysqlWhere(string where)
+        {
+            try
+            {
+                User user = new User();
+                string connStr = GetConnectionString();
+                string sql = $"SELECT userID, userName, userSurname, userAddress, userEmail, userLocation, paymentMethod, userMobile, MD5(userPassword), userPicture FROM user WHERE {where};";
+                using (MySqlConnection con = new MySqlConnection(connStr))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, con);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            user.UserID = int.Parse(reader.GetString(0));
+                            user.FirstName = reader.GetString(1);
+                            user.LastName = reader.GetString(2);
+                            user.Address = reader.GetString(3);
+                            user.Email = reader.GetString(4);
+                            user.Location = reader.GetString(5);
+                            user.PaymentMethod = reader.GetString(6);
+                            user.Mobile = reader.GetString(7);
+                            user.Password = reader.GetString(8);
+                            if (reader.IsDBNull(9) || string.IsNullOrEmpty(reader.GetString(9)))
+                            {
+                                user.PictureURL = "no_picture.jpg";
+                            }
+
+                            else
+                            {
+                                user.PictureURL = reader.GetString(9);
+                            }
+                        }
+                        return user;
                     }
                 }
             }
