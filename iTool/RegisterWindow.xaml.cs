@@ -30,6 +30,8 @@ namespace iTool
         private  List<string> locations = new List<string>() { "Ähtäri", "Espoo", "Helsinki", "Jyväskylä", "Kuopio", "Kuusamo", "Lahti", "Lappeenranta", "Oulu", "Rauma", "Rovanniemi", "Savonlinna", "Seinäjoki", "Tampere", "Turku", "Vaasa", "Vantaa" };
         private string path;
         private string imgFile;
+        private string relativePath;
+        private string dirPath;
 
         //METHODS
         public RegisterWindow()
@@ -53,56 +55,15 @@ namespace iTool
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
-            
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "Select a profile picture";
-            dlg.InitialDirectory = "c:\\";
-            dlg.Filter = "All supported graphics |*.jpg;*.jpeg;*.png|All files (*.*)|*.*";
-            dlg.RestoreDirectory = true;
-            Nullable<bool> result = dlg.ShowDialog(); // näyttää dialogin
-            if (result == true)
-            {
-                txtPic.Text = dlg.FileName;
-            }
-            if (string.IsNullOrEmpty(txtPic.Text))
-            {
-                dlg.FileName = "images/no_picture.png";
-            }
-            
-            imgProfile.Stretch = Stretch.Fill;
-            Uri u = new Uri(dlg.FileName, UriKind.RelativeOrAbsolute);
-            imgProfile.Source = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute));
-            string i = imgProfile.Source.ToString().Split('/')[imgProfile.Source.ToString().Split('/').Length - 1];
-            //path = $@"F:\iTool\iTool\iTool\images\{i}";
-            path = $@"images\{i}";
-            if (File.Exists(path))
-            {
-                int x = 0;
-                for (; File.Exists(path); )
-                {
-                    path = $@"images\{x}{i}";
-                    //path = $@"F:\iTool\iTool\iTool\images\{x}{i}";
-                    imgFile = $"{x}{i}";
-                    x++;
-                }
-            }
-            
-            else
-            {
-                imgFile = path.Split('\\')[path.Split('\\').Length - 1];
-            }
-
-            // relaatiivinen polku images kansioon
-            string relativePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\{path}";
-
-            // pulku valituun kuvatiedostoon
-            string dirPath = $@"{System.IO.Path.GetDirectoryName(dlg.FileName)}\{System.IO.Path.GetFileName(dlg.FileName)}";
-            System.IO.File.Copy(dirPath, relativePath, true);
-            File.SetAttributes(relativePath, FileAttributes.Normal);
-
+            Active.BrowseImage(imgProfile, txtPic);
         }
 
         private void BtnReg_Click(object sender, RoutedEventArgs e)
+        {
+            Register();
+        }
+
+        private void Register()
         {
             if (txtAddEmail.Text.Length == 0)
             {
@@ -149,10 +110,6 @@ namespace iTool
                 txbError.Text = "Enter your address";
                 txtAddAddress.Focus();
             }
-            //else if (string.IsNullOrEmpty(imgFile))
-            //{
-            //    imgFile = null;
-            //}
             else
             {
                 string firstname = txtFirstName.Text;
@@ -186,19 +143,25 @@ namespace iTool
 
                     MySqlConnection con = new MySqlConnection("SERVER=mysql.labranet.jamk.fi;DATABASE=M3156_3;UID=M3156;PASSWORD=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
                     con.Open();
-                    MySqlCommand cmd = new MySqlCommand($"Insert into user (userName,userSurname,userAddress,userEmail,userLocation,paymentMethod,userMobile,userPassword,userPicture) values('{firstname}','{lastname}','{address}','{email}','{location}','{payment}','{mobile}',MD5('{password}'),'{imgFile}')", con);
+                    MySqlCommand cmd = new MySqlCommand($"Insert into user (userName,userSurname,userAddress,userEmail,userLocation,paymentMethod,userMobile,userPassword,userPicture) values('{firstname}','{lastname}','{address}','{email}','{location}','{payment}','{mobile}',MD5('{password}'),'{Active.imgFile}')", con);
                     cmd.CommandType = CommandType.Text;
                     cmd.ExecuteNonQuery();
                     con.Close();
+
+                    System.IO.File.Copy(Active.dirPath, Active.relativePath, true);
+                    File.SetAttributes(Active.relativePath, FileAttributes.Normal);
+
+                    Active.imgFile = null;
+
                     MainWindow mw = new MainWindow();
                     mw.txbMainError.Text = "You have Registered successfully\nYou can login now";
                     mw.Show();
                     this.Close();
                 }
             }
-        
         }
-        public void Reset()
+
+        private void Reset()
         {
             txtFirstName.Text = "";
             txtLastName.Text = "";
@@ -212,7 +175,7 @@ namespace iTool
             cbPayment.SelectedItem = null;
         }
 
-        public void Fill()
+        private void Fill()
         {
             Random rand = new Random();
             char[] abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();

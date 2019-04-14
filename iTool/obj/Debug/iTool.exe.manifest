@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="iTool.exe" size="979896">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="iTool.exe" size="981432">
       <assemblyIdentity name="iTool" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qoFk2ZNZBY1NFvnlaLTH25zX42pfS/hFvOaPjMuJ+xg=</dsig:DigestValue>
+        <dsig:DigestValue>nGiEy4HE4zHHNPQ4DEPoCSCBJAdAYrThI4yXaqObF7E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -585,5 +585,25 @@ namespace iTool
                 throw;
             }
         }
+        public static bool UpdateUserToMysql(string set)
+        {
+            try
+            {
+                string connStr = GetConnectionString();
+                string sql = $"UPDATE user {set} WHERE userID = {Active.UserID};";
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    return true;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

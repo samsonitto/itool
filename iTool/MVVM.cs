@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace iTool
@@ -20,6 +24,9 @@ namespace iTool
         public static BitmapImage ImageSource { get; set; }
         public static int OwnerID { get; set; }
         public static int ToolID { get; set; }
+        public static string relativePath;
+        public static string dirPath;
+        public static string imgFile;
 
         //public static string ConvertStringtoMD5(string password)
         //{
@@ -37,5 +44,54 @@ namespace iTool
         //    }
         //    return sb.ToString();
         //}
+
+        public static void BrowseImage(Image imgProfile, TextBox txtPic)
+        {
+            string path;
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Title = "Select a profile picture";
+            dlg.InitialDirectory = "c:\\";
+            dlg.Filter = "All supported graphics |*.jpg;*.jpeg;*.png|All files (*.*)|*.*";
+            dlg.RestoreDirectory = true;
+            Nullable<bool> result = dlg.ShowDialog(); // näyttää dialogin
+            if (result == true)
+            {
+                txtPic.Text = dlg.FileName;
+            }
+            if (string.IsNullOrEmpty(txtPic.Text))
+            {
+                dlg.FileName = "images/no_picture.png";
+            }
+
+            imgProfile.Stretch = Stretch.Fill;
+            Uri u = new Uri(dlg.FileName, UriKind.RelativeOrAbsolute);
+            imgProfile.Source = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute));
+            string i = imgProfile.Source.ToString().Split('/')[imgProfile.Source.ToString().Split('/').Length - 1];
+            //path = $@"F:\iTool\iTool\iTool\images\{i}";
+            path = $@"images\{i}";
+            if (File.Exists(path))
+            {
+                int x = 0;
+                for (; File.Exists(path);)
+                {
+                    path = $@"images\{x}{i}";
+                    //path = $@"F:\iTool\iTool\iTool\images\{x}{i}";
+                    imgFile = $"{x}{i}";
+                    x++;
+                }
+            }
+
+            else
+            {
+                imgFile = path.Split('\\')[path.Split('\\').Length - 1];
+            }
+
+            // relaatiivinen polku images kansioon
+            relativePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\{path}";
+
+            // polku valituun kuvatiedostoon
+            dirPath = $@"{System.IO.Path.GetDirectoryName(dlg.FileName)}\{System.IO.Path.GetFileName(dlg.FileName)}";
+
+        }
     }
 }
