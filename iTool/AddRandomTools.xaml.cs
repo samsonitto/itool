@@ -35,7 +35,7 @@ namespace iTool
             }
             else
             {
-                lblInfo.Content = $"You did not do shit";
+                lblInfo.Content = $"You did nothing";
             }
             
         }

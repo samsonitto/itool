@@ -1,0 +1,23 @@
+Testi 1: Testataan vaihtaa kaikki tiedot ja kuvan
+Tulos 1: Uudet tiedot kirjautui tietokantaan onnistuneesti
+
+Testi 2: Testataan vaihtaa ainoastaan s-posti
+Tulos 2.1: NULL reference virhe
+Korjaus 2.1.1: Lisätään ehto if (cbNewLocations.SelectedValue != null);
+Tulos 2.2: Uusi s-posti kirjautui onnistuneesti tietokantaan
+
+Testi 3: Avataan ProfileWindow MVVM luokasta
+Tulos 3.1: ProfileWindow aukee onnistuneesti
+
+Testi 4: Vaihdetaan salasana, halutaan että meidät kirjaudutaan ulos
+Tulos 4.1: Kaikki ikunat sulkeutui, Login ikkuna ei auennut
+Korjaus 4.1.1: Vaihdetaan login ikkunan avausta ennen muiden sulkemista
+Tulos 4.2: Login aukesi ja uusi viesti näkyy
+
+Testi 5: Vaihdetaan profiilikuva, osoite ja sijainti
+Tulos 5.1: Profiilikuva vaihtui, osoite ja sijainti päivittyi tietokantaan
+
+Testi 6: Vaihdetaan profiilikuva (cat.png) samannimiseen kuvaan
+Tulos 6.1: Error imgFile used by another process
+Korjaus 6.1.1 path polku oli väärä, vaihdetaan path = $"{ProjectPath}/images/{i}"
+Tulos 6.2: Kuva vaihtui, tallenkui sekä images kansioon että tietokantaan nimellä 0cat.png

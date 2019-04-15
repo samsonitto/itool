@@ -74,8 +74,8 @@ namespace iTool
 
         private void GoToProfile()
         {
-            ProfileWindow profile = new ProfileWindow();
-            profile.Show();
+            Active.profile = new ProfileWindow();
+            Active.profile.Show();
             this.Close();
         }
         private void Filters()

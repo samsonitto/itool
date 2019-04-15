@@ -27,6 +27,8 @@ namespace iTool
         public static string relativePath;
         public static string dirPath;
         public static string imgFile;
+        public static MainWindow main;
+        public static ProfileWindow profile;
 
         //public static string ConvertStringtoMD5(string password)
         //{
@@ -68,7 +70,8 @@ namespace iTool
             imgProfile.Source = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute));
             string i = imgProfile.Source.ToString().Split('/')[imgProfile.Source.ToString().Split('/').Length - 1];
             //path = $@"F:\iTool\iTool\iTool\images\{i}";
-            path = $@"images\{i}";
+            //path = $@"images\{i}";
+            path = $"{ProjectPath}\\images\\{i}";
             if (File.Exists(path))
             {
                 int x = 0;
@@ -87,7 +90,7 @@ namespace iTool
             }
 
             // relaatiivinen polku images kansioon
-            relativePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\{path}";
+            relativePath = $"{ProjectPath}\\images\\{imgFile}";
 
             // polku valituun kuvatiedostoon
             dirPath = $@"{System.IO.Path.GetDirectoryName(dlg.FileName)}\{System.IO.Path.GetFileName(dlg.FileName)}";

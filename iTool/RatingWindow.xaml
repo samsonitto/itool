@@ -1,0 +1,23 @@
+﻿<Window x:Class="iTool.RatingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:iTool"
+        mc:Ignorable="d"
+        Title="iTool: Rating" Height="450" Width="500">
+    <Grid Background="#3a3939">
+        <StackPanel >
+            <Label Content="iTool: Rating" HorizontalContentAlignment="Center" Foreground="#c1fff9" FontSize="30" FontWeight="Black"/>
+            <Label x:Name="lblRatedPerson" Content="Name" HorizontalContentAlignment="Center" Foreground="#c1fff9" Margin="0 10 0 0" FontSize="18"/>
+            <Label x:Name="lblRating" Content="Give rating (1-5)" HorizontalContentAlignment="Center" Foreground="#c1fff9" Margin="0 10 0 0"/>
+            <TextBox x:Name="txtRating" Background="#c1fff9" Height="30" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" Foreground="Black" MaxLength="1"/>
+            <Label x:Name="lblRatingFeedback" Content="Comments (optional)" HorizontalContentAlignment="Center" Foreground="#c1fff9" Margin="0 10 0 0"/>
+            <TextBox x:Name="txtRatingComments" Background="#c1fff9" Height="100" TextWrapping="Wrap" Width="300" HorizontalAlignment="Center" MaxLength="1000" TextChanged="TxtRatingComments_TextChanged"/>
+            <Label x:Name="lblCharCount" Width="300" Content="1000" HorizontalContentAlignment="Right" Foreground="#c1fff9"/>
+            <Button x:Name="btnGiveRating" Content="Give rating" Margin="0 0 0 0" Width="100" Click="BtnGiveRating_Click"/>
+            <Label x:Name="lblMessagesRating" HorizontalContentAlignment="Center" Foreground="#c1fff9" Margin="0 10 0 0"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>

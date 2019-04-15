@@ -139,7 +139,7 @@ namespace iTool
             {
                 List<Tool> tools = new List<Tool>();
                 string connStr = GetConnectionString();
-                string sql = $"SELECT toolID, userOwnerID, toolCategoryID, toolPicture, toolName, toolDescription, toolPrice, toolCondition, toolCategoryName, userLocation FROM all_tools WHERE userOwnerID != {Active.UserID} AND toolID NOT IN (select toolID from rented_tools);";
+                string sql = $"SELECT toolID, userOwnerID, toolCategoryID, toolPicture, toolName, toolDescription, toolPrice, toolCondition, toolCategoryName, userLocation FROM all_tools WHERE userOwnerID != {Active.UserID} AND userLocation != 'DELETED' AND toolName != 'CODE002' AND toolID NOT IN (select toolID from rented_tools);";
                 using (MySqlConnection con = new MySqlConnection(connStr))
                 {
                     con.Open();
@@ -184,7 +184,7 @@ namespace iTool
             {
                 List<Tool> tools = new List<Tool>();
                 string connStr = GetConnectionString();
-                string sql = $"SELECT toolID, userOwnerID, toolCategoryID, toolPicture, toolName, toolDescription, toolPrice, toolCondition, toolCategoryName, userLocation FROM all_tools WHERE userOwnerID = {Active.UserID} GROUP BY toolID";
+                string sql = $"SELECT toolID, userOwnerID, toolCategoryID, toolPicture, toolName, toolDescription, toolPrice, toolCondition, toolCategoryName, userLocation FROM all_tools WHERE userOwnerID = {Active.UserID} AND toolName != 'CODE002' GROUP BY toolID";
                 using (MySqlConnection con = new MySqlConnection(connStr))
                 {
                     con.Open();
@@ -300,12 +300,12 @@ namespace iTool
                 throw;
             }
         }
-        public static bool ReturnRentedToolMysql(int userRating, string actualEndDate, string returnCondition, int transactionID, int raterID, int ratedID)
+        public static bool ReturnRentedToolMysql(int transactionID)
         {
             try
             {
                 string connStr = GetConnectionString();
-                string sql = $"INSERT INTO tr_completion (userRating, ActualEndDate, returnCondition, transactionID, raterID, ratedID ) VALUES ('{userRating}','{actualEndDate}','{returnCondition}',{transactionID},{raterID},{ratedID});";
+                string sql = $"UPDATE transaction SET actualEndDate = CURRENT_TIMESTAMP WHERE transactionID = {transactionID};";
                 using (MySqlConnection conn = new MySqlConnection(connStr))
                 {
                     conn.Open();
@@ -591,6 +591,110 @@ namespace iTool
             {
                 string connStr = GetConnectionString();
                 string sql = $"UPDATE user {set} WHERE userID = {Active.UserID};";
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    return true;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public static bool DeleteProfile()
+        {
+            try
+            {
+                Random rand = new Random();
+                char[] abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+                string pw = abc[rand.Next(abc.Length)].ToString().ToLower();
+                for (int i = 0; i < 5; i++)
+                {
+                    pw = $"{pw}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+                }
+
+                string connStr = GetConnectionString();
+                string sql = $"UPDATE user SET userName = 'CODE001', userSurname = 'PROFILE DELETED', userAddress = 'DELETED', userEmail = 'DELETED', userLocation = 'DELETED', paymentMethod = 'DELETED', userMobile = 0000000000, userPassword = '{pw}', userPicture = null WHERE userID = {Active.UserID};";
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    return true;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public static bool DeleteTool(int toolID)
+        {
+            try
+            {
+                string connStr = GetConnectionString();
+                string sql = $"UPDATE tool SET toolName = 'CODE002', toolDescription = 'TOOL DELETED', toolPrice = 0, toolCondition = 'DELETED', toolPicture = null WHERE toolID = {toolID};";
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    return true;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public static Transaction GetTransactionFromMysql(int toolID)
+        {
+            try
+            {
+                Transaction t = new Transaction();
+                string connStr = GetConnectionString();
+                string sql = $"SELECT  transactionID, transactionStartDate, transactionPlannedEndDate, userOwnerID, userLesseeID, toolID, actualEndDate FROM transaction WHERE toolID = {toolID} AND actualEndDate IS NULL";
+                using (MySqlConnection con = new MySqlConnection(connStr))
+                {
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, con);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            t.TransactionID = int.Parse(reader.GetString(0));
+                            t.StartDate = DateTime.Parse(reader.GetString(1));
+                            t.PlannedEndDate = DateTime.Parse(reader.GetString(2));
+                            t.UserOwnerID = int.Parse(reader.GetString(3));
+                            t.UserLesseeID = int.Parse(reader.GetString(4));
+                            t.ToolID = int.Parse(reader.GetString(5));
+                            if (reader.IsDBNull(6))
+                                t.ActualEndDate = null;
+                            else
+                                t.ActualEndDate = DateTime.Parse(reader.GetString(6));
+                        }
+                        return t;
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public static bool AddRatingToMysql(int rating, string feedback, int raterID, int ratedID, int transactionID)
+        {
+            try
+            {
+                string connStr = GetConnectionString();
+                string sql = $"INSERT INTO rating (ratingFeedback, raterID, ratedID, transactionID, rating ) VALUES ('{feedback}',{raterID},{ratedID},{transactionID},{rating});";
                 using (MySqlConnection conn = new MySqlConnection(connStr))
                 {
                     conn.Open();
