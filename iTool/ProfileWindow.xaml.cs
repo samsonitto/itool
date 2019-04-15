@@ -36,6 +36,7 @@ namespace iTool
             txbFirstName.Text = Active.FirstName;
             txbLastName.Text = Active.LastName;
             txbUserID.Text = $"User ID: {Active.UserID.ToString()}";
+            txbAvgRating.Text = $"Average rating: {DB.GetAvgRatingFromMysql(Active.UserID).ToString()}";
 
             dgMyTools.ItemsSource = DB.GetOwnedToolsFromMysql();
             dgRentedToolsByMe.ItemsSource = DB.GetMyRentedToolsFromMysql();
@@ -323,25 +324,31 @@ namespace iTool
                     Object selected = dgMyTransactions.SelectedItem;
                     Transaction transaction = (Transaction)selected;
 
-                    User user;
-                    if(transaction.UserOwnerID == Active.UserID)
-                    {
-                        user = DB.GetToolOwnerFromMysql(transaction.UserLesseeID);
-                    }
+                    if (string.IsNullOrEmpty(transaction.ActualEndDate.ToString()))
+                        txbMessagesProfile.Text = "This transaction is in progress, transaction must be closed for you to give rating";
                     else
                     {
-                        user = DB.GetToolOwnerFromMysql(transaction.UserOwnerID);
+                        User user;
+                        if (transaction.UserOwnerID == Active.UserID)
+                        {
+                            user = DB.GetToolOwnerFromMysql(transaction.UserLesseeID);
+                        }
+                        else
+                        {
+                            user = DB.GetToolOwnerFromMysql(transaction.UserOwnerID);
+                        }
+
+                        Tool tool = DB.GetToolFromMysql(transaction.ToolID);
+
+
+                        RatingWindow rating = new RatingWindow();
+                        rating.ratedID = user.UserID;
+                        rating.transactionID = transaction.TransactionID;
+                        rating.ratedName = $"{user.FirstName} {user.LastName}";
+
+                        rating.lblRatedPerson.Content = $"Name: {user.FirstName} {user.LastName}, Tool: {tool.ToolName}, Transaction ID: {transaction.TransactionID}";
+                        rating.ShowDialog(); 
                     }
-
-                    Tool tool = DB.GetToolFromMysql(transaction.ToolID);
-
-                    
-                    RatingWindow rating = new RatingWindow();
-                    rating.ratedID = user.UserID;
-                    rating.transactionID = transaction.TransactionID;
-
-                    rating.lblRatedPerson.Content = $"Name: {user.FirstName} {user.LastName}, Tool: {tool.ToolName}, Transaction ID: {transaction.TransactionID}";
-                    rating.ShowDialog();
                 }
             }
             catch

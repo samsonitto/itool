@@ -695,6 +695,7 @@ namespace iTool
             {
                 string connStr = GetConnectionString();
                 string sql = $"INSERT INTO rating (ratingFeedback, raterID, ratedID, transactionID, rating ) VALUES ('{feedback}',{raterID},{ratedID},{transactionID},{rating});";
+
                 using (MySqlConnection conn = new MySqlConnection(connStr))
                 {
                     conn.Open();
@@ -702,6 +703,34 @@ namespace iTool
                     cmd.ExecuteNonQuery();
                     conn.Close();
                     return true;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public static float GetAvgRatingFromMysql(int ratedID)
+        {
+            try
+            {
+
+                string connStr = GetConnectionString();
+                string sql = $"SELECT avg(rating) FROM rating WHERE ratedID = {ratedID}";
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        float avgRating = 0F;
+                        while (reader.Read())
+                        {
+                            avgRating = float.Parse(reader.GetString(0));
+                        }
+                        return avgRating;
+                    }
+
                 }
             }
             catch
