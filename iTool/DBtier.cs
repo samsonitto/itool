@@ -249,9 +249,7 @@ namespace iTool
             string mysqlDatabase = Properties.Settings.Default.database;
             string mysqlUID = Properties.Settings.Default.userID;
             string mysqlPassword = Properties.Settings.Default.password;
-            //yleensä connection string tallennetaan koodin ulkopuolelle
-            //tässä demossa koodissa = HYI HYI Paha!
-            //haetaan salasana App.Config-tiedostosta
+            
             return string.Format($"SERVER={mysqlServer};DATABASE={mysqlDatabase};UID={mysqlUID};PASSWORD={mysqlPassword}");
         }
         public static List<Tool> GetMyRentedToolsFromMysql()
@@ -618,7 +616,7 @@ namespace iTool
                 }
 
                 string connStr = GetConnectionString();
-                string sql = $"UPDATE user SET userName = 'CODE001', userSurname = 'PROFILE DELETED', userAddress = 'DELETED', userEmail = 'DELETED', userLocation = 'DELETED', paymentMethod = 'DELETED', userMobile = 0000000000, userPassword = '{pw}', userPicture = null WHERE userID = {Active.UserID};";
+                string sql = $"UPDATE user SET userName = 'CODE001', userSurname = 'PROFILE DELETED', userAddress = 'DELETED', userEmail = 'DELETED', userLocation = 'DELETED', paymentMethod = 'DELETED', userMobile = 0000000000, userPassword = MD5('{pw}'), userPicture = null WHERE userID = {Active.UserID};";
                 using (MySqlConnection conn = new MySqlConnection(connStr))
                 {
                     conn.Open();
