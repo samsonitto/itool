@@ -97,7 +97,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 * Tunnusten luominen: Kerran per sähköposti
 * Kirjautuminen: rajaton
 
-## Työkalujen selailu, vuokraus ja palautus
+## Työkalujen selailu, vuokraus, palautus ja poistaminen
 
 ```plantuml
 @startuml
@@ -106,6 +106,8 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
     Käyttäjä --> Omistaja : Soittaa ja sopii tapaaminen
     Käyttäjä --> (Työkalun vuokraus) : Vuokraa
     Käyttäjä --> (Työkalun palautus) : Palauttaa
+    Käyttäjä --> (Työkalun poistaminen) : Poistaa
+    (Työkalun poistaminen) --> (iTool tietokanta) : Ylikirjoittaa
 @enduml
 ```
 
@@ -115,16 +117,19 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 2. Käyttäjä ottaa yhteyttä työkalun omistajaan ja sopii tapaaminen
 3. Käyttäjä vuokraa työkalun
 4. Käyttäjä palauttaa työkalun
+5. Käyttäjä poistaa työkalun
+6. Sovellus ylikirjoittaa poistetun työkalun
 
 	
 **Lopputulos**	
 
-* Asiakas on vuokrannut ja palautanut työkalub onnistuneesti
+* Asiakas on vuokrannut, palautanut tai poistanut työkalun onnistuneesti
 
 **Käyttötiheys** 
 
 * Vuokraus: rajaton
 * Palautus: kerran per transaction
+* Poistaminen: kerran per työkalu
 
 ## Työkalujen kommentointi
 
