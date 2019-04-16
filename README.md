@@ -171,16 +171,25 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 
 # Käsitemalli
 
+### Käsitteet
+
+1. User: iTool sovelluksen käyttäj
+2. Tool: Työkalu
+3. Tool Category: Työkalun kategoria
+4. Transaction: Työkalun omistajan ja työkalun vuokraajan välinen kauppa
+5. Comment: Työkalujen kommentit
+6. Rating: Käyttäjän antama arvio(1-5) kaupan toiselle osapuolelle
+
 ```plantuml
 @startuml
-    CommentWindow --|> MainPage
-    RegisterWindow --|> MainWindow
-    MainWindow --> MainPage
-    MainPage --> ProfileWindow
-    User --> MainPage
-    User --> ProfileWindow
-    Tool --|> User
-    User --> DB
+    User --|> Tool
+    Transaction --|> User
+    Transaction --|> Tool
+    Tool --|> ToolCategory
+    Comment --|> Tool
+    Comment --|> User
+    User --> Rating
+    Rating --|> Transaction
 @enduml
 ```
 # Luokkamalli
@@ -214,6 +223,40 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
         +toolCategory
         +toolDescription
         +toolImage
+    }
+    
+    class Comment {
+        +commentID
+        +commentDateTime
+        +commentBody
+        +toolID
+        +userID
+        +commentParentID
+    }
+    
+    class Transaction {
+        +transactionID
+        +transactionStartDate
+        +transactionPlannedEndDate
+        +transactionActualEndDate
+        +userOwnerID
+        +userLesseeID
+        +toolID
+    }
+    
+    class ToolCategory {
+        +toolCategoryID
+        +toolCategoryName
+        +toolCategoryDescription
+    }
+    
+    class Rating {
+        +ratingID
+        +rating
+        +ratingFeedback
+        +raterID
+        +ratedID
+        +transactionID
     }
     
     class MainWindow {
@@ -264,6 +307,14 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
     User --> ProfileWindow
     Tool --|> User
     User --> DB
+    Tool --|> ToolCategory
+    Transaction --|> Tool
+    User --> Transaction
+    User --> Comment
+    Comment --|> Tool
+    User --> Rating
+    Rating --|> User
+    Rating --|> Transaction
     
 @enduml
 ```
