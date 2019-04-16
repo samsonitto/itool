@@ -330,7 +330,7 @@ Suunnittelu, XAML toteutus, code in behind, testit, Mysql database (Tietokannat 
 * Viikko 12: DB, MainPage XAML ja code in behind, DB, Mysql (10h)
 * Viikko 13: ProfileWindow, DB (5h)
 * Viikko 14: Kaikkien ikkunoiden toimintojen parantamista, DB, Harjoitustyön suunnitelmä xD (17h)
-* Viikko 15: Kaikkien ikkunoiden toimintojen parantamista, DB, CommentWindow XAML, Mysql näkymät (3h)
-* Viikko 16: Testaaminen, debuggaaminen
+* Viikko 15: Kaikkien ikkunoiden toimintojen parantamista, DB, CommentWindow XAML, Mysql näkymät (20h)
+* Viikko 16: Rating Window, Testaaminen, debuggaaminen (10h)
 
 Pakko myöntää etää aloin koodaamaan jo viikolla 11 ja tein tämän suunnitelman vasta viikolla 14.
