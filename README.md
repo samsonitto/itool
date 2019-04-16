@@ -64,6 +64,9 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 | FT04 | [ Mahdollisuus arvioida käyttäjiä ](../liitteet/f4_rating.md) | Nice to Have | |
 | FT05 | [ Työkalujen kommentoiminen ](../liitteet/f5_comment.md) | Nice to Have | |
 | FT06 | [ Työkalujen vuokraaminen ](../liitteet/f6_rentatool.md) | Pakollinen | |
+| FT07 | [ Työkalujen palautus ](../liitteet/f7_returntool.md) | Pakollinen | |
+| FT08 | [ Työkalujen poistaminen ](../liitteet/f8_deletetool.md) | Pakollinen | |
+
 
 # Käyttötapaukset
 
