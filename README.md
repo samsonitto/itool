@@ -15,12 +15,12 @@
 * [Käyttöympäristö ja käytetyt teknologiat](#käyttöympäristö-ja-käytetyt-teknologiat)
 * [Käyttäjäroolit](#käyttäjäroolit)
 * [Ominaisuudet](#ominaisuudet)
-* [Käyttötapaukset](#toiminnallisia-vaatimuksia)
+* [Käyttötapaukset](#käyttötapaukset)
 * [Hyväksyntätestit](#hyväksyntätestit)
-* [Käsitemalli](#tärkeimmät-käyttötapaukset-general-use-cases)
-* [Luokkakaavio](#palvelu-mockup-prototyyppi)
-* [Työnjako](#tärkeimmät-tunnistetut-ominaisuudetpiirteet-features)
-* [Työaikasuunnitelma](#käyttäjätarinat)
+* [Käsitemalli](#käsitemalli)
+* [Luokkakaavio](#luokkamalli)
+* [Työnjako](#työnjako)
+* [Työaikasuunnitelma](#työaika-suunnitelma)
 
 # Sovelluksen yleiskuvaus
 
