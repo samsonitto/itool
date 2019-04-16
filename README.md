@@ -15,12 +15,12 @@
 * [Käyttöympäristö ja käytetyt teknologiat](#käyttöympäristö-ja-käytetyt-teknologiat)
 * [Käyttäjäroolit](#käyttäjäroolit)
 * [Ominaisuudet](#ominaisuudet)
-* [Käyttötapaukset](#toiminnallisia-vaatimuksia)
+* [Käyttötapaukset](#käyttötapaukset)
 * [Hyväksyntätestit](#hyväksyntätestit)
-* [Käsitemalli](#tärkeimmät-käyttötapaukset-general-use-cases)
-* [Luokkakaavio](#palvelu-mockup-prototyyppi)
-* [Työnjako](#tärkeimmät-tunnistetut-ominaisuudetpiirteet-features)
-* [Työaikasuunnitelma](#käyttäjätarinat)
+* [Käsitemalli](#käsitemalli)
+* [Luokkakaavio](#luokkamalli)
+* [Työnjako](#työnjako)
+* [Työaikasuunnitelma](#työaika-suunnitelma)
 
 # Sovelluksen yleiskuvaus
 
@@ -64,6 +64,9 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 | FT04 | [ Mahdollisuus arvioida käyttäjiä ](../liitteet/f4_rating.md) | Nice to Have | |
 | FT05 | [ Työkalujen kommentoiminen ](../liitteet/f5_comment.md) | Nice to Have | |
 | FT06 | [ Työkalujen vuokraaminen ](../liitteet/f6_rentatool.md) | Pakollinen | |
+| FT07 | [ Työkalujen palautus ](../liitteet/f7_returntool.md) | Pakollinen | |
+| FT08 | [ Työkalujen poistaminen ](../liitteet/f8_deletetool.md) | Pakollinen | |
+
 
 # Käyttötapaukset
 
@@ -94,7 +97,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 * Tunnusten luominen: Kerran per sähköposti
 * Kirjautuminen: rajaton
 
-## Työkalujen selailu, vuokraus ja palautus
+## Työkalujen selailu, vuokraus, palautus ja poistaminen
 
 ```plantuml
 @startuml
@@ -103,6 +106,8 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
     Käyttäjä --> Omistaja : Soittaa ja sopii tapaaminen
     Käyttäjä --> (Työkalun vuokraus) : Vuokraa
     Käyttäjä --> (Työkalun palautus) : Palauttaa
+    Käyttäjä --> (Työkalun poistaminen) : Poistaa
+    (Työkalun poistaminen) --> (iTool tietokanta) : Ylikirjoittaa
 @enduml
 ```
 
@@ -112,16 +117,19 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 2. Käyttäjä ottaa yhteyttä työkalun omistajaan ja sopii tapaaminen
 3. Käyttäjä vuokraa työkalun
 4. Käyttäjä palauttaa työkalun
+5. Käyttäjä poistaa työkalun
+6. Sovellus ylikirjoittaa poistetun työkalun
 
 	
 **Lopputulos**	
 
-* Asiakas on vuokrannut ja palautanut työkalub onnistuneesti
+* Asiakas on vuokrannut, palautanut tai poistanut työkalun onnistuneesti
 
 **Käyttötiheys** 
 
 * Vuokraus: rajaton
 * Palautus: kerran per transaction
+* Poistaminen: kerran per työkalu
 
 ## Työkalujen kommentointi
 
@@ -163,16 +171,25 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 
 # Käsitemalli
 
+### Käsitteet
+
+1. User: iTool sovelluksen käyttäj
+2. Tool: Työkalu
+3. Tool Category: Työkalun kategoria
+4. Transaction: Työkalun omistajan ja työkalun vuokraajan välinen kauppa
+5. Comment: Työkalujen kommentit
+6. Rating: Käyttäjän antama arvio(1-5) kaupan toiselle osapuolelle
+
 ```plantuml
 @startuml
-    CommentWindow --|> MainPage
-    RegisterWindow --|> MainWindow
-    MainWindow --> MainPage
-    MainPage --> ProfileWindow
-    User --> MainPage
-    User --> ProfileWindow
-    Tool --|> User
-    User --> DB
+    User --|> Tool
+    Transaction --|> User
+    Transaction --|> Tool
+    Tool --|> ToolCategory
+    Comment --|> Tool
+    Comment --|> User
+    User --> Rating
+    Rating --|> Transaction
 @enduml
 ```
 # Luokkamalli
@@ -206,6 +223,40 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
         +toolCategory
         +toolDescription
         +toolImage
+    }
+    
+    class Comment {
+        +commentID
+        +commentDateTime
+        +commentBody
+        +toolID
+        +userID
+        +commentParentID
+    }
+    
+    class Transaction {
+        +transactionID
+        +transactionStartDate
+        +transactionPlannedEndDate
+        +transactionActualEndDate
+        +userOwnerID
+        +userLesseeID
+        +toolID
+    }
+    
+    class ToolCategory {
+        +toolCategoryID
+        +toolCategoryName
+        +toolCategoryDescription
+    }
+    
+    class Rating {
+        +ratingID
+        +rating
+        +ratingFeedback
+        +raterID
+        +ratedID
+        +transactionID
     }
     
     class MainWindow {
@@ -256,6 +307,14 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
     User --> ProfileWindow
     Tool --|> User
     User --> DB
+    Tool --|> ToolCategory
+    Transaction --|> Tool
+    User --> Transaction
+    User --> Comment
+    Comment --|> Tool
+    User --> Rating
+    Rating --|> User
+    Rating --|> Transaction
     
 @enduml
 ```
@@ -271,7 +330,7 @@ Suunnittelu, XAML toteutus, code in behind, testit, Mysql database (Tietokannat 
 * Viikko 12: DB, MainPage XAML ja code in behind, DB, Mysql (10h)
 * Viikko 13: ProfileWindow, DB (5h)
 * Viikko 14: Kaikkien ikkunoiden toimintojen parantamista, DB, Harjoitustyön suunnitelmä xD (17h)
-* Viikko 15: Kaikkien ikkunoiden toimintojen parantamista, DB, CommentWindow XAML, Mysql näkymät (3h)
-* Viikko 16: Testaaminen, debuggaaminen
+* Viikko 15: Kaikkien ikkunoiden toimintojen parantamista, DB, CommentWindow XAML, Mysql näkymät (20h)
+* Viikko 16: Rating Window, Testaaminen, debuggaaminen (10h)
 
 Pakko myöntää etää aloin koodaamaan jo viikolla 11 ja tein tämän suunnitelman vasta viikolla 14.
