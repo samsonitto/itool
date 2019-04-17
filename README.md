@@ -372,9 +372,13 @@ yksi yhteen liitos, joten tr_completion on jätetty kokonaan pois ja transaction
 <img src="liitteet/iTool_v3_no_captions.JPG" alt="iTool v2" width="900">
 
 Tässä on lopullinen versio iTool tietokannasta, tr_completion taulu on jätetty pois ja tietokantaan on lisätty rating talulu arvioita varten. Rating talulle on tehty [trigger](liitteet/trigger.md),
-joka pitää huolta siitä, että käyttäjä joka jättää arvion voi vain ainoastaan arvioida kyseisen transaktion toista osapuolta yhden kerran.<br>
+joka pitää huolta siitä, että käyttäjä joka jättää arvion voi vain ainoastaan arvioida kyseisen transaktion toista osapuolta yhden kerran. Comment taulussa on itseensä liitos,
+koska vastaukset kommenteihin vaatii parentID.<br>
 
 [Täältä löytyy tietokannan luontiskripti](liitteet/database_script.md)
+
+[Queryhistoriasta](liitteet/queryhistory.md) löytyy näkymien luonti, testidatan lisäys ja erilaisia hakuja. Piti luoda 2 isoa näkymää (all_tools ja rented_tools) käyttöliittymän
+toiminnallisuutta varten.
 
 ## Ongelmat, jatkokehitysideat
 
