@@ -30,7 +30,9 @@
     * [Ongelmat, jatkokehitysideat](#)
     * [Yhteenveto](#yhteenveto)
 
-# Sovelluksen yleiskuvaus
+# Vaatimusmäärittely
+
+## Sovelluksen yleiskuvaus
 
 Tarkoituksena on suunnitella ja toteuttaa työkaluvuokraussovelluksen prototyyppi,
 joka aluksi toimisi vain paikallisesti. Vuokrausmenetelmä toimisi samalla periaatteella kun
@@ -38,12 +40,12 @@ joka aluksi toimisi vain paikallisesti. Vuokrausmenetelmä toimisi samalla peria
 asettamat työkalut, työkalun omistajan hintapyynnön mukaan. Käyttäjät pystyy kommentoimaan työkaluja
 ja antaa 1-5 arvion käyttäjistä, joiden kanssa on suorittanut transaction.
 
-# Kohdeyleisö
+## Kohdeyleisö
 
 Kohdeyleisö on kaikki henkilöt, joilla ei ole monipuolista työkalukokoelmaa. Eli todennäköisesti
 kaupungeissa asuvat ihmiset.
 
-# Käyttöympäristö ja käytetyt teknologiat
+## Käyttöympäristö ja käytetyt teknologiat
 
 * Microsoft Windows (Käyttöympäristö)
 * Visual Studio 2017
@@ -51,18 +53,18 @@ kaupungeissa asuvat ihmiset.
 * C#
 * MySql
 
-# Käyttäjäroolit
+## Käyttäjäroolit
 
-## Asiakas
+### Asiakas
 
 Asiakas käyttää sovellusta vuoratakseen tai laittakseen vuokralle työkaluja.
 
-## Ylläpitäjä
+### Ylläpitäjä
 
 Ylläpitäjä ylläpitää palvelua ja pitää huolta siitä, että työkaluja myöhässä palauttaneiden käyttäjätilit
 laitetaan joko jäähylle tai jäädytetään kokonaan.
 
-# Ominaisuudet
+## Ominaisuudet
 
 | Tunnus | Ominaisuus | Prioriteetti | Muuta |
 | :-: | :-: | :-: | :-: |
@@ -76,9 +78,9 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 | FT08 | [ Työkalujen poistaminen ](../liitteet/f8_deletetool.md) | Pakollinen | |
 
 
-# Käyttötapaukset
+## Käyttötapaukset
 
-## Tunnusten luominen ja kirjautuminen
+### Tunnusten luominen ja kirjautuminen
 
 ```plantuml
 @startuml
@@ -105,7 +107,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 * Tunnusten luominen: Kerran per sähköposti
 * Kirjautuminen: rajaton
 
-## Työkalujen selailu, vuokraus, palautus ja poistaminen
+### Työkalujen selailu, vuokraus, palautus ja poistaminen
 
 ```plantuml
 @startuml
@@ -139,7 +141,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 * Palautus: kerran per transaction
 * Poistaminen: kerran per työkalu
 
-## Työkalujen kommentointi
+### Työkalujen kommentointi
 
 ```plantuml
 @startuml
@@ -166,7 +168,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 * Kommenttointi: rajaton
 * Vastaaminen kommentteihin: rajaton
 
-# Hyväksyntätestit
+## Hyväksyntätestit
 
 | TestiID | Kuvaus |								
 |:-:|:-:|
@@ -177,7 +179,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 | AT05 | [Kommentointi](../liitteet/at6_comments.md) |
 | AT06 | [Työkalun palautus](../liitteet/at7_returnatool.md) |
 
-# Käsitemalli
+## Käsitemalli
 
 ### Käsitteet
 
@@ -200,7 +202,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
     Rating --|> Transaction
 @enduml
 ```
-# Luokkamalli
+## Luokkamalli
 
 ```plantuml
 @startuml
@@ -327,12 +329,12 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 @enduml
 ```
 
-# Työnjako
+## Työnjako
 
 Samson Azizyan
 Suunnittelu, XAML toteutus, code in behind, testit, Mysql database (Tietokannat kurssi)
 
-# Työaika suunnitelma
+## Työaika suunnitelma
 
 * Viikko 11: MainWindow ja RegisterWindow sekä XAML että code in behind. User, Tool luokat, Mysql tietokanta (15h)
 * Viikko 12: DB, MainPage XAML ja code in behind, DB, Mysql (10h)
@@ -342,3 +344,25 @@ Suunnittelu, XAML toteutus, code in behind, testit, Mysql database (Tietokannat 
 * Viikko 16: Rating Window, Testaaminen, debuggaaminen (10h)
 
 Pakko myöntää etää aloin koodaamaan jo viikolla 11 ja tein tämän suunnitelman vasta viikolla 14.
+
+# Loppuraportti
+
+## Asennus
+
+## Tietoa ohjelmasta
+
+## Kuvaruutukaappaukset
+
+## Mukana tulevat tiedostot
+
+## Tietokanta
+
+Tietokannan suunnittelin tietokannat opintojakson harjoitustyönä. Tietokannasta on luotu 2 versitota prosessin aikana.
+
+### iTool tietokanta versio 1
+
+### iTool lopullinen versio 2
+
+## Ongelmat, jatkokehitysideat
+
+## Yhteenveto
