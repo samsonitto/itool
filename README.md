@@ -363,9 +363,15 @@ Tietokannan suunnittelin tietokannat opintojakson harjoitustyönä. Tietokannast
 
 <img src="liitteet/iTool.JPG" alt="iTool v1" width="900">
 
+Tässä versiossa tietokannassa oli tr_completion taulu, se taulu oli työkalun palautusta varten. Käyttäjä palauuttaa työkalun, samalla palautustapahtuma tallentuisi
+tr_completion tauluun, johon kirjautuu palautus PVM, palautus kunto ja arvio kaupan toisesta osapuolesta. Transaction ja tr_completion taulujen välissä oli
+yksi yhteen liitos, joten tr_completion on jätetty kokonaan pois ja transaction tauluun on lisätty palautusPVM (actualEndDate) kenttä, joka transaction käynnistyessä olisi null. 
+
 ### iTool tietokanta lopullinen versio 2
 
 <img src="liitteet/iTool_v3_no_captions.JPG" alt="iTool v2" width="900">
+
+Tässä on lopullinen versio iTool tietokannasta, tr_completion taulu on jätetty pois ja tietokantaan on lisätty 
 
 ## Ongelmat, jatkokehitysideat
 
