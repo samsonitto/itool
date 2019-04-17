@@ -9,18 +9,26 @@
 
 ## Sisällysluettelo 
 
-
-* [Sovelluksen yleiskuvaus](#sovelluksen-yleiskuvaus)
-* [Kohdeyleisö](#kohdeyleisö)
-* [Käyttöympäristö ja käytetyt teknologiat](#käyttöympäristö-ja-käytetyt-teknologiat)
-* [Käyttäjäroolit](#käyttäjäroolit)
-* [Ominaisuudet](#ominaisuudet)
-* [Käyttötapaukset](#käyttötapaukset)
-* [Hyväksyntätestit](#hyväksyntätestit)
-* [Käsitemalli](#käsitemalli)
-* [Luokkakaavio](#luokkamalli)
-* [Työnjako](#työnjako)
-* [Työaikasuunnitelma](#työaika-suunnitelma)
+* [Vaatimusmäärittely](#vaatimusmäärittely)
+    * [Sovelluksen yleiskuvaus](#sovelluksen-yleiskuvaus)
+    * [Kohdeyleisö](#kohdeyleisö)
+    * [Käyttöympäristö ja käytetyt teknologiat](#käyttöympäristö-ja-käytetyt-teknologiat)
+    * [Käyttäjäroolit](#käyttäjäroolit)
+    * [Ominaisuudet](#ominaisuudet)
+    * [Käyttötapaukset](#käyttötapaukset)
+    * [Hyväksyntätestit](#hyväksyntätestit)
+    * [Käsitemalli](#käsitemalli)
+    * [Luokkakaavio](#luokkamalli)
+    * [Työnjako](#työnjako)
+    * [Työaikasuunnitelma](#työaika-suunnitelma)
+* [Loppuraportti](#loppuraportti)
+    * [Asennus](#asennus)
+    * [Tetoa ohjelmasta](#tietoa-ohjelmasta)
+    * [Kuvaruutukaappaukset](#kuvaruutukaappaukset)
+    * [Mukana tulevat tiedostot](#)
+    * [Tietokanta](#tietokanta)
+    * [Ongelmat, jatkokehitysideat](#)
+    * [Yhteenveto](#yhteenveto)
 
 # Sovelluksen yleiskuvaus
 
