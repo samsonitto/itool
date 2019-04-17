@@ -9,20 +9,30 @@
 
 ## Sisällysluettelo 
 
+* [Vaatimusmäärittely](#vaatimusmäärittely)
+    * [Sovelluksen yleiskuvaus](#sovelluksen-yleiskuvaus)
+    * [Kohdeyleisö](#kohdeyleisö)
+    * [Käyttöympäristö ja käytetyt teknologiat](#käyttöympäristö-ja-käytetyt-teknologiat)
+    * [Käyttäjäroolit](#käyttäjäroolit)
+    * [Ominaisuudet](#ominaisuudet)
+    * [Käyttötapaukset](#käyttötapaukset)
+    * [Hyväksyntätestit](#hyväksyntätestit)
+    * [Käsitemalli](#käsitemalli)
+    * [Luokkakaavio](#luokkamalli)
+    * [Työnjako](#työnjako)
+    * [Työaikasuunnitelma](#työaika-suunnitelma)
+* [Loppuraportti](#loppuraportti)
+    * [Asennus](#asennus)
+    * [Tetoa ohjelmasta](#tietoa-ohjelmasta)
+    * [Kuvaruutukaappaukset](#kuvaruutukaappaukset)
+    * [Mukana tulevat tiedostot](#)
+    * [Tietokanta](#tietokanta)
+    * [Ongelmat, jatkokehitysideat](#)
+    * [Yhteenveto](#yhteenveto)
 
-* [Sovelluksen yleiskuvaus](#sovelluksen-yleiskuvaus)
-* [Kohdeyleisö](#kohdeyleisö)
-* [Käyttöympäristö ja käytetyt teknologiat](#käyttöympäristö-ja-käytetyt-teknologiat)
-* [Käyttäjäroolit](#käyttäjäroolit)
-* [Ominaisuudet](#ominaisuudet)
-* [Käyttötapaukset](#käyttötapaukset)
-* [Hyväksyntätestit](#hyväksyntätestit)
-* [Käsitemalli](#käsitemalli)
-* [Luokkakaavio](#luokkamalli)
-* [Työnjako](#työnjako)
-* [Työaikasuunnitelma](#työaika-suunnitelma)
+# Vaatimusmäärittely
 
-# Sovelluksen yleiskuvaus
+## Sovelluksen yleiskuvaus
 
 Tarkoituksena on suunnitella ja toteuttaa työkaluvuokraussovelluksen prototyyppi,
 joka aluksi toimisi vain paikallisesti. Vuokrausmenetelmä toimisi samalla periaatteella kun
@@ -30,12 +40,12 @@ joka aluksi toimisi vain paikallisesti. Vuokrausmenetelmä toimisi samalla peria
 asettamat työkalut, työkalun omistajan hintapyynnön mukaan. Käyttäjät pystyy kommentoimaan työkaluja
 ja antaa 1-5 arvion käyttäjistä, joiden kanssa on suorittanut transaction.
 
-# Kohdeyleisö
+## Kohdeyleisö
 
 Kohdeyleisö on kaikki henkilöt, joilla ei ole monipuolista työkalukokoelmaa. Eli todennäköisesti
 kaupungeissa asuvat ihmiset.
 
-# Käyttöympäristö ja käytetyt teknologiat
+## Käyttöympäristö ja käytetyt teknologiat
 
 * Microsoft Windows (Käyttöympäristö)
 * Visual Studio 2017
@@ -43,18 +53,18 @@ kaupungeissa asuvat ihmiset.
 * C#
 * MySql
 
-# Käyttäjäroolit
+## Käyttäjäroolit
 
-## Asiakas
+### Asiakas
 
 Asiakas käyttää sovellusta vuoratakseen tai laittakseen vuokralle työkaluja.
 
-## Ylläpitäjä
+### Ylläpitäjä
 
 Ylläpitäjä ylläpitää palvelua ja pitää huolta siitä, että työkaluja myöhässä palauttaneiden käyttäjätilit
 laitetaan joko jäähylle tai jäädytetään kokonaan.
 
-# Ominaisuudet
+## Ominaisuudet
 
 | Tunnus | Ominaisuus | Prioriteetti | Muuta |
 | :-: | :-: | :-: | :-: |
@@ -68,9 +78,9 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 | FT08 | [ Työkalujen poistaminen ](../liitteet/f8_deletetool.md) | Pakollinen | |
 
 
-# Käyttötapaukset
+## Käyttötapaukset
 
-## Tunnusten luominen ja kirjautuminen
+### Tunnusten luominen ja kirjautuminen
 
 ```plantuml
 @startuml
@@ -97,7 +107,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 * Tunnusten luominen: Kerran per sähköposti
 * Kirjautuminen: rajaton
 
-## Työkalujen selailu, vuokraus, palautus ja poistaminen
+### Työkalujen selailu, vuokraus, palautus ja poistaminen
 
 ```plantuml
 @startuml
@@ -131,7 +141,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 * Palautus: kerran per transaction
 * Poistaminen: kerran per työkalu
 
-## Työkalujen kommentointi
+### Työkalujen kommentointi
 
 ```plantuml
 @startuml
@@ -158,7 +168,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 * Kommenttointi: rajaton
 * Vastaaminen kommentteihin: rajaton
 
-# Hyväksyntätestit
+## Hyväksyntätestit
 
 | TestiID | Kuvaus |								
 |:-:|:-:|
@@ -169,7 +179,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 | AT05 | [Kommentointi](../liitteet/at6_comments.md) |
 | AT06 | [Työkalun palautus](../liitteet/at7_returnatool.md) |
 
-# Käsitemalli
+## Käsitemalli
 
 ### Käsitteet
 
@@ -192,7 +202,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
     Rating --|> Transaction
 @enduml
 ```
-# Luokkamalli
+## Luokkamalli
 
 ```plantuml
 @startuml
@@ -319,12 +329,12 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 @enduml
 ```
 
-# Työnjako
+## Työnjako
 
 Samson Azizyan
 Suunnittelu, XAML toteutus, code in behind, testit, Mysql database (Tietokannat kurssi)
 
-# Työaika suunnitelma
+## Työaika suunnitelma
 
 * Viikko 11: MainWindow ja RegisterWindow sekä XAML että code in behind. User, Tool luokat, Mysql tietokanta (15h)
 * Viikko 12: DB, MainPage XAML ja code in behind, DB, Mysql (10h)
@@ -334,3 +344,42 @@ Suunnittelu, XAML toteutus, code in behind, testit, Mysql database (Tietokannat 
 * Viikko 16: Rating Window, Testaaminen, debuggaaminen (10h)
 
 Pakko myöntää etää aloin koodaamaan jo viikolla 11 ja tein tämän suunnitelman vasta viikolla 14.
+
+# Loppuraportti
+
+## Asennus
+
+## Tietoa ohjelmasta
+
+## Kuvaruutukaappaukset
+
+## Mukana tulevat tiedostot
+
+## Tietokanta
+
+Tietokannan suunnittelin tietokannat opintojakson harjoitustyönä. Tietokannasta on luotu 2 versitota prosessin aikana.
+
+### iTool tietokanta versio 1
+
+<img src="liitteet/iTool.JPG" alt="iTool v1" width="900">
+
+Tässä versiossa tietokannassa oli tr_completion taulu, se taulu oli työkalun palautusta varten. Käyttäjä palauuttaa työkalun, samalla palautustapahtuma tallentuisi
+tr_completion tauluun, johon kirjautuu palautus PVM, palautus kunto ja arvio kaupan toisesta osapuolesta. Transaction ja tr_completion taulujen välissä oli
+yksi yhteen liitos, joten tr_completion on jätetty kokonaan pois ja transaction tauluun on lisätty palautusPVM (actualEndDate) kenttä, joka transaction käynnistyessä olisi null. 
+
+### iTool tietokanta lopullinen versio 2
+
+<img src="liitteet/iTool_v3_no_captions.JPG" alt="iTool v2" width="900">
+
+Tässä on lopullinen versio iTool tietokannasta, tr_completion taulu on jätetty pois ja tietokantaan on lisätty rating taulu arvioita varten. Rating taululle on tehty [trigger](liitteet/trigger.md),
+joka pitää huolta siitä, että käyttäjä joka jättää arvion voi vain ainoastaan arvioida kyseisen transaktion toista osapuolta yhden kerran. Comment taulussa on itseensä liitos,
+koska vastaukset kommenteihin vaatii parentID.<br>
+
+[Täältä löytyy tietokannan luontiskripti](liitteet/database_script.md)
+
+[Queryhistoriasta](liitteet/queryhistory.md) löytyy näkymien luonti, testidatan lisäys ja erilaisia hakuja. Piti luoda 2 isoa näkymää (all_tools ja rented_tools) käyttöliittymän
+toiminnallisuutta varten.
+
+## Ongelmat, jatkokehitysideat
+
+## Yhteenveto
