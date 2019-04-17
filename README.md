@@ -361,11 +361,11 @@ Tietokannan suunnittelin tietokannat opintojakson harjoitustyönä. Tietokannast
 
 ### iTool tietokanta versio 1
 
-<img src="liitteet/iTool.JPG" alt="iTool v1" width="600">
+<img src="liitteet/iTool.JPG" alt="iTool v1" width="900">
 
 ### iTool tietokanta lopullinen versio 2
 
-<img src="liitteet/iTool_v3_no_captions.JPG" alt="iTool v2" width="600">
+<img src="liitteet/iTool_v3_no_captions.JPG" alt="iTool v2" width="900">
 
 ## Ongelmat, jatkokehitysideat
 
