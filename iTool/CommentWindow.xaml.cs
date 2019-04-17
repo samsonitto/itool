@@ -21,6 +21,7 @@ namespace iTool
     {
         private List<Comment> comments;
         private List<User> users;
+        private int? selectedComment = null;
         public CommentWindow()
         {
             InitializeComponent();
@@ -45,9 +46,17 @@ namespace iTool
 
         private void lbxComments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Object selected = lbxComments.SelectedItem;
-            
-            
+            StackPanel selected = (StackPanel)lbxComments.SelectedItem;
+
+            if (selected != null)
+            {
+                Label l = (Label)selected.Children[0];
+                string content = l.Content.ToString();
+                selectedComment = int.Parse(content.Split('#')[content.Split('#').Length - 1]); 
+            }
+
+            lblCommentMessages.Content = $"Comment #{selectedComment} is selected, reply to it by typing a comment and pressing 'Enter'";
+
         }
 
         private void btnComment_Click(object sender, RoutedEventArgs e)
@@ -57,27 +66,18 @@ namespace iTool
 
         private void AddComment()
         {
-            Label user = new Label();
-            user.Content = $"{Active.FirstName} {Active.LastName}, User ID: #{Active.UserID}";
-            user.FontSize = 16;
-            user.FontWeight = FontWeights.Bold;
+            string body = txtComment.Text;
+            string query;
 
-            TextBlock txbComment1 = new TextBlock();
-            txbComment1.Text = txtComment.Text;
-            txbComment1.VerticalAlignment = VerticalAlignment.Top;
-            txbComment1.HorizontalAlignment = HorizontalAlignment.Left;
-            txbComment1.FontSize = 16;
-            txbComment1.TextWrapping = TextWrapping.Wrap;
+            if(selectedComment == null)
+                query = $"INSERT INTO comment (commentDate, commentText, userID, commentParentID, toolID) VALUES (CURRENT_TIMESTAMP,'{body}',{Active.UserID},null,{Active.ToolID});";
+            else
+                query = $"INSERT INTO comment (commentDate, commentText, userID, commentParentID, toolID) VALUES (CURRENT_TIMESTAMP,'{body}',{Active.UserID},{selectedComment},{Active.ToolID});";
 
-            StackPanel spComment = new StackPanel();
-            spComment.Margin = new Thickness(0, 10, 10, 10);
-            spComment.Orientation = Orientation.Vertical;
-            spComment.HorizontalAlignment = HorizontalAlignment.Left;
-            spComment.Children.Add(user);
-            spComment.Children.Add(txbComment1);
-
-
-            lbxComments.Items.Add(spComment);
+            DB.AddCommentToMysql(query);
+            lbxComments.Items.Clear();
+            comments = DB.GetCommentsFromMysql(Active.ToolID);
+            IniComments();
         }
 
         private User GetUser(int userID)
@@ -101,7 +101,6 @@ namespace iTool
 
         private void IniComments()
         {
-            int margin = 0;
             foreach (Comment item in comments)
             {
                 if (item.CommentParentID == null)
@@ -161,7 +160,7 @@ namespace iTool
                         reply1.TextWrapping = TextWrapping.Wrap;
 
                         StackPanel spReply = new StackPanel();
-                        spReply.Margin = new Thickness(margin += 20, 10, 0, 0);
+                        spReply.Margin = new Thickness(20, 10, 0, 0);
                         spReply.Orientation = Orientation.Vertical;
                         spReply.HorizontalAlignment = HorizontalAlignment.Left;
                         spReply.Children.Add(lbComment);

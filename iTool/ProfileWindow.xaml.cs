@@ -33,8 +33,9 @@ namespace iTool
         private void IniMyStuff()
         {
             imgUserProfile.Source = Active.ImageSource;
-            txbFirstName.Text = Active.FirstName;
-            txbLastName.Text = Active.LastName;
+            lblUserProfile.Content = $"{Active.FirstName} {Active.LastName}";
+            //txbFirstName.Text = Active.FirstName;
+            //txbLastName.Text = Active.LastName;
             txbUserID.Text = $"User ID: {Active.UserID.ToString()}";
             txbAvgRating.Text = $"Average rating: {DB.GetAvgRatingFromMysql(Active.UserID).ToString()}";
 

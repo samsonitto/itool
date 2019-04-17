@@ -40,59 +40,61 @@
                 
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" x:Name="spToolDescription" HorizontalAlignment="Left" Height="415" Margin="0" VerticalAlignment="Top" Width="1200" Background="#e6f2ff">
-                <StackPanel Width="400">
-                    <Label  Margin="30 30 0 0"  Content="Tool" FontSize="26" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <Border x:Name="bdrToolImage" HorizontalAlignment="Left" Margin="30 0 60 0" BorderThickness="1" BorderBrush="Black" >
-                        <Image x:Name="imgTool" HorizontalAlignment="Left" Margin="0" Width="{Binding ElementName=bdrToolImage, Path=ActualWidth}" Source="images/no_picture_tool.png"/>
-                    </Border>
-                    
-                </StackPanel>
-                <StackPanel Width="400">
-                    <StackPanel Orientation="Horizontal" Margin="0 40 0 0">
-                        <Label Margin="30 20 0 0"  Content="Name: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Width="130"/>
-                        <TextBlock x:Name="txbToolName" Padding="5 0 0 0" FontSize="16" Margin="5 20 0 0" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Margin="30 20 0 0"  Content="Conditioin: "  FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Width="130"/>
-                        <TextBlock x:Name="txbToolCondition" Padding="5 0 0 0" FontSize="16" Margin="5 20 0 0" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    
-                    <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
-                        <Label Margin="30 20 0 0" Content="Price €/day: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Width="130"/>
-                        <TextBlock x:Name="txbPrice" Padding="5 0 0 0" FontSize="16" Margin="5 20 0 0" VerticalAlignment="Center"/>
-                        <Label Margin="5 20 0 0" Content="€" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    </StackPanel>
+            <Grid Height="415">
+                <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Hidden">
+                    <StackPanel Orientation="Horizontal" x:Name="spToolDescription" HorizontalAlignment="Left" Height="415" Margin="0" VerticalAlignment="Top" Width="1200" Background="#e6f2ff">
+                        <StackPanel Width="400">
+                            <Label  Margin="30 30 0 0"  Content="Tool" FontSize="26" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Border x:Name="bdrToolImage" HorizontalAlignment="Left" Margin="30 0 90 0" BorderThickness="1" BorderBrush="Black" >
+                                <Image x:Name="imgTool" HorizontalAlignment="Left" Margin="0" Width="{Binding ElementName=bdrToolImage, Path=ActualWidth}" Source="images/no_picture_tool.png"/>
+                            </Border>
 
-                    <Label Margin="30 20 0 0" Content="Description: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Width="130"/>
-                    <TextBlock x:Name="txbDescription" Padding="5 0 0 0" FontSize="16" Margin="30 0" TextWrapping="Wrap"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Margin="30 20 0 0" Content="Owner: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Width="130"/>
-                        <TextBlock x:Name="txbOwner" Padding="5 0 0 0" FontSize="16" Margin="5 20 0 0" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Margin="30 20 0 0" Content="Phone number: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Width="130"/>
-                        <TextBlock x:Name="txbNumber" Padding="5 0 0 0" FontSize="16" Margin="5 20 0 0" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    
-                </StackPanel>
-                <StackPanel Width="400">
-                    <StackPanel Orientation="Horizontal" Margin="0 40 0 0">
-                        <Label Margin="30 20 0 0" Content="Rent for:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                        <TextBox x:Name="txtDays" Height="30" Width="60" Margin="10 20 0 0" TextChanged="TxtDays_TextChanged" VerticalContentAlignment="Center"/>
-                        <Label Margin="5 20 0 0" Content="days" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Margin="30 20 0 0" Content="Total price:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                        <TextBlock x:Name="txbTotalPrice" Margin="10 20 0 0" FontSize="16" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <Button Height="30" Margin="30 20 20 0" Width="100" HorizontalAlignment="Left" Content="Rent" FontSize="16" Click="Button_Click"/>
-                    <Button x:Name="btnComment" Height="30" Margin="30 20 20 0" Width="100" HorizontalAlignment="Left" Content="Comment" FontSize="16" Click="BtnComment_Click"/>
-                </StackPanel>
-                
-                
+                        </StackPanel>
+                        <StackPanel Width="400">
+                            <StackPanel Orientation="Horizontal" Margin="0 40 0 0">
+                                <Label Margin="30 20 0 0"  Content="Name: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Width="130"/>
+                                <TextBlock x:Name="txbToolName" Padding="5 0 0 0" FontSize="16" Margin="5 20 0 0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Margin="30 20 0 0"  Content="Conditioin: "  FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Width="130"/>
+                                <TextBlock x:Name="txbToolCondition" Padding="5 0 0 0" FontSize="16" Margin="5 20 0 0" VerticalAlignment="Center"/>
+                            </StackPanel>
 
-            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
+                                <Label Margin="30 20 0 0" Content="Price €/day: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Width="130"/>
+                                <TextBlock x:Name="txbPrice" Padding="5 0 0 0" FontSize="16" Margin="5 20 0 0" VerticalAlignment="Center"/>
+                                <Label Margin="5 20 0 0" Content="€" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <Label Margin="30 20 0 0" Content="Description: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Width="130"/>
+                            <TextBlock x:Name="txbDescription" Padding="5 0 0 0" FontSize="16" Margin="30 0" TextWrapping="Wrap"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Margin="30 20 0 0" Content="Owner: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Width="130"/>
+                                <TextBlock x:Name="txbOwner" Padding="5 0 0 0" FontSize="16" Margin="5 20 0 0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Margin="30 20 0 0" Content="Phone number: " FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Width="130"/>
+                                <TextBlock x:Name="txbNumber" Padding="5 0 0 0" FontSize="16" Margin="5 20 0 0" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                        <StackPanel Width="400">
+                            <StackPanel Orientation="Horizontal" Margin="0 40 0 0">
+                                <Label Margin="30 20 0 0" Content="Rent for:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                                <TextBox x:Name="txtDays" Height="30" Width="60" Margin="10 20 0 0" TextChanged="TxtDays_TextChanged" VerticalContentAlignment="Center"/>
+                                <Label Margin="5 20 0 0" Content="days" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Margin="30 20 0 0" Content="Total price:" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                                <TextBlock x:Name="txbTotalPrice" Margin="10 20 0 0" FontSize="16" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button Height="30" Margin="30 20 20 0" Width="100" HorizontalAlignment="Left" Content="Rent" FontSize="16" Click="Button_Click"/>
+                            <Button x:Name="btnComment" Height="30" Margin="30 20 20 0" Width="100" HorizontalAlignment="Left" Content="Comment" FontSize="16" Click="BtnComment_Click"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
             <TextBox x:Name="txbMessages" Text="Here you can see all tools that are available for rent. Use filters or the search bar to find a tool for you." FontSize="16" Height="37" VerticalContentAlignment="Center" Padding="10 0 10 0"/>
         </StackPanel>
         

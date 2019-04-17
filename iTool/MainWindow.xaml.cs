@@ -70,7 +70,7 @@ namespace iTool
                     Active.LastName = dataSet.Tables[0].Rows[0]["userSurname"].ToString();
                     Active.ImageFileName = dataSet.Tables[0].Rows[0]["userPicture"].ToString();
 
-                    if (string.IsNullOrEmpty(Active.ImagePath))
+                    if (string.IsNullOrEmpty(Active.ImageFileName))
                     {
                         Active.ImageSource = new BitmapImage(new Uri($"{Active.ProjectPath}/images/no_picture.png", UriKind.RelativeOrAbsolute));
                     }

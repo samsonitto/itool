@@ -148,8 +148,11 @@ namespace iTool
                     cmd.ExecuteNonQuery();
                     con.Close();
 
-                    System.IO.File.Copy(Active.dirPath, Active.relativePath, true);
-                    File.SetAttributes(Active.relativePath, FileAttributes.Normal);
+                    if (!string.IsNullOrEmpty(txtPic.Text))
+                    {
+                        System.IO.File.Copy(Active.dirPath, Active.relativePath, true);
+                        File.SetAttributes(Active.relativePath, FileAttributes.Normal);
+                    }
 
                     Active.imgFile = null;
 

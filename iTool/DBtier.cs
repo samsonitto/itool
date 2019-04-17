@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
@@ -773,7 +774,10 @@ namespace iTool
                         float avgRating = 0F;
                         while (reader.Read())
                         {
-                            avgRating = float.Parse(reader.GetString(0));
+                            if(!reader.IsDBNull(0))
+                                avgRating = float.Parse(reader.GetString(0));
+                            else
+                                avgRating = 0;
                         }
                         return avgRating;
                     }
@@ -783,6 +787,29 @@ namespace iTool
             catch
             {
                 throw;
+            }
+        }
+        public static bool AddCommentToMysql(string query)
+        {
+            try
+            {
+                string connStr = GetConnectionString();
+                string sql = $"{query}";
+
+                using (MySqlConnection conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    return true;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
             }
         }
     }

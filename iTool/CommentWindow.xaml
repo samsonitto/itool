@@ -14,15 +14,9 @@
                 <ListBox x:Name="lbxComments" Height="470" Background="#e6f2ff" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="lbxComments_SelectionChanged">
                 </ListBox>
             </Border>
-            <StackPanel Orientation="Horizontal" Margin="30 30 30 10" Height="100">
-                <TextBox x:Name="txtComment" Height="100" Width="600" HorizontalAlignment="Left" KeyUp="TxtComment_KeyUp" TextWrapping="Wrap" Padding="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"/>
-                <StackPanel>
-                    <Button x:Name="btnComment" Content="New Comment" Width="110" Height="45" Margin="20 0 0 0" Click="btnComment_Click"/>
-                    <Button x:Name="btnReply" Content="Reply" Width="110" Height="45" Margin="20 10 0 0"/>
-                </StackPanel>
+                <TextBox x:Name="txtComment" Margin="30 30 30 10" Height="100" Width="730" HorizontalAlignment="Center" KeyUp="TxtComment_KeyUp" TextWrapping="Wrap" Padding="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"/>
                 
-            </StackPanel>
-            <TextBlock x:Name="CommentMessages" Margin="30 0"/>
+            <Label x:Name="lblCommentMessages" Margin="30 0" Height="30" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10 0"/>
         </StackPanel>
     </Grid>
 </Window>
