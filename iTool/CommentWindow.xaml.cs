@@ -20,6 +20,7 @@ namespace iTool
     public partial class CommentWindow : Window
     {
         private List<Comment> comments;
+        private List<User> users;
         public CommentWindow()
         {
             InitializeComponent();
@@ -28,82 +29,10 @@ namespace iTool
 
         private void IniMyStuuf()
         {
-
+            users = DB.GetAllUsersFromMysql();
             comments = DB.GetCommentsFromMysql(Active.ToolID);
 
-            int margin = 0;
-            foreach(Comment item in comments)
-            {
-
-                if (item.CommentParentID == 0)
-                {
-                    User u = DB.GetToolOwnerFromMysql(item.userID);
-
-                    Label lbComment = new Label();
-                    lbComment.Content = $"Comment #{item.CommentID}";
-                    lbComment.FontSize = 12;
-                    lbComment.FontWeight = FontWeights.Bold;
-
-                    Label l = new Label();
-                    l.Content = $"{u.FirstName} {u.LastName}, User ID: #{u.UserID}   {item.DateTime.ToString()}";
-                    l.FontSize = 12;
-                    l.FontWeight = FontWeights.Bold;
-
-                    TextBlock txbComment1 = new TextBlock();
-                    txbComment1.Text = item.Text;
-                    txbComment1.VerticalAlignment = VerticalAlignment.Top;
-                    txbComment1.HorizontalAlignment = HorizontalAlignment.Left;
-                    txbComment1.FontSize = 12;
-                    txbComment1.TextWrapping = TextWrapping.Wrap;
-
-                    StackPanel spComment = new StackPanel();
-                    spComment.Margin = new Thickness(0, 10, 10, 10);
-                    spComment.Orientation = Orientation.Vertical;
-                    spComment.HorizontalAlignment = HorizontalAlignment.Left;
-                    spComment.Children.Add(lbComment);
-                    spComment.Children.Add(l);
-                    spComment.Children.Add(txbComment1);
-
-                    lbxComments.Items.Add(spComment); 
-                }
-
-                foreach (Comment reply in comments)
-                {
-                    if (reply.CommentParentID == item.CommentID)
-                    {
-                        User us = DB.GetToolOwnerFromMysql(reply.userID);
-
-                        Label lbComment = new Label();
-                        lbComment.Content = $"Comment #{reply.CommentID}";
-                        lbComment.FontSize = 12;
-                        lbComment.FontWeight = FontWeights.Bold;
-                        Label lb = new Label();
-                        lb.Content = $"{us.FirstName} {us.LastName}, User ID: #{us.UserID}   {item.DateTime.ToString()}   In reply to comment #{item.CommentID}";
-                        lb.FontSize = 12;
-                        lb.FontWeight = FontWeights.Bold;
-
-                        TextBlock reply1 = new TextBlock();
-                        reply1.Text = reply.Text;
-                        reply1.VerticalAlignment = VerticalAlignment.Top;
-                        reply1.HorizontalAlignment = HorizontalAlignment.Left;
-                        reply1.FontSize = 12;
-                        reply1.TextWrapping = TextWrapping.Wrap;
-
-                        StackPanel spReply = new StackPanel();
-                        spReply.Margin = new Thickness(margin += 20, 10, 0, 0);
-                        spReply.Orientation = Orientation.Vertical;
-                        spReply.HorizontalAlignment = HorizontalAlignment.Left;
-                        spReply.Children.Add(lbComment);
-                        spReply.Children.Add(lb);
-                        spReply.Children.Add(reply1);
-
-                        lbxComments.Items.Add(spReply);
-                    }
-                }
-
-            }
-
-            
+            IniComments();
         }
 
         private void TxtComment_KeyUp(object sender, KeyEventArgs e)
@@ -149,6 +78,101 @@ namespace iTool
 
 
             lbxComments.Items.Add(spComment);
+        }
+
+        private User GetUser(int userID)
+        {
+            try
+            {
+                foreach (User user in users)
+                {
+                    if (user.UserID == userID)
+                    {
+                        return user;
+                    }
+                }
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        private void IniComments()
+        {
+            int margin = 0;
+            foreach (Comment item in comments)
+            {
+                if (item.CommentParentID == null)
+                {
+                    //User u = DB.GetToolOwnerFromMysql(item.userID);
+                    User u = GetUser(item.userID);
+
+                    Label lbComment = new Label();
+                    lbComment.Content = $"Comment #{item.CommentID}";
+                    lbComment.FontSize = 12;
+                    lbComment.FontWeight = FontWeights.Bold;
+
+                    Label l = new Label();
+                    l.Content = $"{u.FirstName} {u.LastName}, User ID: #{u.UserID}   {item.DateTime.ToString()}";
+                    l.FontSize = 12;
+                    l.FontWeight = FontWeights.Bold;
+
+                    TextBlock txbComment1 = new TextBlock();
+                    txbComment1.Text = item.Text;
+                    txbComment1.VerticalAlignment = VerticalAlignment.Top;
+                    txbComment1.HorizontalAlignment = HorizontalAlignment.Left;
+                    txbComment1.FontSize = 12;
+                    txbComment1.TextWrapping = TextWrapping.Wrap;
+
+                    StackPanel spComment = new StackPanel();
+                    spComment.Margin = new Thickness(0, 10, 10, 10);
+                    spComment.Orientation = Orientation.Vertical;
+                    spComment.HorizontalAlignment = HorizontalAlignment.Left;
+                    spComment.Children.Add(lbComment);
+                    spComment.Children.Add(l);
+                    spComment.Children.Add(txbComment1);
+
+                    lbxComments.Items.Add(spComment);
+                }
+
+                foreach (Comment reply in comments)
+                {
+                    if (reply.CommentParentID == item.CommentID)
+                    {
+                        //User us = DB.GetToolOwnerFromMysql(reply.userID);
+                        User us = GetUser(reply.userID);
+
+                        Label lbComment = new Label();
+                        lbComment.Content = $"Comment #{reply.CommentID}";
+                        lbComment.FontSize = 12;
+                        lbComment.FontWeight = FontWeights.Bold;
+                        Label lb = new Label();
+                        lb.Content = $"{us.FirstName} {us.LastName}, User ID: #{us.UserID}   {item.DateTime.ToString()}   In reply to comment #{item.CommentID}";
+                        lb.FontSize = 12;
+                        lb.FontWeight = FontWeights.Bold;
+
+                        TextBlock reply1 = new TextBlock();
+                        reply1.Text = reply.Text;
+                        reply1.VerticalAlignment = VerticalAlignment.Top;
+                        reply1.HorizontalAlignment = HorizontalAlignment.Left;
+                        reply1.FontSize = 12;
+                        reply1.TextWrapping = TextWrapping.Wrap;
+
+                        StackPanel spReply = new StackPanel();
+                        spReply.Margin = new Thickness(margin += 20, 10, 0, 0);
+                        spReply.Orientation = Orientation.Vertical;
+                        spReply.HorizontalAlignment = HorizontalAlignment.Left;
+                        spReply.Children.Add(lbComment);
+                        spReply.Children.Add(lb);
+                        spReply.Children.Add(reply1);
+
+                        lbxComments.Items.Add(spReply);
+                    }
+                }
+
+            }
         }
     }
 }

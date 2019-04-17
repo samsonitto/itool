@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:iTool"
         mc:Ignorable="d"
-        Title="AddAToolWindow" Height="450" Width="900" KeyUp="Window_KeyUp">
+        Title="AddAToolWindow" Height="450" Width="900" KeyUp="Window_KeyUp"
+        SizeToContent="WidthAndHeight">
     <Grid>
         <StackPanel>
             <Label Content="iTool: Add a New Tool" Background="LightGray" FontSize="30" HorizontalContentAlignment="Center" Foreground="Blue" FontWeight="Black" Height="80" VerticalContentAlignment="Center"/>

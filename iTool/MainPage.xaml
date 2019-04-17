@@ -5,43 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:iTool"
         mc:Ignorable="d"
-          Title="iTool: " Height="900" Width="1200" ResizeMode="NoResize">
+          Title="iTool: " Height="900" Width="1200" ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight">
     <Window.Resources>
-
-        <Style TargetType="Label">
-            <Setter Property="Foreground" Value="#c1fff9" />
-        </Style>
-        <Style TargetType="PasswordBox">
-            <Setter Property="Background" Value="#c1fff9"/>
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Background" Value="#c1fff9"/>
-        </Style>
-        <Style TargetType="ComboBox">
-            <Setter Property="Background" Value="#c1fff9"/>
-        </Style>
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="Black"/>
-            <Setter Property="Foreground" Value="#c1fff9"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="Black"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <Style TargetType="StackPanel">
-            <Setter Property="Background" Value="#3a3939"/>
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#c1fff9"/>
-        </Style>
-        
-
     </Window.Resources>
     <Grid >
         <StackPanel Height="870" Background="#FFDADADA" VerticalAlignment="Top">
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="70" Margin="0,0,-6.4,0" VerticalAlignment="Top" Width= "1200">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="70" Margin="0,0,-6.4,0" VerticalAlignment="Top" Width="1200" Background="#a0a0a0">
                 <Border x:Name="bdrProfileImage" BorderThickness="1" BorderBrush="Black" Margin="30 5 0 5" Cursor="Hand">
                     <Image x:Name="imgMainPageProfile" Cursor="Hand" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Top" MouseDown="ImgMainPageProfile_MouseDown" Height="{Binding ElementName=bdrProfileImage, Path=ActualHeight}"/>
                 </Border>
@@ -122,7 +93,7 @@
                 
 
             </StackPanel>
-            <TextBox x:Name="txbMessages" Text="Here you can see all tools that are available for rent. Use filters or the search bar to find a tool for you." FontSize="16" Height="30" VerticalContentAlignment="Center" Padding="10 0 10 0"/>
+            <TextBox x:Name="txbMessages" Text="Here you can see all tools that are available for rent. Use filters or the search bar to find a tool for you." FontSize="16" Height="37" VerticalContentAlignment="Center" Padding="10 0 10 0"/>
         </StackPanel>
         
     </Grid>

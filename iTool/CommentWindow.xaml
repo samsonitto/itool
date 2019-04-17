@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:iTool"
         mc:Ignorable="d"
-        Title="CommentWindow" Height="800" Width="800">
+        Title="CommentWindow" Height="800" Width="800"
+        SizeToContent="WidthAndHeight">
     <Grid>
         <StackPanel>
             <Label x:Name="lblCommentsHeader" Content="iTool: Comments" HorizontalContentAlignment="Center" FontSize="40" FontWeight="Black" Foreground="Blue" Margin="30 20 30 0"/>

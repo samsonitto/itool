@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:iTool"
         mc:Ignorable="d"
-        Title="iTool: Register" Height="800" Width="1200" ResizeMode="NoResize">
+        Title="iTool: Register" Height="800" Width="1200" ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight">
     <Grid>
         <StackPanel>
             <Label Content="iTool: Register" HorizontalContentAlignment="Center" FontSize="30" Margin="0 40 0 40"/>

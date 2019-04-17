@@ -123,6 +123,7 @@ namespace iTool
                 int cID = DB.GetToolCategoryID(cbToolCategories.SelectedValue.ToString());
                 DB.AddAToolToMysql(txtToolName.Text, cID, txtDescription.Text, Active.UserID, cbToolCondition.SelectedValue.ToString(), float.Parse(txtPrice.Text), imgFile);
                 lblToolError.Content = "You have successfully added a tool for rent!";
+                Active.profile.dgMyTools.ItemsSource = DB.GetOwnedToolsFromMysql();
 
                 if (!string.IsNullOrEmpty(txtBrowseToolImage.Text))
                 {
@@ -146,7 +147,7 @@ namespace iTool
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.T)
+            if(e.Key == Key.F1)
             {
                 AddRandomTools addRandomTools = new AddRandomTools();
                 addRandomTools.ShowDialog();
