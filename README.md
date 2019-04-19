@@ -128,7 +128,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 3. Käyttäjä vuokraa työkalun
 4. Käyttäjä palauttaa työkalun
 5. Käyttäjä poistaa työkalun
-6. Sovellus ylikirjoittaa poistetun työkalun
+6. Sovellus ylikirjoittaa poistetun työkalun [(CODE002)](liitteet/code002.md)
 
 	
 **Lopputulos**	
@@ -167,6 +167,27 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 
 * Kommenttointi: rajaton
 * Vastaaminen kommentteihin: rajaton
+
+### Tunnusten poistaminen
+
+```plantuml
+@startuml
+    Käyttäjä --> (Tunnusten poistaminen)
+    (Tunnusten poistaminen) --> (iTool tietokanta) : Ylikirjoittaa
+@enduml
+```
+**Käyttötapauksen kuvaus**
+
+1. Käyttäjä poista tunnukset
+2. Tunnukset ylikirjoitetaan tietokannassa  [(CODE001)](liitteet/code001.md)
+
+**Lopputulos**	
+
+* Käyttäjän tunnukset on ylikirjoitettu tietokkannassa
+
+**Käyttötiheys** 
+
+* Kerran per sähköposti
 
 ## Hyväksyntätestit
 
