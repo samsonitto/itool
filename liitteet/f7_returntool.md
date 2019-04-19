@@ -1,6 +1,5 @@
 # Työkalun palautus
 
-
 | | |
 |:-:|:-:|
 | Ominaisuus ID |FT07 |
@@ -19,31 +18,9 @@ Siihen liittyy vuokratun työkalun palautus omistajalleen.
 
 | | 
 |:-:|
-| [Use Case 1: Tunnusten luominen](usecase1.md) | 
-| [Use Case 2: Kirjautuminen](usecase2.md) | 
-| [FUNC-REQ-0001](../vaatimusmaarittely.md#toiminnallisia-vaatimuksia) |  
-| [FUNC-REQ-0008](../vaatimusmaarittely.md#toiminnallisia-vaatimuksia) |  
-| [USAGE-REQ-0001](../vaatimusmaarittely.md#ei-toiminnallisia-käytettävyysvaatimuksia) |  
-| [SEC-REQ-0001](../vaatimusmaarittely.md#ei-toiminnallisia-tietoturvavaatimuksia) |  
+| [Use Case 2: Työkalujen käsittely](../README.md#työkalujen-selailu-vuokraus-palautus-ja-poistaminen) | 
+| [AT06](at7_returnatool.md) |  
 
 ### Alustavat käyttäjätarinat (User Storys)
 
 * Käyttäjänä haluan, että voin paluttaa työkalun omistajalle kätevästi.
-
-
-### Testaus / mahdolliset hyväksyntä kriteerit 
-
-*Kirjataan muutamia huomiota testauksen kannalta*
-
-| Testitapaus  | Testin lähde  | Kuka vastaa  |
-|:-: | :-:|:-:|
-| [Testitapaus 1]()  | vaatimus id?   |   |
-| [Testitapaus 2]()  | vaatimus id?   |   |
-| [Testitapaus 3]()  | vaatimus id?   |   |
-| [Testitapaus 4]()  | vaatimus id?   |   |
-| | |
-
-
-
-
-
