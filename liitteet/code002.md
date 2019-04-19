@@ -5,6 +5,7 @@ jonka primary key on käytetty muissa tauluissa viiteavaimena aj työkalun ID:n 
 
 ### Esimerkki
 
+```sql
 mysql> SELECT * FROM tool WHERE toolName = 'CODE002';
 +--------+----------+-----------------+-----------+---------------+----------------+-------------+-------------+
 | toolID | toolName | toolDescription | toolPrice | toolCondition | toolCategoryID | userOwnerID | toolPicture |
@@ -12,3 +13,4 @@ mysql> SELECT * FROM tool WHERE toolName = 'CODE002';
 |     83 | CODE002  | TOOL DELETED    |      0.00 | DELETED       |              9 |           1 | NULL        |
 |    175 | CODE002  | TOOL DELETED    |      0.00 | DELETED       |              6 |          30 | NULL        |
 +--------+----------+-----------------+-----------+---------------+----------------+-------------+-------------+
+```
