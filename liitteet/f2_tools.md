@@ -19,7 +19,7 @@ Työkaluja voi myös luonnollisesti poistamaan tai muokkaamaan.
 
 | | 
 |:-:|
-| [Use Case 1: Tunnusten luominen](usecase1.md) | 
+| [Use Case 2: Työkalujen käsittely](itoolui#työkalujen-selailu-vuokraus-palautus-ja-poistaminen) | 
   
 
 
