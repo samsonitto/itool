@@ -19,7 +19,7 @@ Työkaluja voi myös luonnollisesti poistamaan tai muokkaamaan.
 
 | | 
 |:-:|
-| [Use Case 2: Työkalujen käsittely](itoolui#työkalujen-selailu-vuokraus-palautus-ja-poistaminen) | 
+| [Use Case 2: Työkalujen käsittely](../README.md#työkalujen-selailu-vuokraus-palautus-ja-poistaminen) | 
   
 
 
