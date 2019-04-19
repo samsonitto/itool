@@ -20,10 +20,4 @@ Työkaluja voi myös luonnollisesti poistamaan tai muokkaamaan.
 | | 
 |:-:|
 | [Use Case 2: Työkalujen käsittely](../README.md#työkalujen-selailu-vuokraus-palautus-ja-poistaminen) | 
-  
-
-
-
-
-
-
+| [AT02: Työkalun lisäys/poisto](at3_addtool.md) |
