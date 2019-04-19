@@ -11,3 +11,4 @@
 
 Jokaisella käyttäjällä on arvio, joka on keskiarvo muiden käyttäjien jättämistä arvioista. 
 Sovellus laskee keskiarvon suoraan tietokannasta.
+
