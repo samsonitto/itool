@@ -401,18 +401,25 @@ pystyy täyttämään kaikki rekiströintikentät satunnaisilla arvoilla, tämä
 
 ### 'Login'-ikkuna
 <img src="images/itool_login.JPG" alt="iTool v1" width="400">
+
 ### 'Register'-ikkuna
 <img src="images/itool_register.JPG" alt="iTool v1" width="700">
+
 ### 'Main'-ikkuna
 <img src="images/itool_main.JPG" alt="iTool v1" width="900">
+
 ### 'Profile'-ikkuna
 <img src="images/itool_profile.JPG" alt="iTool v1" width="800">
+
 ### 'Edit Profile'-ikkuna
 <img src="images/itool_edit.JPG" alt="iTool v1" width="700">
+
 ### 'Add a Tool'-ikkuna
 <img src="images/itool_addtool.JPG" alt="iTool v1" width="700">
+
 ### Piilotettu 'Add random tools'-ikkuna
 <img src="images/itool_addrandomtools.JPG" alt="iTool v1" width="300">
+
 ## Mukana tulevat tiedostot
 
 ## Tietokanta
