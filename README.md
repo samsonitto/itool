@@ -400,10 +400,19 @@ pystyy täyttämään kaikki rekiströintikentät satunnaisilla arvoilla, tämä
 ## Kuvaruutukaappaukset
 
 ### 'Login'-ikkuna
+<img src="images/itool_login.JPG" alt="iTool v1" width="400">
 ### 'Register'-ikkuna
+<img src="images/itool_register.JPG" alt="iTool v1" width="700">
 ### 'Main'-ikkuna
+<img src="images/itool_main.JPG" alt="iTool v1" width="900">
 ### 'Profile'-ikkuna
+<img src="images/itool_profile.JPG" alt="iTool v1" width="800">
+### 'Edit Profile'-ikkuna
+<img src="images/itool_edit.JPG" alt="iTool v1" width="700">
 ### 'Add a Tool'-ikkuna
+<img src="images/itool_addtool.JPG" alt="iTool v1" width="700">
+### Piilotettu 'Add random tools'-ikkuna
+<img src="images/itool_addrandomtools.JPG" alt="iTool v1" width="300">
 ## Mukana tulevat tiedostot
 
 ## Tietokanta
@@ -412,7 +421,7 @@ Tietokannan suunnittelin tietokannat opintojakson harjoitustyönä. Tietokannast
 
 ### iTool tietokanta versio 1
 
-<img src="liitteet/iTool.JPG" alt="iTool v1" width="900">
+<img src="images/iTool.JPG" alt="iTool v1" width="900">
 
 Tässä versiossa tietokannassa oli tr_completion taulu, se taulu oli työkalun palautusta varten. Käyttäjä palauuttaa työkalun, samalla palautustapahtuma tallentuisi
 tr_completion tauluun, johon kirjautuu palautus PVM, palautus kunto ja arvio kaupan toisesta osapuolesta. Transaction ja tr_completion taulujen välissä oli
@@ -420,7 +429,7 @@ yksi yhteen liitos, joten tr_completion on jätetty kokonaan pois ja transaction
 
 ### iTool tietokanta lopullinen versio 2
 
-<img src="liitteet/iTool_v3_no_captions.JPG" alt="iTool v2" width="900">
+<img src="images/iTool_v3_no_captions.JPG" alt="iTool v2" width="900">
 
 Tässä on lopullinen versio iTool tietokannasta, tr_completion taulu on jätetty pois ja tietokantaan on lisätty rating taulu arvioita varten. Rating taululle on tehty [trigger](liitteet/trigger.md),
 joka pitää huolta siitä, että käyttäjä joka jättää arvion voi vain ainoastaan arvioida kyseisen transaktion toista osapuolta yhden kerran. Comment taulussa on itseensä liitos,
