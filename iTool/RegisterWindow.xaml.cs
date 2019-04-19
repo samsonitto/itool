@@ -25,15 +25,16 @@ namespace iTool
 
     public partial class RegisterWindow : Window
     {
-        //PROPERTIES
+        #region PROPERTIES
         private List<string> payment = new List<string>() { "Invoice", "MasterCard", "Paypal", "VISA" };
         private  List<string> locations = new List<string>() { "Ähtäri", "Espoo", "Helsinki", "Jyväskylä", "Kuopio", "Kuusamo", "Lahti", "Lappeenranta", "Oulu", "Rauma", "Rovanniemi", "Savonlinna", "Seinäjoki", "Tampere", "Turku", "Vaasa", "Vantaa" };
         private string path;
         private string imgFile;
         private string relativePath;
         private string dirPath;
+        #endregion
 
-        //METHODS
+        #region METHODS
         public RegisterWindow()
         {
             InitializeComponent();
@@ -46,121 +47,112 @@ namespace iTool
             cbLocation.ItemsSource = locations;
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow main = new MainWindow();
-            main.Show();
-            this.Close();
-        }
-
-        private void btnBrowse_Click(object sender, RoutedEventArgs e)
-        {
-            Active.BrowseImage(imgProfile, txtPic);
-        }
-
-        private void BtnReg_Click(object sender, RoutedEventArgs e)
-        {
-            Register();
-        }
-
         private void Register()
         {
-            if (txtAddEmail.Text.Length == 0)
+            try
             {
-                txbError.Text = "Enter an email";
-                txtAddEmail.Focus();
-            }
-            else if (!Regex.IsMatch(txtAddEmail.Text, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
-            {
-                txbError.Text = "Enter a valid email.";
-                txtAddEmail.Focus();
-            }
-            else if (DB.EmailChecker().Contains(txtAddEmail.Text))
-            {
-                txbError.Text = "Email is already in use";
-                txtAddEmail.Focus();
-            }
-            else if (txtFirstName.Text.Length == 0)
-            {
-                txbError.Text = "Enter your first name";
-                txtFirstName.Focus();
-            }
-            else if (txtLastName.Text.Length == 0)
-            {
-                txbError.Text = "Enter your last name";
-                txtLastName.Focus();
-            }
-            else if (txtMobile.Text.Length < 10 || !int.TryParse(txtMobile.Text, out int num))
-            {
-                txbError.Text = "Enter valid mobile number";
-                txtMobile.Focus();
-            }
-            else if (cbLocation.Text.Length == 0)
-            {
-                txbError.Text = "Enter your location";
-                cbLocation.Focus();
-            }
-            else if (cbPayment.SelectedValue is null)
-            {
-                txbError.Text = "Choose the payment method";
-                cbPayment.Focus();
-            }
-            else if (txtAddAddress.Text.Length == 0)
-            {
-                txbError.Text = "Enter your address";
-                txtAddAddress.Focus();
-            }
-            else
-            {
-                string firstname = txtFirstName.Text;
-                string lastname = txtLastName.Text;
-                string email = txtAddEmail.Text;
-                string password = pwdCreatePassword.Password;
-                string location = cbLocation.SelectedValue.ToString();
-                string mobile = txtMobile.Text;
-                string imgSource = imgProfile.Source.ToString();
-
-                string address = txtAddAddress.Text;
-                string payment = cbPayment.SelectedValue.ToString();
-                if (pwdCreatePassword.Password.Length == 0)
+                if (txtAddEmail.Text.Length == 0)
                 {
-                    txbError.Text = "Enter password";
-                    pwdCreatePassword.Focus();
+                    txbError.Text = "Enter an email";
+                    txtAddEmail.Focus();
                 }
-                else if (pwdConfirm.Password.Length == 0)
+                else if (!Regex.IsMatch(txtAddEmail.Text, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
                 {
-                    txbError.Text = "Enter Confirm password";
-                    pwdConfirm.Focus();
+                    txbError.Text = "Enter a valid email.";
+                    txtAddEmail.Focus();
                 }
-                else if (pwdCreatePassword.Password != pwdConfirm.Password)
+                else if (DB.EmailChecker().Contains(txtAddEmail.Text))
                 {
-                    txbError.Text = "Confirm password must be same as password";
-                    pwdConfirm.Focus();
+                    txbError.Text = "Email is already in use";
+                    txtAddEmail.Focus();
+                }
+                else if (txtFirstName.Text.Length == 0)
+                {
+                    txbError.Text = "Enter your first name";
+                    txtFirstName.Focus();
+                }
+                else if (txtLastName.Text.Length == 0)
+                {
+                    txbError.Text = "Enter your last name";
+                    txtLastName.Focus();
+                }
+                else if (txtMobile.Text.Length < 10 || !int.TryParse(txtMobile.Text, out int num))
+                {
+                    txbError.Text = "Enter valid mobile number";
+                    txtMobile.Focus();
+                }
+                else if (cbLocation.Text.Length == 0)
+                {
+                    txbError.Text = "Enter your location";
+                    cbLocation.Focus();
+                }
+                else if (cbPayment.SelectedValue is null)
+                {
+                    txbError.Text = "Choose the payment method";
+                    cbPayment.Focus();
+                }
+                else if (txtAddAddress.Text.Length == 0)
+                {
+                    txbError.Text = "Enter your address";
+                    txtAddAddress.Focus();
                 }
                 else
                 {
-                    txbError.Text = "";
+                    string firstname = txtFirstName.Text;
+                    string lastname = txtLastName.Text;
+                    string email = txtAddEmail.Text;
+                    string password = pwdCreatePassword.Password;
+                    string location = cbLocation.SelectedValue.ToString();
+                    string mobile = txtMobile.Text;
+                    string imgSource = imgProfile.Source.ToString();
 
-                    MySqlConnection con = new MySqlConnection("SERVER=mysql.labranet.jamk.fi;DATABASE=M3156_3;UID=M3156;PASSWORD=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
-                    con.Open();
-                    MySqlCommand cmd = new MySqlCommand($"Insert into user (userName,userSurname,userAddress,userEmail,userLocation,paymentMethod,userMobile,userPassword,userPicture) values('{firstname}','{lastname}','{address}','{email}','{location}','{payment}','{mobile}',MD5('{password}'),'{Active.imgFile}')", con);
-                    cmd.CommandType = CommandType.Text;
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-
-                    if (!string.IsNullOrEmpty(txtPic.Text))
+                    string address = txtAddAddress.Text;
+                    string payment = cbPayment.SelectedValue.ToString();
+                    if (pwdCreatePassword.Password.Length == 0)
                     {
-                        System.IO.File.Copy(Active.dirPath, Active.relativePath, true);
-                        File.SetAttributes(Active.relativePath, FileAttributes.Normal);
+                        txbError.Text = "Enter password";
+                        pwdCreatePassword.Focus();
                     }
+                    else if (pwdConfirm.Password.Length == 0)
+                    {
+                        txbError.Text = "Enter Confirm password";
+                        pwdConfirm.Focus();
+                    }
+                    else if (pwdCreatePassword.Password != pwdConfirm.Password)
+                    {
+                        txbError.Text = "Confirm password must be same as password";
+                        pwdConfirm.Focus();
+                    }
+                    else
+                    {
+                        txbError.Text = "";
 
-                    Active.imgFile = null;
+                        MySqlConnection con = new MySqlConnection("SERVER=mysql.labranet.jamk.fi;DATABASE=M3156_3;UID=M3156;PASSWORD=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
+                        con.Open();
+                        MySqlCommand cmd = new MySqlCommand($"Insert into user (userName,userSurname,userAddress,userEmail,userLocation,paymentMethod,userMobile,userPassword,userPicture) values('{firstname}','{lastname}','{address}','{email}','{location}','{payment}','{mobile}',MD5('{password}'),'{Active.imgFile}')", con);
+                        cmd.CommandType = CommandType.Text;
+                        cmd.ExecuteNonQuery();
+                        con.Close();
 
-                    MainWindow mw = new MainWindow();
-                    mw.txbMainError.Text = "You have Registered successfully\nYou can login now";
-                    mw.Show();
-                    this.Close();
+                        if (!string.IsNullOrEmpty(txtPic.Text))
+                        {
+                            System.IO.File.Copy(Active.dirPath, Active.relativePath, true);
+                            File.SetAttributes(Active.relativePath, FileAttributes.Normal);
+                        }
+
+                        Active.imgFile = null;
+
+                        MainWindow mw = new MainWindow();
+                        mw.txbMainError.Text = "You have Registered successfully\nYou can login now";
+                        mw.Show();
+                        this.Close();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
             }
         }
 
@@ -180,66 +172,93 @@ namespace iTool
 
         private void Fill()
         {
-            Random rand = new Random();
-            char[] abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-            char[] c123 = "1234567890".ToCharArray();
-            string fName = abc[rand.Next(abc.Length)].ToString().ToUpper();
-            string lName = abc[rand.Next(abc.Length)].ToString().ToUpper();
-            string eMail = abc[rand.Next(abc.Length)].ToString().ToLower();
-            string pw = abc[rand.Next(abc.Length)].ToString().ToLower();
-            string mobile = c123[rand.Next(c123.Length)].ToString();
-            string address = abc[rand.Next(abc.Length)].ToString().ToUpper();
-            string location = abc[rand.Next(abc.Length)].ToString().ToUpper();
-
-            for (int i = 0; i < 5; i++)
+            try
             {
-                eMail = $"{eMail}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
-            }
+                Random rand = new Random();
+                char[] abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+                char[] c123 = "1234567890".ToCharArray();
+                string fName = abc[rand.Next(abc.Length)].ToString().ToUpper();
+                string lName = abc[rand.Next(abc.Length)].ToString().ToUpper();
+                string eMail = abc[rand.Next(abc.Length)].ToString().ToLower();
+                string pw = abc[rand.Next(abc.Length)].ToString().ToLower();
+                string mobile = c123[rand.Next(c123.Length)].ToString();
+                string address = abc[rand.Next(abc.Length)].ToString().ToUpper();
+                string location = abc[rand.Next(abc.Length)].ToString().ToUpper();
 
-            for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 5; i++)
+                {
+                    eMail = $"{eMail}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+                }
+
+                for (int i = 0; i < 5; i++)
+                {
+                    pw = $"{pw}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+                }
+
+                for (int i = 0; i < 5; i++)
+                {
+                    fName = $"{fName}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+                }
+
+                for (int i = 0; i < 5; i++)
+                {
+                    lName = $"{lName}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+                }
+
+                for (int i = 0; i < 9; i++)
+                {
+                    mobile = $"{mobile}{c123[rand.Next(c123.Length)].ToString()}";
+                }
+
+                for (int i = 0; i < 5; i++)
+                {
+                    address = $"{address}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+                }
+
+                for (int i = 0; i < 5; i++)
+                {
+                    location = $"{location}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+                }
+
+                txtAddEmail.Text = $"{eMail}@gmail.com";
+                pwdCreatePassword.Password = pw;
+                pwdConfirm.Password = pw;
+                txtFirstName.Text = fName;
+                txtLastName.Text = lName;
+                txtMobile.Text = mobile;
+                txtAddAddress.Text = $"{address} {c123[rand.Next(c123.Length)].ToString()} {abc[rand.Next(abc.Length)].ToString().ToLower()} {c123[rand.Next(c123.Length)].ToString()}";
+                cbLocation.SelectedValue = cbLocation.Items[rand.Next(cbLocation.Items.Count)];
+                cbPayment.SelectedValue = cbPayment.Items[rand.Next(cbPayment.Items.Count)];
+            }
+            catch (Exception ex)
             {
-                pw = $"{pw}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
+                MessageBox.Show(ex.Message);
             }
+        }
+        #endregion
 
-            for (int i = 0; i < 5; i++)
-            {
-                fName = $"{fName}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
-            }
+        #region EVENTHANDLERS
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close();
+        }
 
-            for (int i = 0; i < 5; i++)
-            {
-                lName = $"{lName}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
-            }
+        private void btnBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            Active.BrowseImage(imgProfile, txtPic);
+        }
 
-            for (int i = 0; i < 9; i++)
-            {
-                mobile = $"{mobile}{c123[rand.Next(c123.Length)].ToString()}";
-            }
-
-            for (int i = 0; i < 5; i++)
-            {
-                address = $"{address}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
-            }
-
-            for (int i = 0; i < 5; i++)
-            {
-                location = $"{location}{abc[rand.Next(abc.Length)].ToString().ToLower()}";
-            }
-
-            txtAddEmail.Text = $"{eMail}@gmail.com";
-            pwdCreatePassword.Password = pw;
-            pwdConfirm.Password = pw;
-            txtFirstName.Text = fName;
-            txtLastName.Text = lName;
-            txtMobile.Text = mobile;
-            txtAddAddress.Text = $"{address} {c123[rand.Next(c123.Length)].ToString()} {abc[rand.Next(abc.Length)].ToString().ToLower()} {c123[rand.Next(c123.Length)].ToString()}";
-            cbLocation.SelectedValue = cbLocation.Items[rand.Next(cbLocation.Items.Count)];
-            cbPayment.SelectedValue = cbPayment.Items[rand.Next(cbPayment.Items.Count)];
+        private void BtnReg_Click(object sender, RoutedEventArgs e)
+        {
+            Register();
         }
 
         private void BtnFill_Click(object sender, RoutedEventArgs e)
         {
             Fill();
         }
+        #endregion
     }
 }

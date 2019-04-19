@@ -34,7 +34,7 @@
     </Window.Resources>
     <Grid Background="#3a3939">
         <StackPanel>
-            <Label Content="iTool: Edit Profile" Foreground="#c1fff9" HorizontalContentAlignment="Center" FontSize="40" Margin="0 40 0 30" FontFamily="Harrington"/>
+            <Label Content="iTool: Edit Profile" Foreground="#c1fff9" HorizontalContentAlignment="Center" FontSize="40" Margin="0 40 0 30" FontFamily="Courier New"/>
             <StackPanel Orientation="Horizontal" Margin="90 50 90 0">
                 <StackPanel Width="300" Margin="0 0 0 0">
                     <Image x:Name="imgEditProfile"/>

@@ -19,7 +19,7 @@
                 <TextBlock x:Name="txtUsername" Margin="20 5 0 0" TextWrapping="Wrap" Text="User Name" Width="auto" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtSearchBar" Height="30"  Margin="250 0 0 0" TextWrapping="Wrap" Text="Search Tools" Width="250" Foreground="#FF636262" FontSize="16" TextChanged="TxtSearchBar_TextChanged"/>
                 <Button x:Name="btnSearchTools" Height="30" Content="Search" FontSize="16" Width="100" Margin="10 0 0 0" Click="BtnSearchTools_Click"/>
-                <Label Content="iTool" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="175 0 0 0" FontSize="40" Foreground="Blue" FontWeight="Black"/>
+                <Label Content="iTool" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="175 0 0 0" FontSize="40" Foreground="Blue" FontWeight="Black" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Height="350" VerticalAlignment="Top">

@@ -25,10 +25,14 @@ namespace iTool
     
     public partial class MainWindow : Window
     {
+        #region METHODS
         public MainWindow()
         {
             InitializeComponent();
         }
+        #endregion
+
+        #region EVENTHANDLERS
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow register = new RegisterWindow();
@@ -38,57 +42,66 @@ namespace iTool
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (txtEmail.Text.Length == 0)
+            try
             {
-                txbMainError.Text = "Enter an email.";
-                txtEmail.Focus();
-            }
-            else if (!Regex.IsMatch(txtEmail.Text, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
-            {
-                txbMainError.Text = "Enter a valid email.";
-                txbMainError.Focus();
-            }
-            else
-            {
-                string email = txtEmail.Text;
-                string password = pwdPassword.Password;
-                string connStr = DB.GetConnectionString();
-                MySqlConnection con = new MySqlConnection(connStr);
-                con.Open();
-                MySqlCommand cmd = new MySqlCommand($"Select * from user where userEmail='{email}' and userPassword=MD5('{password}')", con);
-                cmd.CommandType = CommandType.Text;
-                MySqlDataAdapter adapter = new MySqlDataAdapter();
-                adapter.SelectCommand = cmd;
-                DataSet dataSet = new DataSet();
-                adapter.Fill(dataSet);
-                if (dataSet.Tables[0].Rows.Count > 0)
+                if (txtEmail.Text.Length == 0)
                 {
-                    //string username = dataSet.Tables[0].Rows[0]["userName"].ToString() + " " + dataSet.Tables[0].Rows[0]["userSurname"].ToString();
-                    Active.UserID = int.Parse(dataSet.Tables[0].Rows[0]["userID"].ToString());
-                    Active.ImagePath = $"{Active.ProjectPath}/images/{dataSet.Tables[0].Rows[0]["userPicture"].ToString()}";
-                    Active.FirstName = dataSet.Tables[0].Rows[0]["userName"].ToString();
-                    Active.LastName = dataSet.Tables[0].Rows[0]["userSurname"].ToString();
-                    Active.ImageFileName = dataSet.Tables[0].Rows[0]["userPicture"].ToString();
-
-                    if (string.IsNullOrEmpty(Active.ImageFileName))
-                    {
-                        Active.ImageSource = new BitmapImage(new Uri($"{Active.ProjectPath}/images/no_picture.png", UriKind.RelativeOrAbsolute));
-                    }
-                    else
-                    {
-                        Active.ImageSource = new BitmapImage(new Uri(Active.ImagePath, UriKind.RelativeOrAbsolute));
-                    }
-
-                    MainPage main = new MainPage();
-                    main.Show();
-                    this.Close();
+                    txbMainError.Text = "Enter an email.";
+                    txtEmail.Focus();
+                }
+                else if (!Regex.IsMatch(txtEmail.Text, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
+                {
+                    txbMainError.Text = "Enter a valid email.";
+                    txbMainError.Focus();
                 }
                 else
                 {
-                    txbMainError.Text = "Sorry! Please enter existing emailid/password.";
+                    string email = txtEmail.Text;
+                    string password = pwdPassword.Password;
+                    string connStr = DB.GetConnectionString();
+                    MySqlConnection con = new MySqlConnection(connStr);
+                    con.Open();
+                    MySqlCommand cmd = new MySqlCommand($"Select * from user where userEmail='{email}' and userPassword=MD5('{password}')", con);
+                    cmd.CommandType = CommandType.Text;
+                    MySqlDataAdapter adapter = new MySqlDataAdapter();
+                    adapter.SelectCommand = cmd;
+                    DataSet dataSet = new DataSet();
+                    adapter.Fill(dataSet);
+                    if (dataSet.Tables[0].Rows.Count > 0)
+                    {
+                        //string username = dataSet.Tables[0].Rows[0]["userName"].ToString() + " " + dataSet.Tables[0].Rows[0]["userSurname"].ToString();
+                        Active.UserID = int.Parse(dataSet.Tables[0].Rows[0]["userID"].ToString());
+                        Active.ImagePath = $"{Active.ProjectPath}/images/{dataSet.Tables[0].Rows[0]["userPicture"].ToString()}";
+                        Active.FirstName = dataSet.Tables[0].Rows[0]["userName"].ToString();
+                        Active.LastName = dataSet.Tables[0].Rows[0]["userSurname"].ToString();
+                        Active.ImageFileName = dataSet.Tables[0].Rows[0]["userPicture"].ToString();
+
+                        if (string.IsNullOrEmpty(Active.ImageFileName))
+                        {
+                            Active.ImageSource = new BitmapImage(new Uri($"{Active.ProjectPath}/images/no_picture.png", UriKind.RelativeOrAbsolute));
+                        }
+                        else
+                        {
+                            Active.ImageSource = new BitmapImage(new Uri(Active.ImagePath, UriKind.RelativeOrAbsolute));
+                        }
+
+                        MainPage main = new MainPage();
+                        main.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        txbMainError.Text = "Sorry! Please enter existing emailid/password.";
+                    }
+                    con.Close();
                 }
-                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
             }
         }
+        #endregion
     }
 }

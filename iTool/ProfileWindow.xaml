@@ -17,7 +17,7 @@
     
     <Grid>
         <StackPanel VerticalAlignment="Top" Height="770">
-            <Label x:Name="lblUserProfile" Content="iTool: User Profile" FontSize="30" HorizontalContentAlignment="Left" FontWeight="Bold" Background="#aaaaaa" Padding="20 5 0 5"/>
+            <Label x:Name="lblUserProfile" Content="iTool: User Profile" FontSize="35" HorizontalContentAlignment="Left" FontWeight="Bold" Background="#aaaaaa" Padding="20 5 0 5" FontFamily="Courier New"/>
             <StackPanel Orientation="Horizontal">
                 <Grid Height="680">
                     <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Hidden">

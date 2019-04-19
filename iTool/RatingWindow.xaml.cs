@@ -19,11 +19,14 @@ namespace iTool
     /// </summary>
     public partial class RatingWindow : Window
     {
+        #region PROPERTIES
         private int counter = 1000;
         public int ratedID;
         public int transactionID;
         public string ratedName;
+        #endregion
 
+        #region METHODS
         public RatingWindow()
         {
             InitializeComponent();
@@ -34,7 +37,9 @@ namespace iTool
         {
 
         }
+        #endregion
 
+        #region EVENTHANDLERS
         private void BtnGiveRating_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -48,7 +53,7 @@ namespace iTool
                     lblMessagesRating.Content = "Not a number";
                 else if (int.Parse(rating) < 1 || int.Parse(rating) > 5)
                     lblMessagesRating.Content = "Input 1-5 number to rate";
-                
+
                 else
                 {
                     DB.AddRatingToMysql(int.Parse(rating), feedback, Active.UserID, ratedID, transactionID);
@@ -67,6 +72,7 @@ namespace iTool
             string input = txtRatingComments.Text;
             int c = counter - input.Length;
             lblCharCount.Content = $"{c}";
-        }
+        } 
+        #endregion
     }
 }

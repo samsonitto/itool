@@ -22,9 +22,12 @@ namespace iTool
     /// </summary>
     public partial class EditProfile : Window
     {
+        #region PROPERTIES
         private List<string> payment = new List<string>() { "Invoice", "MasterCard", "Paypal", "VISA" };
         private List<string> locations = new List<string>() { "Ähtäri", "Espoo", "Helsinki", "Jyväskylä", "Kuopio", "Kuusamo", "Lahti", "Lappeenranta", "Oulu", "Rauma", "Rovanniemi", "Savonlinna", "Seinäjoki", "Tampere", "Turku", "Vaasa", "Vantaa" };
+        #endregion
 
+        #region METHODS
         public EditProfile()
         {
             InitializeComponent();
@@ -37,7 +40,9 @@ namespace iTool
             cbNewLocation.ItemsSource = locations;
             cbNewPayment.ItemsSource = payment;
         }
+        #endregion
 
+        #region EVENTHANDLERS
         private void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
             User activeUser = DB.GetUserFromMysqlWhere($"userID = {Active.UserID}");
@@ -151,30 +156,38 @@ namespace iTool
                         sql = sql + item;
                     }
 
-                    sql = sql.Remove(sql.Length - 1, 1);
-                    DB.UpdateUserToMysql(sql);
-
                     message = message.Remove(message.Length - 1, 1);
 
-                    if (!string.IsNullOrEmpty(Active.imgFile))
-                    {
-                        System.IO.File.Copy(Active.dirPath, Active.relativePath, true);
-                        File.SetAttributes(Active.relativePath, FileAttributes.Normal);
-                        Active.ImageSource = new BitmapImage(new Uri($"{Active.ProjectPath}/images/{Active.imgFile}"));
-                    }
+                    sql = sql.Remove(sql.Length - 1, 1);
 
-                    if (newPassword)
+                    var result = MessageBox.Show($"Do you really want to update {message}?", "iTool: Update Profile", MessageBoxButton.YesNo);
+
+                    if (result == MessageBoxResult.Yes)
                     {
-                        Active.main = new MainWindow();
-                        Active.main.txbMainError.Text = "You have changed your password \nLog in using your new password";
-                        Active.main.Show();
-                        this.Close();
-                        Active.profile.Close();
+                        DB.UpdateUserToMysql(sql);
+
+
+
+                        if (!string.IsNullOrEmpty(Active.imgFile))
+                        {
+                            System.IO.File.Copy(Active.dirPath, Active.relativePath, true);
+                            File.SetAttributes(Active.relativePath, FileAttributes.Normal);
+                            Active.ImageSource = new BitmapImage(new Uri($"{Active.ProjectPath}/images/{Active.imgFile}"));
+                        }
+
+                        if (newPassword)
+                        {
+                            Active.main = new MainWindow();
+                            Active.main.txbMainError.Text = "You have changed your password \nLog in using your new password";
+                            Active.main.Show();
+                            this.Close();
+                            Active.profile.Close();
+                        }
+
+                        Active.profile.imgUserProfile.Source = Active.ImageSource;
+                        Active.profile.txbMessagesProfile.Text = message;
+                        this.Close(); 
                     }
-                    
-                    Active.profile.imgUserProfile.Source = Active.ImageSource;
-                    Active.profile.txbMessagesProfile.Text = message;
-                    this.Close();
                 }
             }
             catch //(Exception ex)
@@ -188,5 +201,6 @@ namespace iTool
         {
             Active.BrowseImage(imgEditProfile, txtNewPic);
         }
+        #endregion
     }
 }

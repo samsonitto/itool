@@ -22,20 +22,19 @@ namespace iTool
     /// </summary>
     public partial class ProfileWindow : Window
     {
+        #region METHODS
+
         public ProfileWindow()
         {
             InitializeComponent();
             IniMyStuff();
         }
 
-        #region METHODS
-
         private void IniMyStuff()
         {
             imgUserProfile.Source = Active.ImageSource;
             lblUserProfile.Content = $"{Active.FirstName} {Active.LastName}";
-            //txbFirstName.Text = Active.FirstName;
-            //txbLastName.Text = Active.LastName;
+
             txbUserID.Text = $"User ID: {Active.UserID.ToString()}";
             txbAvgRating.Text = $"Average rating: {DB.GetAvgRatingFromMysql(Active.UserID).ToString()}";
 
@@ -139,10 +138,15 @@ namespace iTool
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mw = new MainWindow();
-            mw.txbMainError.Text = "You have succesfully logged out of iTool";
-            mw.Show();
-            this.Close();
+            var result = MessageBox.Show($"You are logging out, confirm.", "iTool: Logout", MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                MainWindow mw = new MainWindow();
+                mw.txbMainError.Text = "You have succesfully logged out of iTool";
+                mw.Show();
+                this.Close(); 
+            }
         }
 
         private void btnAddTool_Click(object sender, RoutedEventArgs e)
@@ -193,6 +197,7 @@ namespace iTool
             dgMyTransactions.Columns[1].Header = "Start Date";
             dgMyTransactions.Columns[2].Header = "Planned End Date";
             dgMyTransactions.Columns[3].Header = "Actual End Date";
+
         }
 
         private void dgMyTransactions_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -358,9 +363,6 @@ namespace iTool
             }
         }
 
-
         #endregion
-
-
     }
 }
