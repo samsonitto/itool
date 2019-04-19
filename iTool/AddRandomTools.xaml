@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:iTool"
         mc:Ignorable="d"
-        Title="AddRandomTools" Height="500" Width="450">
+        Title="iTool: Add Random Tools" Height="500" Width="450">
     <Grid Background="#3a3939">
         <StackPanel>
             <Label Content="iTool: Generate Tools" FontSize="25" FontWeight="Black" Foreground="#c1fff9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>

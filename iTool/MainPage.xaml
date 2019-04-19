@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:iTool"
         mc:Ignorable="d"
-          Title="iTool: " Height="900" Width="1200" ResizeMode="NoResize"
+          Title="iTool: Main" Height="900" Width="1200" ResizeMode="NoResize"
         SizeToContent="WidthAndHeight">
     <Window.Resources>
     </Window.Resources>

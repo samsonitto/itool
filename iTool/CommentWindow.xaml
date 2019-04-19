@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:iTool"
         mc:Ignorable="d"
-        Title="CommentWindow" Height="800" Width="800"
+        Title="iTool: Comments" Height="800" Width="800"
         SizeToContent="WidthAndHeight">
     <Grid>
         <StackPanel>
