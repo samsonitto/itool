@@ -408,6 +408,9 @@ pystyy täyttämään kaikki rekiströintikentät satunnaisilla arvoilla, tämä
 ### 'Main'-ikkuna
 <img src="images/itool_main.JPG" alt="iTool v1" width="900">
 
+### 'Commment'-ikkuna
+<img src="images/itool_comment.JPG" alt="iTool v1" width="500">
+
 ### 'Profile'-ikkuna
 <img src="images/itool_profile.JPG" alt="iTool v1" width="800">
 
