@@ -402,11 +402,20 @@ pystyy täyttämään kaikki rekiströintikentät satunnaisilla arvoilla, tämä
 ### 'Login'-ikkuna
 <img src="images/itool_login.JPG" alt="iTool v1" width="400">
 
+Login ikkunassa pystyy kirjautumaan iTool-sovellukseen sisään tai siirtymään rekiströintiin.
+
 ### 'Register'-ikkuna
 <img src="images/itool_register.JPG" alt="iTool v1" width="700">
 
+Register ikkunassa pystyy rekiströitymään iTool-palveluun, kaikki kentät on pakollisia, paitsi kuva. Löytyy myös 'Fill' nappi, jota klikkamalla voi täyttää kentät satunnaisilla tiedoilla.
+Nappi on luotu testausta varten.
+
 ### 'Main'-ikkuna
 <img src="images/itool_main.JPG" alt="iTool v1" width="900">
+
+Mainissa voi selailla ja vuokrata työkaluja. Datagridissa työkalua klikkaamalla voi nähdä työkalun kuvan ja tiedot yksityiskohtaisemmin ikkunan alaosassa.
+Vasemmassa laidassa on suodattimia, jotka suodattaa joko sijainnin tai kategorian mukaan. Yläpalkista löytyy 'Etsi'-kenttä, jonka avulla voi etsiä työkaluja nimen tai nimen osan mukaan.
+Profiilikuvaa klikkaamalla pääsee siirtymään 'User profile'-ikkunaan. Työkalua valitsemalla ja 'Comment'-nappia painamalla aukee 'Comment'-ikkuna.
 
 ### 'Commment'-ikkuna
 <img src="images/itool_comment.JPG" alt="iTool v1" width="500">
