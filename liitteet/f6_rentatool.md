@@ -17,3 +17,4 @@ Käyttäjä vuokraa muilta käyttäjiltä työkaluja.
 | | 
 |:-:|
 | [Use Case 2: Työkalujen vuokraaminen ja palautus](../README.md#työkalujen-selailu-vuokraus-ja-palautus) | 
+| [AT03 Työkalujen vuokraminen](at4_rentatool.md) | 
