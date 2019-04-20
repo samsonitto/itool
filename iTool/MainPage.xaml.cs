@@ -76,6 +76,7 @@ namespace iTool
 
         private void GoToProfile()
         {
+            //AVATAAN PROFIILI-IKKUNA
             Active.profile = new ProfileWindow();
             Active.profile.Show();
             this.Close();
@@ -83,39 +84,48 @@ namespace iTool
 
         private void Filters()
         {
-            if (cbCityFilter.SelectedValue != null && cbToolCategory.SelectedValue != null)
+            //SUODATTIMIEN TOIMINNALLISUUS
+            try
             {
-                string location = cbCityFilter.SelectedValue.ToString();
-                string category = cbToolCategory.SelectedValue.ToString();
+                if (cbCityFilter.SelectedValue != null && cbToolCategory.SelectedValue != null) //SUODATTIMISSA ON OLETUKSENA VALITTU VALUE[0], JOKA ON 'All categories' JA 'All cities'
+                {
+                    string location = cbCityFilter.SelectedValue.ToString();
+                    string category = cbToolCategory.SelectedValue.ToString();
 
-                if (category == "All categories" && location == "All cities")
-                {
-                    dgTools.ItemsSource = tools;
-                    txbMessages.Text = "Here you can see all tools that are available for rent. Use filters or the search bar to find a tool for you.";
+                    if (category == "All categories" && location == "All cities") //JOS SUOATTIMISSA EI OLE EHTOJA
+                    {
+                        dgTools.ItemsSource = tools;
+                        txbMessages.Text = "Here you can see all tools that are available for rent. Use filters or the search bar to find a tool for you.";
+                    }
+                    else if (category != "All categories" && location != "All cities") //JOS MOLEMMISSA SUODATTIMISSA ON VALITTU JOTAIN
+                    {
+                        dgTools.ItemsSource = tools.Where(t => t.ToolCategoryName.Contains(category) && t.ToolLocation.Contains(location));
+                        txbMessages.Text = $"Here you can see tools, filtered by location: {cbCityFilter.SelectedValue.ToString()} and category: {cbToolCategory.SelectedValue.ToString()}.";
+                    }
+                    else if (location == "All cities" && cbToolCategory.SelectedValue.ToString() != "All categories") //JOS KATEGORIA SUODATTIMESSA ON VALITTU JOTAIN
+                    {
+                        dgTools.ItemsSource = tools.Where(t => t.ToolCategoryName.Contains(category));
+                        txbMessages.Text = $"Here you can see tools, filtered by category: {cbToolCategory.SelectedValue.ToString()}.";
+                    }
+                    else //JOS KAUPUNKI SUODATTIMESSA ON VALITTU JOTAIN
+                    {
+                        dgTools.ItemsSource = tools.Where(t => t.ToolLocation.Contains(location));
+                        txbMessages.Text = $"Here you can see tools, filtered by location: {cbCityFilter.SelectedValue.ToString()}.";
+                    }
                 }
-                else if (category != "All categories" && location != "All cities")
-                {
-                    dgTools.ItemsSource = tools.Where(t => t.ToolCategoryName.Contains(category) && t.ToolLocation.Contains(location));
-                    txbMessages.Text = $"Here you can see tools, filtered by location: {cbCityFilter.SelectedValue.ToString()} and category: {cbToolCategory.SelectedValue.ToString()}.";
-                }
-                else if (location == "All cities" && cbToolCategory.SelectedValue.ToString() != "All categories")
-                {
-                    dgTools.ItemsSource = tools.Where(t => t.ToolCategoryName.Contains(category));
-                    txbMessages.Text = $"Here you can see tools, filtered by category: {cbToolCategory.SelectedValue.ToString()}.";
-                }
-                else
-                {
-                    dgTools.ItemsSource = tools.Where(t => t.ToolLocation.Contains(location));
-                    txbMessages.Text = $"Here you can see tools, filtered by location: {cbCityFilter.SelectedValue.ToString()}.";
-                }
+            }
+            catch
+            {
+                throw;
             }
         }
 
         private void ShowPicture(string imageFile)
         {
+            //NÄYTETÄÄN VALITUN TYÖKALUN KUVA
             try
             {
-                if (string.IsNullOrEmpty(imageFile) || !File.Exists(imageFile))
+                if (string.IsNullOrEmpty(imageFile) || !File.Exists(imageFile)) //JOS TYÖKALULLA EI OLE KUVAA
                 {
                     imageFile = "no_picture_tool.png";
                 }
@@ -133,12 +143,13 @@ namespace iTool
         #region EVENTHANDLERS
         private void DgTools_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //HAETAAN TYÖKALUN TIEDOT DATAGRIDIN VALINNAN PERUSTEELLA
             Object selected = dgTools.SelectedItem;
             if(selected != null)
             {
                 try
                 {
-                    Tool tool = (Tool)selected;
+                    Tool tool = (Tool)selected; //CASTATAAN DATAGRIDVALINNASTA TYÖKALUOLIO
                     ShowPicture(tool.ToolPictureURL);
                     txbToolName.Text = tool.ToolName;
                     toolName = tool.ToolName;
@@ -150,7 +161,7 @@ namespace iTool
                     Active.ToolID = tool.ToolID;
                     Active.OwnerID = tool.UserOwnerID;
 
-                    User user = DB.GetToolOwnerFromMysql(tool.UserOwnerID);
+                    User user = DB.GetToolOwnerFromMysql(tool.UserOwnerID); //HAETAAN TIETOKANNASTA TYÖKALUN OMISTAJAN TIEDOT
                     txbOwner.Text = user.FirstName + " " + user.LastName;
                     txbNumber.Text = user.Mobile;
 
@@ -189,11 +200,13 @@ namespace iTool
 
         private void ImgMainPageProfile_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            //PROFIILIKUVAA KLIKKAAMALLA PÄÄSEE PROFIILI-IKKUNAAN
             GoToProfile();
         }
 
         private void TxtDays_TextChanged(object sender, TextChangedEventArgs e)
         {
+            //LASKETAAN TRANSAKTION KOKONAISHINNAN DYNAAMISESTI SYÖTTÄMÄLLÄ PÄIVIEN MÄÄRÄN
             try
             {
                 if (!int.TryParse(txtDays.Text, out int num) && !string.IsNullOrEmpty(txtDays.Text))
@@ -221,36 +234,35 @@ namespace iTool
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //VUOKRATAAN TYÖKALUN PAINAMALLA 'Rent' BUTTONIA
             try
             {
-                
-
-                if (!string.IsNullOrEmpty(txtDays.Text) && int.TryParse(txtDays.Text, out int num))
+                if (!string.IsNullOrEmpty(txtDays.Text) && int.TryParse(txtDays.Text, out int num)) //TARKISTETAAN ETTÄ PÄIVIEN MÄÄRÄ ON SYÖTETTY OIKEIN
                 {
-                    var result = MessageBox.Show($"Do you really want to rent {toolName} for {txtDays.Text} and {txbTotalPrice.Text}?", "iTool: Rent a Tool", MessageBoxButton.YesNo);
+                    var result = MessageBox.Show($"Do you really want to rent {toolName} for {txtDays.Text} and {txbTotalPrice.Text}?", "iTool: Rent a Tool", MessageBoxButton.YesNo); //YES/NO VARMISTUSIKKUNA
                     
-                    if (result == MessageBoxResult.Yes)
+                    if (result == MessageBoxResult.Yes) //JOS ON VASTATTU 'YES'
                     {
                         DateTime dateTime = DateTime.Now;
                         DateTime addDays = dateTime.AddDays(int.Parse(txtDays.Text));
                         string startDate = dateTime.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
                         string plannedEndDate = addDays.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
-                        DB.AddTransactionToMysql(startDate, plannedEndDate, Active.OwnerID, Active.UserID, Active.ToolID);
-                        tools = DB.GetToolsFromMysql();
-                        dgTools.ItemsSource = tools;
-                        txbMessages.Text = $"You have rented {toolName}"; 
+                        DB.AddTransactionToMysql(startDate, plannedEndDate, Active.OwnerID, Active.UserID, Active.ToolID); //LISÄTÄÄN UUSI TRANSAKTIO TIETOKANTAAN
+                        tools = DB.GetToolsFromMysql(); //PÄIVITETÄÄN TYÖKALULISTA
+                        dgTools.ItemsSource = tools; //PÄIVITETÄÄN DATAGRIDIN
+                        txbMessages.Text = $"You have rented {toolName}"; //ESITETÄÄN VIESTI KÄYTTÄJÄLLE
                     }
                     else
                     {
-                        txbMessages.Text = "You did not go through it";
+                        txbMessages.Text = "You did not go through it"; //JOS ON VALITTU 'NO'
                     }
                 }
-                else if (float.TryParse(txtDays.Text, out float fnum))
+                else if (float.TryParse(txtDays.Text, out float fnum)) //JOS PÄIVIEN MÄÄRÄ ON SYÖTETTY DESIMAALEINA
                 {
                     txtDays.Focus();
                     txbMessages.Text = $"\"Days\" field can't be a decimal number";
                 }
-                else
+                else //JOS PÄIVIEN MÄÄRÄ ON TYHJÄ TAI JOKU MUU KUN NUMERO
                 {
                     txtDays.Focus();
                     txbMessages.Text = $"\"Days\" field can't be empty or not a number";
@@ -264,6 +276,7 @@ namespace iTool
 
         private void DgTools_AutoGeneratedColumns(object sender, EventArgs e)
         {
+            //PIILOTETAAN DATAGRIDIN KOLUMNEJA JA VAIHDETAAN DATAGRIDIN KOLUMNIEN OTSIKOT
             dgTools.Columns[0].Visibility = Visibility.Collapsed;
             dgTools.Columns[1].Visibility = Visibility.Collapsed;
             dgTools.Columns[2].Visibility = Visibility.Collapsed;
@@ -280,6 +293,7 @@ namespace iTool
 
         private void BtnSearchTools_Click(object sender, RoutedEventArgs e)
         {
+            //ETSITÄÄN TYÖKALUJA NIMELLÄ
             try
             {
                 if (!string.IsNullOrEmpty(txtSearchBar.Text))
@@ -302,6 +316,7 @@ namespace iTool
 
         private void TxtSearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
+            //ESITETÄÄN TAAS KAIKKI VUOKRALLA OLEVAT TYÖKALUT SILLOIN KUN SEARCH BAR ON TYHENNETTY
             try
             {
                 if (txtSearchBar.Text == "")
@@ -319,6 +334,7 @@ namespace iTool
 
         private void BtnComment_Click(object sender, RoutedEventArgs e)
         {
+            //AVATAAAN KOMMANTTI-IKKUNA
             CommentWindow comment = new CommentWindow();
             comment.ShowDialog();
         }

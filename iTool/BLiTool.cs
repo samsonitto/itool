@@ -22,8 +22,6 @@ namespace iTool
         public string Address { get; set; }
         public string PaymentMethod { get; set; }
         public string PictureURL { get; set; }
-        //public List<Tool> ToolCollection = new List<Tool>();
-
     }
 
     public class Tool
@@ -61,7 +59,7 @@ namespace iTool
         public string Text { get; set; }
         public int ToolID { get; set; }
         public int userID { get; set; }
-        public int? CommentParentID { get; set; }
+        public int? CommentParentID { get; set; } //NULLABLE, KOSKA KENTTÄ VOI OLLA NULL
     }
 
     public class Transaction

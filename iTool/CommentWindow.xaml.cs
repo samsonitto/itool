@@ -20,9 +20,9 @@ namespace iTool
     public partial class CommentWindow : Window
     {
         #region PROPERTIES
-        private List<Comment> comments;
+        private List<Comment> comments; //APUMUUTTUJA SITÄ VARTEN ETTEI TARVIS AVATA MYSQL YHTEYS KUN HAETAAN UUDEN KOMMENTIN
         private List<User> users;
-        private int? selectedComment = null;
+        private int? selectedComment = null; //VALITUN KOMMENTIN ID
         #endregion
 
         #region METHODS
@@ -34,8 +34,8 @@ namespace iTool
 
         private void IniMyStuuf()
         {
-            users = DB.GetAllUsersFromMysql();
-            comments = DB.GetCommentsFromMysql(Active.ToolID);
+            users = DB.GetAllUsersFromMysql(); //HAETAAN KAIKKI KÄYTTÄJÄT
+            comments = DB.GetCommentsFromMysql(Active.ToolID); //HAETAAN TIETYN TYÖKALUN KAIKKI KOMMENTIT
 
             IniComments();
         }
@@ -47,12 +47,14 @@ namespace iTool
                 string body = txtComment.Text;
                 string query;
 
-                if (selectedComment == null)
+                if (selectedComment == null) //JOS HALUTAAN JÄTTÄÄ PARENT KOMMENTIN
                     query = $"INSERT INTO comment (commentDate, commentText, userID, commentParentID, toolID) VALUES (CURRENT_TIMESTAMP,'{body}',{Active.UserID},null,{Active.ToolID});";
-                else
+                else //JOS HALUTAAN VASTATA JOHONKIN KOMMENTTIIN
                     query = $"INSERT INTO comment (commentDate, commentText, userID, commentParentID, toolID) VALUES (CURRENT_TIMESTAMP,'{body}',{Active.UserID},{selectedComment},{Active.ToolID});";
 
-                DB.AddCommentToMysql(query);
+                DB.AddCommentToMysql(query); //LISÄTÄÄN KOMMENTTI TIETOKANTAAN
+
+                //PÄIVITETÄÄN KOMMENTTIKENTÄN
                 lbxComments.Items.Clear();
                 comments = DB.GetCommentsFromMysql(Active.ToolID);
                 IniComments();
@@ -66,6 +68,7 @@ namespace iTool
 
         private User GetUser(int userID)
         {
+            //HAETAAN KÄYTTÄJÄ KÄYTTÄJÄLISTASTA KÄYTTÄJÄ ID:N PERUSTEELLA
             try
             {
                 foreach (User user in users)
@@ -85,13 +88,13 @@ namespace iTool
 
         private void IniComments()
         {
+            //HAETAAN KAIKKI KOMMENTIT 'comments' LISTASTA JA LUODAAN NÄKYMÄ NIISTÄ
             try
             {
                 foreach (Comment item in comments)
                 {
                     if (item.CommentParentID == null)
                     {
-                        //User u = DB.GetToolOwnerFromMysql(item.userID);
                         User u = GetUser(item.userID);
 
                         Label lbComment = new Label();
@@ -126,7 +129,6 @@ namespace iTool
                     {
                         if (reply.CommentParentID == item.CommentID)
                         {
-                            //User us = DB.GetToolOwnerFromMysql(reply.userID);
                             User us = GetUser(reply.userID);
 
                             Label lbComment = new Label();
@@ -181,6 +183,7 @@ namespace iTool
 
             if (selected != null)
             {
+                //POIMITAAN VALITUN KOMMENTIN ID
                 Label l = (Label)selected.Children[0];
                 string content = l.Content.ToString();
                 selectedComment = int.Parse(content.Split('#')[content.Split('#').Length - 1]); 

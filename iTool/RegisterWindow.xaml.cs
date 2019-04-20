@@ -43,14 +43,17 @@ namespace iTool
 
         private void IniMyStuff()
         {
+            //KOMBOBOKSIT
             cbPayment.ItemsSource = payment;
             cbLocation.ItemsSource = locations;
         }
 
         private void Register()
         {
+            //REKSTRÖINTITAPAHTUMA
             try
             {
+                //TARKISTETAAN ONKO KAIKKI KENTÄT OIKEIN TÄYTETTY
                 if (txtAddEmail.Text.Length == 0)
                 {
                     txbError.Text = "Enter an email";
@@ -108,6 +111,8 @@ namespace iTool
 
                     string address = txtAddAddress.Text;
                     string payment = cbPayment.SelectedValue.ToString();
+
+                    //TARKISTETAAN ETTÄ SALASANAKENTÄT ON OIKEIN TÄYTETTY
                     if (pwdCreatePassword.Password.Length == 0)
                     {
                         txbError.Text = "Enter password";
@@ -127,14 +132,16 @@ namespace iTool
                     {
                         txbError.Text = "";
 
-                        MySqlConnection con = new MySqlConnection("SERVER=mysql.labranet.jamk.fi;DATABASE=M3156_3;UID=M3156;PASSWORD=Mn1GQ5TbFX7UI0tjH2Y4H2oWtcfs4zra");
+                        //LISÄTÄÄN UUSI KÄYTTÄJÄ TIETOKANTAAN
+                        string connStr = DB.GetConnectionString();
+                        MySqlConnection con = new MySqlConnection(connStr);
                         con.Open();
                         MySqlCommand cmd = new MySqlCommand($"Insert into user (userName,userSurname,userAddress,userEmail,userLocation,paymentMethod,userMobile,userPassword,userPicture) values('{firstname}','{lastname}','{address}','{email}','{location}','{payment}','{mobile}',MD5('{password}'),'{Active.imgFile}')", con);
                         cmd.CommandType = CommandType.Text;
                         cmd.ExecuteNonQuery();
                         con.Close();
 
-                        if (!string.IsNullOrEmpty(txtPic.Text))
+                        if (!string.IsNullOrEmpty(txtPic.Text)) //KUVAA ON VALITTU, KOPIOIDAAN KUVA 'IMAGES' KANSIOON
                         {
                             System.IO.File.Copy(Active.dirPath, Active.relativePath, true);
                             File.SetAttributes(Active.relativePath, FileAttributes.Normal);
@@ -172,6 +179,7 @@ namespace iTool
 
         private void Fill()
         {
+            //TÄYTETÄÄN KENTÄT SATUNNAISILLA TIEDOILLA (TESTAAMISTA VARTEN)
             try
             {
                 Random rand = new Random();
@@ -240,6 +248,7 @@ namespace iTool
         #region EVENTHANDLERS
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
+            //PALATAAN TAKAISIN LOGIN IKKUNAAN
             MainWindow main = new MainWindow();
             main.Show();
             this.Close();
@@ -247,6 +256,7 @@ namespace iTool
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
+            //SELATAAN KUVA
             Active.BrowseImage(imgProfile, txtPic);
         }
 

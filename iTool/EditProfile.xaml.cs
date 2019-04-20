@@ -45,15 +45,16 @@ namespace iTool
         #region EVENTHANDLERS
         private void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            User activeUser = DB.GetUserFromMysqlWhere($"userID = {Active.UserID}");
-            User confirmPwd = DB.GetUserFromMysqlWhere($"userPassword = MD5('{pwdCurrentPassword.Password}')");
+            User activeUser = DB.GetUserFromMysqlWhere($"userID = {Active.UserID}"); //LUODAAN AKTIIVIKÄYTTÄJÄSTÄ OLIO
+            User confirmPwd = DB.GetUserFromMysqlWhere($"userPassword = MD5('{pwdCurrentPassword.Password}')"); //HAETAAN KYTTÄJÄ, JONKA SALASANA VASTAA CURRENT PASSWORD KENTÄN SISÄLTÖÄ
 
-            List<string> attributes = new List<string>();
+            List<string> attributes = new List<string>(); //LUODAAN SQL QUERRY:N LUONTIA VARTEN APULISTA
 
-            string emailFormat = @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$";
+            string emailFormat = @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"; //S-POSTI MUOTOSTRINGI
 
             try
             {
+                //TARKISTETAAN ETTÄ KAIKKI KENTÄT ON OIKEIN TÄYTETTY
                 if (!string.IsNullOrEmpty(txtNewEmail.Text) && !Regex.IsMatch(txtNewEmail.Text, emailFormat))
                 {
                     txbNewError.Text = "Enter a valid email.";
@@ -99,83 +100,83 @@ namespace iTool
                     string address = txtNewAddress.Text;
                     string location = null;
                     string payment = null;
-                    if (cbNewLocation.SelectedValue != null)
+                    if (cbNewLocation.SelectedValue != null) //JOS UUSI SIJAINTI ON VALITTU
                     {
                         location = cbNewLocation.SelectedValue.ToString();
                     }
-                    if (cbNewPayment.SelectedValue != null)
+                    if (cbNewPayment.SelectedValue != null) //JOS UUSI MAKSUTAPA ON VALITTU
                     {
                         payment = cbNewPayment.SelectedValue.ToString();
                     }
 
                     bool newPassword = false;
 
-                    if (!string.IsNullOrEmpty(email))
+                    if (!string.IsNullOrEmpty(email)) //JOS UUSI S-POSTI ON MÄÄRITETTY
                     {
-                        attributes.Add($" userEmail = '{email}',");
-                        message = message + " e-mail,";
+                        attributes.Add($" userEmail = '{email}',"); //LISÄTÄÄN LISTALLE
+                        message = message + " e-mail,"; //RAKENNETAAN VIESTI
                     }
                         
-                    if (!string.IsNullOrEmpty(password))
+                    if (!string.IsNullOrEmpty(password)) //JOS UUSI SALASANA ON MÄÄRITETTY
                     {
-                        attributes.Add($" userPassword = MD5('{password}'),");
-                        newPassword = true;
+                        attributes.Add($" userPassword = MD5('{password}'),"); //LISÄTÄÄN LISTALLE
+                        newPassword = true; //RAKENNETAAN VIESTI
                     }
-                    if (!string.IsNullOrEmpty(mobile))
+                    if (!string.IsNullOrEmpty(mobile)) //JOS UUSI PUHNRO ON MÄÄRITETTY
                     {
-                        attributes.Add($" userMobile = '{mobile}',");
-                        message = message + " mobile,";
+                        attributes.Add($" userMobile = '{mobile}',"); //LISÄTÄÄN LISTALLE
+                        message = message + " mobile,"; //RAKENNETAAN VIESTI
                     }
                         
-                    if (!string.IsNullOrEmpty(address))
+                    if (!string.IsNullOrEmpty(address)) //JOS UUSI OSOITE MÄÄRITETTY
                     {
-                        attributes.Add($" userAddress = '{address}',");
-                        message = message + " address,";
+                        attributes.Add($" userAddress = '{address}',"); //LISÄTÄÄN LISTALLE
+                        message = message + " address,"; //RAKENNETAAN VIESTI
                     }
                         
                     if (!string.IsNullOrEmpty(location))
                     {
-                        attributes.Add($" userLocation = '{location}',");
-                        message = message + " location,";
+                        attributes.Add($" userLocation = '{location}',"); //LISÄTÄÄN LISTALLE
+                        message = message + " location,"; //RAKENNETAAN VIESTI
                     }
                         
                     if (!string.IsNullOrEmpty(payment))
                     {
-                        attributes.Add($" paymentMethod = '{payment}',");
-                        message = message + " payment,";
+                        attributes.Add($" paymentMethod = '{payment}',"); //LISÄTÄÄN LISTALLE
+                        message = message + " payment,"; //RAKENNETAAN VIESTI
                     }
                         
-                    if (!string.IsNullOrEmpty(Active.imgFile))
+                    if (!string.IsNullOrEmpty(Active.imgFile)) //JOS UUSI PROFIILIKUVA ON VALITTU
                     {
-                        attributes.Add($" userPicture = '{Active.imgFile}',");
-                        message = message + " profile image,";
+                        attributes.Add($" userPicture = '{Active.imgFile}',"); //LISÄTÄÄN LISTALLE
+                        message = message + " profile image,"; //RAKENNETAAN VIESTI
                     }
                         
-                    foreach (string item in attributes)
+                    foreach (string item in attributes) //REKENNETAAN SQL QUERRY STRINGI
                     {
                         sql = sql + item;
                     }
 
-                    message = message.Remove(message.Length - 1, 1);
+                    message = message.Remove(message.Length - 1, 1); //POSTETAAN VIIMEINEN PILKKU VIESTISTÄ
 
-                    sql = sql.Remove(sql.Length - 1, 1);
+                    sql = sql.Remove(sql.Length - 1, 1); //POISTETAAN VIIMEINEN PILKKU SQL QUERRYSTÄ
 
-                    var result = MessageBox.Show($"Do you really want to update {message}?", "iTool: Update Profile", MessageBoxButton.YesNo);
+                    var result = MessageBox.Show($"Do you really want to update {message}?", "iTool: Update Profile", MessageBoxButton.YesNo); //YES/NO VARMISTUSIKKUNA
 
-                    if (result == MessageBoxResult.Yes)
+                    if (result == MessageBoxResult.Yes) //JOS ON VALITTU 'YES' VARMISTUSIKKUNASSA
                     {
-                        DB.UpdateUserToMysql(sql);
+                        DB.UpdateUserToMysql(sql); //PÄIVITETÄÄN KÄYTTÄJÄN TIEDOT TIETOKANNASSA
 
 
 
-                        if (!string.IsNullOrEmpty(Active.imgFile))
+                        if (!string.IsNullOrEmpty(Active.imgFile)) //JOS UUSI KUVA ON VALITTU, KOPIOIDAAN UUSI KUVATIEDOSTO 'images' KANSIOON
                         {
                             System.IO.File.Copy(Active.dirPath, Active.relativePath, true);
                             File.SetAttributes(Active.relativePath, FileAttributes.Normal);
-                            Active.ImageSource = new BitmapImage(new Uri($"{Active.ProjectPath}/images/{Active.imgFile}"));
+                            Active.ImageSource = new BitmapImage(new Uri($"{Active.ProjectPath}/images/{Active.imgFile}")); //VAIHDETAAN AKTIIVIKÄYTTÄJÄN AKTIIVIKUVA
                         }
 
-                        if (newPassword)
+                        if (newPassword) //JOS SALASANA ON VAIHDETTU, KIRJAUDUTAAN ULOS
                         {
                             Active.main = new MainWindow();
                             Active.main.txbMainError.Text = "You have changed your password \nLog in using your new password";
@@ -185,7 +186,7 @@ namespace iTool
                         }
 
                         Active.profile.imgUserProfile.Source = Active.ImageSource;
-                        Active.profile.txbMessagesProfile.Text = message;
+                        Active.profile.txbMessagesProfile.Text = message; //ESITETÄÄN VIESTI KÄYTTÄJÄLLE
                         this.Close(); 
                     }
                 }

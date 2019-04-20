@@ -20,7 +20,7 @@ namespace iTool
     public partial class RatingWindow : Window
     {
         #region PROPERTIES
-        private int counter = 1000;
+        private int counter = 1000; //MERKKILASKURI
         public int ratedID;
         public int transactionID;
         public string ratedName;
@@ -42,11 +42,13 @@ namespace iTool
         #region EVENTHANDLERS
         private void BtnGiveRating_Click(object sender, RoutedEventArgs e)
         {
+            //ANNETAAN ARVIO
             try
             {
                 string rating = txtRating.Text;
                 string feedback = txtRatingComments.Text;
 
+                //TARKISTETAAN ONKO KAIKKI KENTÄT OIKEIN TÄYTETTY
                 if (string.IsNullOrEmpty(rating))
                     lblMessagesRating.Content = "Input rating";
                 else if (!int.TryParse(rating, out int num))
@@ -56,7 +58,7 @@ namespace iTool
 
                 else
                 {
-                    DB.AddRatingToMysql(int.Parse(rating), feedback, Active.UserID, ratedID, transactionID);
+                    DB.AddRatingToMysql(int.Parse(rating), feedback, Active.UserID, ratedID, transactionID); //LISÄTÄÄN ARVIO TIETOKANTAAN
                     Active.profile.txbMessagesProfile.Text = $"You have rated {ratedName}";
                     this.Close();
                 }
@@ -69,6 +71,7 @@ namespace iTool
 
         private void TxtRatingComments_TextChanged(object sender, TextChangedEventArgs e)
         {
+            //MERKKILASKURIN TOIMINNALLISUUS
             string input = txtRatingComments.Text;
             int c = counter - input.Length;
             lblCharCount.Content = $"{c}";

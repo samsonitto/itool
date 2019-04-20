@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace iTool
 {
-    /// <summary>
-    /// Interaction logic for AddRandomTools.xaml
-    /// </summary>
     public partial class AddRandomTools : Window
     {
         #region METHODS
@@ -29,6 +26,7 @@ namespace iTool
         {
             try
             {
+                //GENEROIDAAN SATUNNAISIA TYÖKALUJA
                 List<int> userIDs = DB.GetUserIDsFromMysql();
                 List<string> conditions = new List<string>() { "Poor", "Ok", "Good", "Pristine" };
                 List<string> categories = new List<string>() { "Hionta", "Hitsauskoneet", "Juottaminen", "Käsityökalut", "Leikkaustyökalut", "Leikkuuterät", "Mittavälineet", "Paineilma", "Poranterät", "Työkalujen säilyttäminen", "Työpajan varustus", "Työstökoneet", "Sähkötyökalut" };
@@ -59,6 +57,7 @@ namespace iTool
 
         static string LoremIpsum(int minWords, int maxWords, int minSentences, int maxSentences, int numParagraphs)
         {
+            //GENEROIDAAN LOREM IPSUM TYÖKALU DESCRIPTIONIA VARTEN
             try
             {
                 var words = new[] { "lorem", "ipsum", "dolor", "sit", "amet", "consectetuer", "adipiscing", "elit", "sed", "diam", "nonummy", "nibh", "euismod", "tincidunt", "ut", "laoreet", "dolore", "magna", "aliquam", "erat" };
@@ -72,7 +71,6 @@ namespace iTool
 
                 for (int p = 0; p < numParagraphs; p++)
                 {
-                    //result.Append("<p>");
                     for (int s = 0; s < numSentences; s++)
                     {
                         for (int w = 0; w < numWords; w++)
@@ -82,7 +80,6 @@ namespace iTool
                         }
                         result.Append(". ");
                     }
-                    //result.Append("</p>");
                 }
 
                 return result.ToString();

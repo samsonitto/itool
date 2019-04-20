@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace iTool
 {
-    /// <summary>
-    /// Interaction logic for AddAToolWindow.xaml
-    /// </summary>
     public partial class AddAToolWindow : Window
     {
         #region PROPERTIES
@@ -53,7 +50,7 @@ namespace iTool
             txtDescription.Text = "";
             txtBrowseToolImage.Text = "";
             imgAddTool.Source = new BitmapImage(new Uri(@"F:\iTool\iTool\iTool\images\no_picture_tool.png", UriKind.RelativeOrAbsolute));
-        }
+        } // Tyhjentää kaikki kentät ja komboboksit
         #endregion
 
         #region EVENTHANDLERS
@@ -61,7 +58,7 @@ namespace iTool
         {
             try
             {
-                OpenFileDialog dlg = new OpenFileDialog();
+                OpenFileDialog dlg = new OpenFileDialog(); //OpenFileDialog olio
                 dlg.Title = "Select a tool image";
                 dlg.InitialDirectory = "c:\\";
                 dlg.Filter = "All supported graphics |*.jpg;*.jpeg;*.png|All files (*.*)|*.*";
@@ -71,17 +68,19 @@ namespace iTool
                 {
                     txtBrowseToolImage.Text = dlg.FileName;
                 }
-                if (string.IsNullOrEmpty(txtBrowseToolImage.Text))
+                if (string.IsNullOrEmpty(txtBrowseToolImage.Text)) //jos kuvaa ei ole valittu
                 {
                     dlg.FileName = "images/no_picture_tool.png";
                 }
 
                 imgAddTool.Stretch = Stretch.Fill;
                 Uri u = new Uri(dlg.FileName, UriKind.RelativeOrAbsolute);
-                imgAddTool.Source = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute));
-                string i = imgAddTool.Source.ToString().Split('/')[imgAddTool.Source.ToString().Split('/').Length - 1];
+                imgAddTool.Source = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute)); // näyttää valitun kuvan
+                string i = imgAddTool.Source.ToString().Split('/')[imgAddTool.Source.ToString().Split('/').Length - 1]; //kuvatiedoston nimi
                 //path = $@"F:\iTool\iTool\iTool\images\{i}";
-                path = $@"images\{i}";
+                path = $@"images\{i}"; //polku kuvatiedostoon
+
+                //Metodi, joka lisää numeron kuvatiedostonimen alkuun, jos samanniminen kuvatiedosto on jop olemassa 'images' kansiossa
                 if (File.Exists(path))
                 {
                     int x = 0;
@@ -99,7 +98,7 @@ namespace iTool
                     imgFile = path.Split('\\')[path.Split('\\').Length - 1];
                 }
 
-                // relaatiivinen polku images kansioon
+                // relaatiivinen polku kuvatiedostoon
                 relativePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\{path}";
 
                 // polku valituun kuvatiedostoon
@@ -116,6 +115,7 @@ namespace iTool
         {
             try
             {
+                //TARKISTETAAN ONKO KAIKKI KENTÄT TÄYTETTY OIKEIN
                 if (txtToolName.Text.Length == 0)
                 {
                     lblToolError.Content = "Enter a tool name";
@@ -143,16 +143,19 @@ namespace iTool
                 }
                 else
                 {
-                    int cID = DB.GetToolCategoryID(cbToolCategories.SelectedValue.ToString());
-                    DB.AddAToolToMysql(txtToolName.Text, cID, txtDescription.Text, Active.UserID, cbToolCondition.SelectedValue.ToString(), float.Parse(txtPrice.Text), imgFile);
+                    int cID = DB.GetToolCategoryID(cbToolCategories.SelectedValue.ToString()); //MÄÄRITETÄÄN VALITUN TYÖKALUKATEGORIAN ID
+                    DB.AddAToolToMysql(txtToolName.Text, cID, txtDescription.Text, Active.UserID, cbToolCondition.SelectedValue.ToString(), float.Parse(txtPrice.Text), imgFile); //LISÄTÄÄN TYÖKALU TIETOKANTAAN
                     lblToolError.Content = "You have successfully added a tool for rent!";
-                    Active.profile.dgMyTools.ItemsSource = DB.GetOwnedToolsFromMysql();
+                    Active.profile.dgMyTools.ItemsSource = DB.GetOwnedToolsFromMysql(); //PÄIVITETÄÄN OMIEN TYÖKALUJEN LISTAN
 
+                    //KOPIOIDAAN KUVATIEDOSTO 'images' KANSIOON
                     if (!string.IsNullOrEmpty(txtBrowseToolImage.Text))
                     {
                         System.IO.File.Copy(dirPath, relativePath, true);
                         File.SetAttributes(relativePath, FileAttributes.Normal);
                     }
+
+                    //RESETOIDAAN KAIKKI KENTÄT
                     Reset();
                 }
             }
@@ -164,6 +167,7 @@ namespace iTool
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
+            //AVATAAN PIILOTETTU 'AddRandomTools' IKKUNA
             if(e.Key == Key.F1)
             {
                 AddRandomTools addRandomTools = new AddRandomTools();

@@ -16,7 +16,7 @@ namespace iTool
     public static class Active
     {
         #region PROPERTIES
-        public static string ProjectPath { get { return Directory.GetParent(Environment.CurrentDirectory).Parent.FullName; } }
+        public static string ProjectPath { get { return Directory.GetParent(Environment.CurrentDirectory).Parent.FullName; } } //PROJEKTIPOLKU
         public static string FirstName { get; set; }
         public static string LastName { get; set; }
         public static string ImagePath { get; set; }
@@ -52,44 +52,47 @@ namespace iTool
 
         public static void BrowseImage(Image imgProfile, TextBox txtPic)
         {
+            //KUVATIEDOSTON SELAAMINEN
             try
             {
                 string path;
                 OpenFileDialog dlg = new OpenFileDialog();
-                dlg.Title = "Select a profile picture";
-                dlg.InitialDirectory = "c:\\";
-                dlg.Filter = "All supported graphics |*.jpg;*.jpeg;*.png|All files (*.*)|*.*";
+                dlg.Title = "Select a profile picture"; //DIALOGIN OTSIKKO
+                dlg.InitialDirectory = "c:\\"; //DIALOG AUKEE C LEVYLTÄ
+                dlg.Filter = "All supported graphics |*.jpg;*.jpeg;*.png|All files (*.*)|*.*"; //TUETUJEN TIEDOSTOMUOTOJEN SUODATUS
                 dlg.RestoreDirectory = true;
                 Nullable<bool> result = dlg.ShowDialog(); // näyttää dialogin
-                if (result == true)
+                if (result == true) //JOS KUVA ON VALITTU
                 {
                     txtPic.Text = dlg.FileName;
                 }
-                if (string.IsNullOrEmpty(txtPic.Text))
+                if (string.IsNullOrEmpty(txtPic.Text)) //JOS KUVAA EI VALITTU
                 {
                     dlg.FileName = "images/no_picture.png";
                 }
 
                 imgProfile.Stretch = Stretch.Fill;
                 Uri u = new Uri(dlg.FileName, UriKind.RelativeOrAbsolute);
-                imgProfile.Source = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute));
-                string i = imgProfile.Source.ToString().Split('/')[imgProfile.Source.ToString().Split('/').Length - 1];
+                imgProfile.Source = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute)); //NÄYTETÄÄN VALITTU KUVA
+                string i = imgProfile.Source.ToString().Split('/')[imgProfile.Source.ToString().Split('/').Length - 1]; //POIMITAAN KUVATIEDOSTON NIMI
                 //path = $@"F:\iTool\iTool\iTool\images\{i}";
                 //path = $@"images\{i}";
-                path = $"{ProjectPath}\\images\\{i}";
-                if (File.Exists(path))
+
+                //TARKISTETAAN ONKO SAMANNIMINEN KUVATIEDOSTON ON JO OLEMASSA 'IMAGES' KANSIOSSA
+                path = $"{ProjectPath}\\images\\{i}"; //POLKU KUVATIEDOSTOON
+                if (File.Exists(path)) //JOS ON OLEMASSA
                 {
                     int x = 0;
-                    for (; File.Exists(path);)
+                    for (; File.Exists(path);) //KÄYDÄÄN NIIN KAUAN KUN KUVATIEDOSTO ON OLEMASSA
                     {
-                        path = $@"images\{x}{i}";
+                        path = $@"images\{x}{i}"; //LISÄTÄÄN KUVATIEDOSTON NIMEN ALKUUN NUMERO (X)
                         //path = $@"F:\iTool\iTool\iTool\images\{x}{i}";
                         imgFile = $"{x}{i}";
                         x++;
                     }
                 }
 
-                else
+                else //JOS KUVATIEDOSTOA EI OLE OLEMASSA, POIMITAAN KUVATIEDOSTON NIMI
                 {
                     imgFile = path.Split('\\')[path.Split('\\').Length - 1];
                 }
@@ -105,7 +108,7 @@ namespace iTool
                 throw;
             }
 
-        }
+        } 
         #endregion
     }
 }
