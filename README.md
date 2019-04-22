@@ -2,7 +2,7 @@
 
 ## Tekijä
 
-* Samson Azizyan
+* Samson Azizyan (M3156)
 * M3156 
 * Versionumero 0.1
 
