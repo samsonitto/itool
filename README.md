@@ -25,9 +25,10 @@
     * [Asennus](#asennus)
     * [Tetoa ohjelmasta](#tietoa-ohjelmasta)
     * [Kuvaruutukaappaukset](#kuvaruutukaappaukset)
-    * [Mukana tulevat tiedostot](#)
+    * [Mukana tulevat tiedostot](#mukana-tulevat-tiedostot)
     * [Tietokanta](#tietokanta)
-    * [Ongelmat, jatkokehitysideat](#)
+    * [Ongelmat, jatkokehitysideat](#ongelmat-jatkokehitysideat)
+    * [Työmäärä](#työmäärä)
     * [Yhteenveto](#yhteenveto)
 
 # Vaatimusmäärittely
