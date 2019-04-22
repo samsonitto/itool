@@ -410,7 +410,7 @@ pystyy täyttämään kaikki rekiströintikentät satunnaisilla arvoilla, tämä
 <img src="images/itool_register.JPG" alt="iTool v1" width="700">
 
 * Register ikkunassa pystyy rekiströitymään iTool-palveluun, kaikki kentät on pakollisia, paitsi kuva.
-* Löytyy myös 'Fill' nappi, jota klikkamalla voi täyttää kentät satunnaisilla tiedoilla. Nappi on luotu testausta varten.
+* Löytyy myös 'Fill' nappi, jota klikkaamalla voi täyttää kentät satunnaisilla tiedoilla. Nappi on luotu testausta varten.
 
 ### 'Main'-ikkuna
 <img src="images/itool_main.JPG" alt="iTool v1" width="900">
