@@ -433,6 +433,7 @@ pystyy täyttämään kaikki rekiströintikentät satunnaisilla arvoilla, tämä
 <img src="images/itool_profile.JPG" alt="iTool v1" width="800">
 
 * Profiili-ikkunassa nähdään 3 listaa: "Omat työkalut", "Omat vuokratut työkalut" ja "Omat transaktiot"
+* Työkaluja tai transaktioita valitsemalla pääsee näkemään niiden tiedot iksityiskohtaisemmin
 * Valitsemalla työkalu "Omat työkalut" listasta ja painamalla 'Delete' nappia voidaan poistaa työkalu kokonaan
 * Valitsemalla työkalu "Omat vuokratut työkalut" listasta ja painamalla 'Space' nappia voidaan palauttaa vuokratun työkalun omistajalleen
 * Valitsemalla transaktio "Omat transaktiot" listasta ja painamalla 'Space' nappia voidaan antaa transaktion toiselle osapuolelle arvion
