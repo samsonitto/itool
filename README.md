@@ -368,8 +368,10 @@ Pakko myöntää etää aloin koodaamaan jo viikolla 11 ja tein tämän suunnite
 # Loppuraportti
 
 ## Asennus
-Sovellus on pakattu zip-pakkaukseen, pakkaus pitää purkkaa sellaisenaan. Hakemistorakenteen pitää olla tasan tarkkaan sellainen kun pakkauksessa, koska sovellus käyttää 'images' - kansiotta
-kuvien tallentaamiseen ja esittämiseen.
+* Sovellus on pakattu zip-pakkaukseen, pakkaus pitää purkkaa sellaisenaan
+* Hakemistorakenteen pitää olla tasan tarkkaan sellainen kun pakkauksessa, koska sovellus käyttää 'images' - kansiotta kuvien tallentaamiseen ja esittämiseen
+* Exe-tiedosto löytyy bin/Debug kansiosta
+* Sovelluksen käyttöä varten pitää olla joko kirjautuneena labranetin tietokoneelle tai käyttää labranetin VPN-yhteyttä, koska tietokanta sijaitsee mysql.labranet palvelimella
 
 ## Tietoa ohjelmasta
 
@@ -456,6 +458,8 @@ pystyy täyttämään kaikki rekiströintikentät satunnaisilla arvoilla, tämä
 
 ## Mukana tulevat tiedostot
 
+* Mukana tulee [zip-pakkaus](https://student.labranet.jamk.fi/~M3156/iTool/iTool_v0.1.zip)
+
 ## Tietokanta
 
 Tietokannan suunnittelin tietokannat opintojakson harjoitustyönä. Tietokannasta on luotu 2 versitota prosessin aikana.
@@ -483,4 +487,37 @@ toiminnallisuutta varten.
 
 ## Ongelmat, jatkokehitysideat
 
+Tämä sovellus oli vaan hiekkalaatikkoprototyyppi mahdollisesta tulevasta toimivasta sovelluksesta, siihen nähden ei ole esiintynyt hirveän isoja ongelmia.
+On olemassa kuitenkin muutamaa kehitysideaa.
+
+### Kommentit
+
+* Kommentit ei esinny oikeassa järjestyksessä
+* Täytyy käydä koodi läpi ja parantaa
+* Kommentteihin täytyy pystyä päästä käsiksi myös Profiili-ikkunasta (pieni ja helppo päivitys)
+
+### Images kansio
+
+* Images kansio on olemassa vain paikallisesti
+* Täytyy siirtää webclietille, jota se päivittyisi kaikilla käyttäjillä dynaamisesti
+
+### Tietokantakyselyt
+
+* Koodissa on vähän liikaa ylimääräisiä yhteydenottoja mysql palvelimelle
+* Pitää muuttaa koodia, että otetaan vaan kerran per uusi ikkuna yhteyden palvelimelle
+* Täytyy implementoida 'Entity Framework' tulevissa versioissa
+
+## Työmäärä
+
+Olen tehnyt kaiken yksin, joten on mennyt paljon aikaa tekemiseen. Täältä löytyy karkea arvio työtunneista:
+
+* XAML ja ulkoasu: 15h
+* Code behind: 25h
+* Tietokanta: 10h
+* Dokumentointi: 5-10h
+
 ## Yhteenveto
+
+* Samson Azizyan (M3156)
+* Arvosanaehdotus: 5
+* Perustelut: Asetin itselleni arvosanaehdotukseksi 5, koska tein tosi paljon hommaa ja siihen kului noin 60h. Saattoi olla vähän liian kunniahimoinen projekti. Lopputulokseen olen tyytyväinen, kaikki toimii niin kuin pitääkin. Ulkoasu olisi voinut olla näyttävämpi, mutta toiminnallisuus oli prioriteettina tässä projektissa. Tietokanta oli monipuolinen ja hyvin toimiva. Tämä on hyvä pohja jatkokehitystä varten.
