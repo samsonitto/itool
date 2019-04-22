@@ -423,11 +423,23 @@ pystyy täyttämään kaikki rekiströintikentät satunnaisilla arvoilla, tämä
 ### 'Commment'-ikkuna
 <img src="images/itool_comment.JPG" alt="iTool v1" width="500">
 
+* Comment ikkunassa voi jättää uusia kommentteja koskien kyseistä työkalua
+* Voi myös vastata olemassa oleviin kommenteihin klikkaamalla kommenttia
+* Kommentit jätetään painamalla 'Enter'-nappia
+
 ### 'Profile'-ikkuna
 <img src="images/itool_profile.JPG" alt="iTool v1" width="800">
 
+* Profiili-ikkunassa nähdään 3 listaa: "Omat työkalut", "Omat vuokratut työkalut" ja "Omat transaktiot"
+* Valitsemalla työkalu "Omat työkalut" listasta ja painamalla 'Delete' nappia voidaan poistaa työkalu kokonaan
+* Valitsemalla työkalu "Omat vuokratut työkalut" listasta ja painamalla 'Space' nappia voidaan palauttaa vuokratun työkalun omistajalleen
+* Valitsemalla transaktio "Omat transaktiot" listasta ja painamalla 'Space' nappia voidaan antaa transaktion toiselle osapuolelle arvion
+* Vasemassa laidassa on palkki, josta pääsee muokkaamaan omaa profiiliä
+
 ### 'Edit Profile'-ikkuna
 <img src="images/itool_edit.JPG" alt="iTool v1" width="700">
+
+* Edit profile ikkunassa voi muokata omat profiilitiedot
 
 ### 'Add a Tool'-ikkuna
 <img src="images/itool_addtool.JPG" alt="iTool v1" width="700">
