@@ -444,8 +444,15 @@ pystyy täyttämään kaikki rekiströintikentät satunnaisilla arvoilla, tämä
 ### 'Add a Tool'-ikkuna
 <img src="images/itool_addtool.JPG" alt="iTool v1" width="700">
 
+* Lisää työkalu - ikkunassa voi lisätä uusia työkaluja
+* Kaikki kentä työkalun kuvaa lukuunottamatta ovat pakollisia
+
 ### Piilotettu 'Add random tools'-ikkuna
 <img src="images/itool_addrandomtools.JPG" alt="iTool v1" width="300">
+
+* Add random tools ikkuna on piilotettu ikkuna, johon pääsee käsiksi painamalla 'F1'-nappia "Add a Tool" ikkunan auki ollessa
+* Tämä ikkuna oli luotu testaamista varten
+* Tämä metodi generoi käyttäjän syöttämän määrän satunnaisia työkaluja kaikkien käyttäjien kesken iTool-tietokantaan
 
 ## Mukana tulevat tiedostot
 
