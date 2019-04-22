@@ -507,6 +507,10 @@ On olemassa kuitenkin muutamaa kehitysideaa.
 * Pitää muuttaa koodia, että otetaan vaan kerran per uusi ikkuna yhteyden palvelimelle
 * Täytyy implementoida 'Entity Framework' tulevissa versioissa
 
+### Samanaikainen kirjautuminen
+
+* Täytyy implementoida sellainen toiminnallisuus, jolla sama käyttäjä ei voisi olla kirjautuneena moneella päätelaitteella samanaikaisesti
+
 ## Työmäärä
 
 Olen tehnyt kaiken yksin, joten on mennyt paljon aikaa tekemiseen. Täältä löytyy karkea arvio työtunneista:
