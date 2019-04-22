@@ -448,7 +448,7 @@ pystyy täyttämään kaikki rekiströintikentät satunnaisilla arvoilla, tämä
 <img src="images/itool_addtool.JPG" alt="iTool v1" width="700">
 
 * Lisää työkalu - ikkunassa voi lisätä uusia työkaluja
-* Kaikki kentä työkalun kuvaa lukuunottamatta ovat pakollisia
+* Kaikki kentät työkalun kuvaa lukuunottamatta ovat pakollisia
 
 ### Piilotettu 'Add random tools'-ikkuna
 <img src="images/itool_addrandomtools.JPG" alt="iTool v1" width="300">
