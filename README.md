@@ -204,7 +204,7 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 
 ### Käsitteet
 
-1. User: iTool sovelluksen käyttäj
+1. User: iTool sovelluksen käyttäjä
 2. Tool: Työkalu
 3. Tool Category: Työkalun kategoria
 4. Transaction: Työkalun omistajan ja työkalun vuokraajan välinen kauppa
