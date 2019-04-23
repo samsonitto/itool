@@ -78,7 +78,7 @@ namespace iTool
                 imgAddTool.Source = new BitmapImage(new Uri(dlg.FileName, UriKind.RelativeOrAbsolute)); // näyttää valitun kuvan
                 string i = imgAddTool.Source.ToString().Split('/')[imgAddTool.Source.ToString().Split('/').Length - 1]; //kuvatiedoston nimi
                 //path = $@"F:\iTool\iTool\iTool\images\{i}";
-                path = $@"images\{i}"; //polku kuvatiedostoon
+                path = $@"{Active.ProjectPath}\images\{i}"; //polku kuvatiedostoon
 
                 //Metodi, joka lisää numeron kuvatiedostonimen alkuun, jos samanniminen kuvatiedosto on jop olemassa 'images' kansiossa
                 if (File.Exists(path))
@@ -86,7 +86,7 @@ namespace iTool
                     int x = 0;
                     for (; File.Exists(path);)
                     {
-                        path = $@"images\{x}{i}";
+                        path = $@"{Active.ProjectPath}\images\{x}{i}";
                         //path = $@"F:\iTool\iTool\iTool\images\{x}{i}";
                         imgFile = $"{x}{i}";
                         x++;
@@ -99,8 +99,8 @@ namespace iTool
                 }
 
                 // relaatiivinen polku kuvatiedostoon
-                relativePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\{path}";
-
+                //relativePath = $"{Directory.GetParent(Environment.CurrentDirectory).Parent.FullName}\\{path}";
+                relativePath = path;
                 // polku valituun kuvatiedostoon
                 dirPath = $@"{System.IO.Path.GetDirectoryName(dlg.FileName)}\{System.IO.Path.GetFileName(dlg.FileName)}";
             }

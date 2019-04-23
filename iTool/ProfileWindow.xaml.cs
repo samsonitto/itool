@@ -257,20 +257,49 @@ namespace iTool
 
         private void BtnDeleteProfile_Click(object sender, RoutedEventArgs e)
         {
-            //POISTETAAN KÄYTTÄJÄ
-            var result = MessageBox.Show($"Do you really want to delete your user profile and all of your data from the iTool database?", "iTool: Delete Profile", MessageBoxButton.YesNo); //VARMISTUSIKKUNA
+            try
+            {
+                //POISTETAAN KÄYTTÄJÄ
+                List<Transaction> transactions = DB.GetTransactionsFromMysql();
+                List<Transaction> checkTr = new List<Transaction>();
+                bool transactionActive = false;
 
-            if (result == MessageBoxResult.Yes) //YES
-            {
-                DB.DeleteProfile(); //YLIKIRJOITETAAN KÄYTTÄJÄ TIETOKANNASSA
-                Active.main = new MainWindow(); //LUODAAN LOGIN IKKUNAN OLIO
-                Active.main.Show(); //NÄYTETÄÄN LOGIN IKKUNA
-                Active.main.txbMainError.Text = "You have deleted your profile successfully"; //ESITETÄÄN VIESTI KÄYTTÄJÄLLE
-                this.Close(); //SULJETAAN TÄMÄ IKKUNA
+                foreach (Transaction item in transactions)
+                {
+                    if (item.ActualEndDate == null)
+                    {
+                        checkTr.Add(item);
+                    }
+                }
+
+                if (checkTr.Count() > 0)
+                    transactionActive = true;
+
+                if (transactionActive)
+                {
+                    txbMessagesProfile.Text = "Cannot delete your profile while you have an ongoing transaction";
+                }
+                else
+                {
+                    var result = MessageBox.Show($"Do you really want to delete your user profile and all of your data from the iTool database?", "iTool: Delete Profile", MessageBoxButton.YesNo); //VARMISTUSIKKUNA
+
+                    if (result == MessageBoxResult.Yes) //YES
+                    {
+                        DB.DeleteProfile(); //YLIKIRJOITETAAN KÄYTTÄJÄ TIETOKANNASSA
+                        Active.main = new MainWindow(); //LUODAAN LOGIN IKKUNAN OLIO
+                        Active.main.Show(); //NÄYTETÄÄN LOGIN IKKUNA
+                        Active.main.txbMainError.Text = "You have deleted your profile successfully"; //ESITETÄÄN VIESTI KÄYTTÄJÄLLE
+                        this.Close(); //SULJETAAN TÄMÄ IKKUNA
+                    }
+                    else //NO
+                    {
+                        txbMessagesProfile.Text = $"You did nothing";
+                    }
+                }
             }
-            else //NO
+            catch
             {
-                txbMessagesProfile.Text = $"You did nothing";
+                throw;
             }
         }
 
