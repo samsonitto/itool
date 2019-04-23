@@ -527,3 +527,5 @@ Olen tehnyt kaiken yksin, joten on mennyt paljon aikaa tekemiseen. Täältä lö
 * Samson Azizyan (M3156)
 * Arvosanaehdotus: 5
 * Perustelut: Asetin itselleni arvosanaehdotukseksi 5, koska tein tosi paljon hommaa ja siihen kului noin 60h. Saattoi olla vähän liian kunniahimoinen projekti. Lopputulokseen olen tyytyväinen, kaikki toimii niin kuin pitääkin. Ulkoasu olisi voinut olla näyttävämpi, mutta toiminnallisuus oli prioriteettina tässä projektissa. Tietokanta oli monipuolinen ja hyvin toimiva. Tämä on hyvä pohja jatkokehitystä varten.
+* Mitä opin: Opin tekemään yksinkertaisia käyttöliittymiä, implementoimaan mysql-tietokantoja, opin syvemmin käsittelemään olioita ja luokkia. Tämän opintojakson aikana minun ohjelmointitaito on kolmenkertaistunut.
+* Mitä pitää oppia: Käsittelemään interfaceja, käyttämään webclientia (tallentamaan sinne tiedostoja), Entity Framework
