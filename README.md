@@ -513,6 +513,11 @@ On olemassa kuitenkin muutamaa kehitysideaa.
 
 * Täytyy implementoida sellainen toiminnallisuus, jolla sama käyttäjä ei voisi olla kirjautuneena moneella päätelaitteella samanaikaisesti
 
+### Katselmoinnin aikana ilmestyneet bugit
+
+* Lisättäessä uusi työkalu ilmeni ongelma samannimisen kuvatiedoston kanssa (bugi korjattu)
+* Käyttäjä pystyi poistamaan oman profiilin vaikka sillä oli auki olevia transaktioita (bugi korjattu)
+
 ## Työmäärä
 
 Olen tehnyt kaiken yksin, joten on mennyt paljon aikaa tekemiseen. Täältä löytyy karkea arvio työtunneista:
