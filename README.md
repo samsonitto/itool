@@ -194,11 +194,11 @@ laitetaan joko jäähylle tai jäädytetään kokonaan.
 | TestiID | Kuvaus |								
 |:-:|:-:|
 | AT01 | [Tunnusten luominen ja sovellukseen kirjautuminen](../liitteet/at1_tunnusten_luominen.md) |
-| AT02 | [Työkalun lisäys/poisto](../liitteet/at3_addtool.md) |
-| AT03 | [Työkalun vuokraaminen](../liitteet/at4_rentatool.md) |
-| AT04 | [Tunnusten poistaminen](../liitteet/at5_delete.md) |
-| AT05 | [Kommentointi](../liitteet/at6_comments.md) |
-| AT06 | [Työkalun palautus](../liitteet/at7_returnatool.md) |
+| AT02 | [Työkalun lisäys/poisto](./liitteet/at3_addtool.md) |
+| AT03 | [Työkalun vuokraaminen](./liitteet/at4_rentatool.md) |
+| AT04 | [Tunnusten poistaminen](./liitteet/at5_delete.md) |
+| AT05 | [Kommentointi](./liitteet/at6_comments.md) |
+| AT06 | [Työkalun palautus](./liitteet/at7_returnatool.md) |
 
 ## Käsitemalli
 
